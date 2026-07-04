@@ -511,6 +511,73 @@
         }
         .btn-cron.finalizar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
 
+        /* ===== SEPARADOR "OU" ESTILIZADO ===== */
+        .divider-ou {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 8px 0 4px 0;
+            width: 100%;
+        }
+        .divider-ou hr {
+            flex: 1;
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+        .divider-ou span {
+            padding: 0 4px;
+            background: transparent;
+            color: #94a3b8;
+        }
+
+        /* ===== TOGGLE SWITCH ===== */
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            user-select: none;
+        }
+        .toggle-wrapper .toggle-slider {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+            background: #cbd5e1;
+            border-radius: 30px;
+            transition: 0.3s;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .toggle-wrapper .toggle-slider.active {
+            background: #5b7cfa;
+        }
+        .toggle-wrapper .toggle-slider .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+        .toggle-wrapper .toggle-slider.active .toggle-knob {
+            left: 20px;
+        }
+        .toggle-wrapper input[type="checkbox"] {
+            display: none;
+        }
+
         /* ===== HISTÓRICO ===== */
         .journey-history-card {
             background: #fff;
@@ -1368,6 +1435,68 @@
         }
         .logout-btn:active { transform: scale(0.97); background: #fee2e2; }
         .logout-btn i { color: #dc2626; }
+
+        /* ===== ESPAÇAMENTO DOS CARDS DE RESUMO ===== */
+        .resumo-card {
+            padding: 18px 20px;
+            margin-bottom: 8px;
+        }
+        .resumo-card .title {
+            margin-bottom: 16px;
+        }
+        .resumo-card .grid-stats {
+            margin-bottom: 4px;
+        }
+
+        /* ===== TOGGLE FOLGA ===== */
+        .folga-status-msg {
+            margin-top: 10px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #22c55e;
+        }
+        .folga-status-msg.folga {
+            background: #fefce8;
+            border-color: #fde68a;
+            color: #ca8a04;
+        }
+
+        /* ===== CHECKBOX DE DIAS DA SEMANA ===== */
+        .days-off-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+        }
+        .days-off-grid label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            padding: 6px 0;
+            border-radius: 10px;
+            background: #f8fafc;
+            border: 1px solid #eef2f7;
+            transition: 0.2s;
+        }
+        .days-off-grid label.active {
+            background: #e0f2fe;
+            border-color: #5b7cfa;
+            color: #0f172a;
+        }
+        .days-off-grid label input[type="checkbox"] {
+            margin-bottom: 2px;
+            accent-color: #5b7cfa;
+        }
     </style>
 </head>
 <body>
@@ -1470,19 +1599,35 @@
                     <button class="btn-cron reanudar" id="cronReanudar" onclick="reanudarJornada()" disabled><i class="fas fa-play"></i> Reanudar</button>
                     <button class="btn-cron finalizar" id="cronFinalizar" onclick="finalizarJornada()" disabled><i class="fas fa-flag-checkered"></i> Finalizar</button>
                 </div>
+
+                <div class="divider-ou">
+                    <hr><span>ou</span><hr>
+                </div>
+                <button class="btn-app btn-app-outline" onclick="openManualJourneyModal()" style="width:100%; margin-top:4px;">
+                    <i class="fas fa-calendar-plus"></i> Registrar manualmente
+                </button>
             </div>
 
-            <div class="glass-inner">
-                <div class="title"><i class="fas fa-calendar-day"></i> Resumo Hoje</div>
+            <div class="glass-inner resumo-card">
+                <div class="title" style="display:flex; justify-content:space-between; align-items:center;">
+                    <span><i class="fas fa-calendar-day"></i> Resumo Hoje</span>
+                    <label class="toggle-wrapper" id="folgaToggleWrapper">
+                        <span>Folga eventual</span>
+                        <span class="toggle-slider" id="folgaSlider">
+                            <span class="toggle-knob"></span>
+                        </span>
+                        <input type="checkbox" id="folgaSwitch">
+                    </label>
+                </div>
                 <div class="grid-stats">
                     <div class="stat-item green"><div class="value" id="dailyEarnings">R$ 0</div><div class="label">Ganhos</div></div>
                     <div class="stat-item red"><div class="value" id="dailyExpenses">R$ 0</div><div class="label">Gastos</div></div>
                     <div class="stat-item blue"><div class="value" id="dailyNet">R$ 0</div><div class="label">Lucro</div></div>
                 </div>
-                <div id="dailyGoalStatus" style="text-align:center; font-size:0.8rem; margin-top:8px;"></div>
+                <div id="dailyGoalStatus"></div>
             </div>
 
-            <div class="glass-inner">
+            <div class="glass-inner resumo-card">
                 <div class="title"><i class="fas fa-calendar-week"></i> Resumo Semana</div>
                 <div class="grid-stats">
                     <div class="stat-item green"><div class="value" id="weeklyEarnings">R$ 0</div><div class="label">Ganhos</div></div>
@@ -1491,7 +1636,7 @@
                 </div>
             </div>
 
-            <div class="glass-inner">
+            <div class="glass-inner resumo-card">
                 <div class="title"><i class="fas fa-calendar-alt"></i> Resumo Mensal</div>
                 <div class="grid-stats">
                     <div class="stat-item green"><div class="value" id="monthlyEarnings">R$ 0</div><div class="label">Ganhos</div></div>
@@ -1974,6 +2119,24 @@
                     <option value="liquido">Líquida (ganhos - gastos)</option>
                 </select>
             </div>
+
+            <!-- Dias de folga recorrentes -->
+            <div class="form-group">
+                <label class="app-label">Dias de folga (recorrentes)</label>
+                <div class="days-off-grid" id="daysOffGrid">
+                    <label data-day="0"><input type="checkbox" value="0"> Dom</label>
+                    <label data-day="1"><input type="checkbox" value="1"> Seg</label>
+                    <label data-day="2"><input type="checkbox" value="2"> Ter</label>
+                    <label data-day="3"><input type="checkbox" value="3"> Qua</label>
+                    <label data-day="4"><input type="checkbox" value="4"> Qui</label>
+                    <label data-day="5"><input type="checkbox" value="5"> Sex</label>
+                    <label data-day="6"><input type="checkbox" value="6"> Sáb</label>
+                </div>
+                <p style="font-size:0.7rem; color:#94a3b8; margin-top:4px;">
+                    <i class="fas fa-info-circle"></i> Os dias selecionados serão ignorados no cálculo da meta. O switch "Folga eventual" tem prioridade.
+                </p>
+            </div>
+
             <button type="submit" class="btn-app" id="editGoalBtn"><i class="fas fa-save"></i> Salvar Meta</button>
         </form>
     </div>
@@ -2015,10 +2178,11 @@
         platforms: ['Uber', '99', 'InDriver', 'Bolt', 'Cabify', 'Urbano norte'],
         subcategories: {},
         goals: {
-            daily: { value: 0, type: 'bruto' },
-            weekly: { value: 0, type: 'bruto' },
-            monthly: { value: 0, type: 'bruto' }
-        }
+            daily: { value: 0, type: 'bruto', daysOff: [] },
+            weekly: { value: 0, type: 'bruto', daysOff: [] },
+            monthly: { value: 0, type: 'bruto', daysOff: [] }
+        },
+        folga: {} // { "2026-07-04": true }
     };
 
     let activeJourney = {
@@ -2046,7 +2210,6 @@
     let finishPlatformsData = [];
     let manualPlatformsData = [];
 
-    // Variáveis para controle de toast
     let lastGoalToastTime = 0;
 
     // =============================================================
@@ -2300,10 +2463,11 @@
                     'Diligências pessoais': ['Banco', 'Farmácia', 'Correios/Cartório']
                 },
                 goals: {
-                    daily: { value: 0, type: 'bruto' },
-                    weekly: { value: 0, type: 'bruto' },
-                    monthly: { value: 0, type: 'bruto' }
-                }
+                    daily: { value: 0, type: 'bruto', daysOff: [] },
+                    weekly: { value: 0, type: 'bruto', daysOff: [] },
+                    monthly: { value: 0, type: 'bruto', daysOff: [] }
+                },
+                folga: {}
             };
 
             await db.collection('drivers').doc(uid).set(defaultData);
@@ -2360,6 +2524,8 @@
             document.getElementById('filterDate').value = getToday();
             applyFilter();
 
+            atualizarSwitchFolga();
+
         } else {
             currentUser = null;
             document.getElementById('authContainer').style.display = 'block';
@@ -2372,8 +2538,9 @@
             setLoading('signupBtn', false);
             appData = { profile: { name: '', phone: '', photoURL: '' }, cars: [], journeys: [], expenses: [],
                 categories: [], paymentMethods: [], pauseReasons: [], platforms: [], subcategories: {},
-                goals: { daily: { value: 0, type: 'bruto' }, weekly: { value: 0, type: 'bruto' },
-                    monthly: { value: 0, type: 'bruto' } }
+                goals: { daily: { value: 0, type: 'bruto', daysOff: [] }, weekly: { value: 0, type: 'bruto',
+                        daysOff: [] }, monthly: { value: 0, type: 'bruto', daysOff: [] } },
+                folga: {}
             };
             resetCronometro();
             if (dashboardInterval) {
@@ -2435,10 +2602,11 @@
                         ]
                     },
                     goals: data.goals || {
-                        daily: { value: 0, type: 'bruto' },
-                        weekly: { value: 0, type: 'bruto' },
-                        monthly: { value: 0, type: 'bruto' }
-                    }
+                        daily: { value: 0, type: 'bruto', daysOff: [] },
+                        weekly: { value: 0, type: 'bruto', daysOff: [] },
+                        monthly: { value: 0, type: 'bruto', daysOff: [] }
+                    },
+                    folga: data.folga || {}
                 };
                 console.log('📄 Dados carregados do Firestore:', appData);
             } else {
@@ -2486,10 +2654,11 @@
                         ]
                     },
                     goals: {
-                        daily: { value: 0, type: 'bruto' },
-                        weekly: { value: 0, type: 'bruto' },
-                        monthly: { value: 0, type: 'bruto' }
-                    }
+                        daily: { value: 0, type: 'bruto', daysOff: [] },
+                        weekly: { value: 0, type: 'bruto', daysOff: [] },
+                        monthly: { value: 0, type: 'bruto', daysOff: [] }
+                    },
+                    folga: {}
                 };
                 await docRef.set(defaultData);
                 appData = defaultData;
@@ -2520,6 +2689,7 @@
                 platforms: appData.platforms,
                 subcategories: appData.subcategories,
                 goals: appData.goals,
+                folga: appData.folga,
                 name: appData.profile.name,
                 phone: appData.profile.phone,
                 photoURL: appData.profile.photoURL
@@ -2563,6 +2733,7 @@
         }
         applyFilter();
         updateBadges();
+        atualizarSwitchFolga();
     }
 
     // =============================================================
@@ -2586,7 +2757,6 @@
             carEl.innerText = 'Nenhum carro cadastrado';
         }
 
-        // Perfil (aba)
         const heroNameEl = document.getElementById('profileHeroName');
         if (heroNameEl) heroNameEl.innerText = p.name || 'Usuário';
         const heroEmailEl = document.getElementById('profileDisplayEmail');
@@ -2598,12 +2768,13 @@
     }
 
     // =============================================================
-    // 9. DASHBOARD (com correção do toast)
+    // 9. DASHBOARD (com correção do toast e folga)
     // =============================================================
     function renderDashboard() {
         const journeys = appData.journeys || [];
         const expenses = appData.expenses || [];
         const now = new Date();
+        const hoje = getToday();
 
         const dailyJourneys = journeys.filter(j => isSameDay(new Date(j.date), now));
         const dailyExpenses = expenses.filter(e => isSameDay(new Date(e.date), now));
@@ -2643,11 +2814,26 @@
         document.getElementById('monthlyExpenses').innerText = formatCurrency(monthly.expenses);
         document.getElementById('monthlyNet').innerText = formatCurrency(monthly.net);
 
-        // Meta diária
-        const dailyGoal = appData.goals.daily || { value: 0, type: 'bruto' };
+        // ===== VERIFICAÇÃO DE FOLGA =====
+        const isFolgaEventual = appData.folga && appData.folga[hoje] === true;
+        const diaSemana = now.getDay(); // 0=domingo, 1=segunda, ...
+        const dailyGoal = appData.goals.daily || { value: 0, type: 'bruto', daysOff: [] };
+        const daysOff = dailyGoal.daysOff || [];
+        const isFolgaRecorrente = daysOff.includes(diaSemana);
+
+        const goalEl = document.getElementById('dailyGoalStatus');
+
+        // Se for folga (eventual ou recorrente), mostra mensagem de folga
+        if (isFolgaEventual || isFolgaRecorrente) {
+            const motivo = isFolgaEventual ? '🌴 Folga eventual' : '📅 Dia de folga recorrente';
+            goalEl.innerHTML = `<div class="folga-status-msg folga">${motivo} — Meta não aplicada.</div>`;
+            return;
+        }
+
+        // Caso contrário, mostra o progresso da meta
         const goalValue = dailyGoal.value;
         const goalType = dailyGoal.type || 'bruto';
-        const goalEl = document.getElementById('dailyGoalStatus');
+
         if (goalValue > 0) {
             const currentValue = (goalType === 'liquido') ? daily.net : daily.earnings;
             const percent = Math.min(100, (currentValue / goalValue) * 100);
@@ -2656,12 +2842,12 @@
             const falta = achieved ? 'Meta superada!' : `Faltam ${formatCurrency(goalValue - currentValue)}`;
             const label = goalType === 'liquido' ? 'líquido' : 'bruto';
             goalEl.innerHTML = `
-                    <span class="${achieved ? 'achieved' : 'not-achieved'}">
+                    <div class="folga-status-msg" style="background:#f0fdf4; border-color:#bbf7d0; color:#22c55e;">
                         ${icon} Meta ${label}: ${formatCurrency(currentValue)} de ${formatCurrency(goalValue)} (${percent.toFixed(0)}%) - ${falta}
-                    </span>
+                    </div>
                 `;
 
-            // --- ALERTA DE META COM COOLDOWN (30 segundos) ---
+            // Alertas de meta (cooldown de 30s)
             if (currentValue >= goalValue * 0.8 && currentValue < goalValue) {
                 const nowTime = Date.now();
                 if (nowTime - lastGoalToastTime > 30000) {
@@ -2669,8 +2855,8 @@
                     lastGoalToastTime = nowTime;
                 }
             }
-            const now = new Date();
-            const dayProgress = (now.getHours() * 60 + now.getMinutes()) / (24 * 60);
+            const nowDate = new Date();
+            const dayProgress = (nowDate.getHours() * 60 + nowDate.getMinutes()) / (24 * 60);
             const expectedValue = goalValue * dayProgress;
             if (currentValue < expectedValue * 0.7 && dayProgress > 0.5) {
                 const nowTime = Date.now();
@@ -2680,7 +2866,7 @@
                 }
             }
         } else {
-            goalEl.innerHTML = `<span style="color:#64748b;">Defina uma meta diária para acompanhar seu progresso.</span>`;
+            goalEl.innerHTML = `<div style="color:#64748b; font-size:0.8rem; text-align:center; margin-top:8px;">Defina uma meta diária para acompanhar seu progresso.</div>`;
         }
     }
 
@@ -2689,30 +2875,37 @@
     // =============================================================
     function renderGoal(period) {
         const container = document.getElementById('goalContent');
-        const goal = appData.goals[period] || { value: 0, type: 'bruto' };
+        const goal = appData.goals[period] || { value: 0, type: 'bruto', daysOff: [] };
         const goalValue = goal.value;
         const goalType = goal.type || 'bruto';
         const now = new Date();
 
+        // Filtra jornadas e gastos considerando dias de folga
+        function isDayOff(date) {
+            const day = date.getDay();
+            const daysOff = goal.daysOff || [];
+            return daysOff.includes(day);
+        }
+
         let earnings = 0;
         let expenses = 0;
         if (period === 'daily') {
-            const dailyJourneys = appData.journeys.filter(j => isSameDay(new Date(j.date), now));
+            const dailyJourneys = appData.journeys.filter(j => isSameDay(new Date(j.date), now) && !isDayOff(new Date(j.date)));
             earnings = dailyJourneys.reduce((acc, j) => acc + j.platforms.reduce((s, p) => s + (parseFloat(p.gross) ||
                 0), 0), 0);
-            const dailyExpenses = appData.expenses.filter(e => isSameDay(new Date(e.date), now));
+            const dailyExpenses = appData.expenses.filter(e => isSameDay(new Date(e.date), now) && !isDayOff(new Date(e.date)));
             expenses = dailyExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
         } else if (period === 'weekly') {
-            const weeklyJourneys = appData.journeys.filter(j => isSameWeek(new Date(j.date), now));
+            const weeklyJourneys = appData.journeys.filter(j => isSameWeek(new Date(j.date), now) && !isDayOff(new Date(j.date)));
             earnings = weeklyJourneys.reduce((acc, j) => acc + j.platforms.reduce((s, p) => s + (parseFloat(p.gross) ||
                 0), 0), 0);
-            const weeklyExpenses = appData.expenses.filter(e => isSameWeek(new Date(e.date), now));
+            const weeklyExpenses = appData.expenses.filter(e => isSameWeek(new Date(e.date), now) && !isDayOff(new Date(e.date)));
             expenses = weeklyExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
         } else if (period === 'monthly') {
-            const monthlyJourneys = appData.journeys.filter(j => isSameMonth(new Date(j.date), now));
+            const monthlyJourneys = appData.journeys.filter(j => isSameMonth(new Date(j.date), now) && !isDayOff(new Date(j.date)));
             earnings = monthlyJourneys.reduce((acc, j) => acc + j.platforms.reduce((s, p) => s + (parseFloat(p.gross) ||
                 0), 0), 0);
-            const monthlyExpenses = appData.expenses.filter(e => isSameMonth(new Date(e.date), now));
+            const monthlyExpenses = appData.expenses.filter(e => isSameMonth(new Date(e.date), now) && !isDayOff(new Date(e.date)));
             expenses = monthlyExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
         }
 
@@ -2758,11 +2951,26 @@
         editingGoalPeriod = period;
         const periodNames = { daily: 'Diária', weekly: 'Semanal', monthly: 'Mensal' };
         document.getElementById('editGoalLabel').innerText = `Meta ${periodNames[period]} (R$)`;
-        const goal = appData.goals[period] || { value: 0, type: 'bruto' };
+        const goal = appData.goals[period] || { value: 0, type: 'bruto', daysOff: [] };
         document.getElementById('editGoalInput').value = goal.value || '';
         document.getElementById('editGoalTypeSelect').value = goal.type || 'bruto';
+
+        // Atualizar checkboxes de dias de folga
+        const daysOff = goal.daysOff || [];
+        document.querySelectorAll('#daysOffGrid input[type="checkbox"]').forEach(cb => {
+            cb.checked = daysOff.includes(parseInt(cb.value));
+            cb.closest('label').classList.toggle('active', cb.checked);
+        });
+
         document.getElementById('editGoalModal').classList.add('active');
     }
+
+    // Atualiza o estilo dos labels dos dias de folga
+    document.querySelectorAll('#daysOffGrid input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', function() {
+            this.closest('label').classList.toggle('active', this.checked);
+        });
+    });
 
     document.getElementById('editGoalForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -2774,8 +2982,14 @@
             return;
         }
 
+        // Coleta os dias de folga selecionados
+        const daysOff = [];
+        document.querySelectorAll('#daysOffGrid input[type="checkbox"]:checked').forEach(cb => {
+            daysOff.push(parseInt(cb.value));
+        });
+
         setLoading('editGoalBtn', true);
-        appData.goals[period] = { value, type };
+        appData.goals[period] = { value, type, daysOff };
         await saveUserData();
         closeModal('editGoalModal');
         setLoading('editGoalBtn', false);
@@ -2784,7 +2998,33 @@
     });
 
     // =============================================================
-    // 11. HISTÓRICO
+    // 11. FOLGA - SWITCH
+    // =============================================================
+    function atualizarSwitchFolga() {
+        const hoje = getToday();
+        const isFolga = appData.folga && appData.folga[hoje] === true;
+        const checkbox = document.getElementById('folgaSwitch');
+        const slider = document.getElementById('folgaSlider');
+        checkbox.checked = isFolga;
+        slider.classList.toggle('active', isFolga);
+    }
+
+    document.getElementById('folgaSwitch').addEventListener('change', async function() {
+        const hoje = getToday();
+        const isChecked = this.checked;
+        if (isChecked) {
+            appData.folga[hoje] = true;
+        } else {
+            delete appData.folga[hoje];
+        }
+        await saveUserData();
+        renderDashboard();
+        atualizarSwitchFolga();
+        showToast(isChecked ? 'Dia marcado como folga eventual.' : 'Folga eventual removida.', 'info', 3000);
+    });
+
+    // =============================================================
+    // 12. HISTÓRICO
     // =============================================================
     function applyFilter() {
         const dateInput = document.getElementById('filterDate');
@@ -2926,7 +3166,7 @@
     }
 
     // =============================================================
-    // 12. EXPORTAÇÃO
+    // 13. EXPORTAÇÃO
     // =============================================================
     function exportJourneysCSV() {
         const journeys = appData.journeys || [];
@@ -2991,7 +3231,7 @@
     }
 
     // =============================================================
-    // 13. TOAST, CONFIRM, EDIT TEXT, STATUS
+    // 14. TOAST, CONFIRM, EDIT TEXT, STATUS
     // =============================================================
     function showToast(message, type = 'info', duration = 5000) {
         const toast = document.getElementById('toast');
@@ -3006,7 +3246,6 @@
             info: '#5b7cfa'
         };
         toast.style.borderLeft = `4px solid ${colors[type] || colors.info}`;
-        // Limpa o timeout anterior para não acumular
         if (toast._timeout) {
             clearTimeout(toast._timeout);
             toast._timeout = null;
@@ -3072,7 +3311,7 @@
     window.addEventListener('offline', () => setStatus('⚠️ Offline', false));
 
     // =============================================================
-    // 14. GASTOS (LISTA E FILTROS)
+    // 15. GASTOS (LISTA E FILTROS)
     // =============================================================
     function renderExpenseList() {
         const container = document.getElementById('expenseList');
@@ -3138,7 +3377,7 @@
     }
 
     // =============================================================
-    // 15. PERFIL E CARROS
+    // 16. PERFIL E CARROS
     // =============================================================
     function renderProfileForm() {
         const p = appData.profile || {};
@@ -3175,7 +3414,7 @@
     }
 
     // =============================================================
-    // 16. CONFIGURAÇÕES
+    // 17. CONFIGURAÇÕES
     // =============================================================
     function toggleAccordion(header) {
         const body = header.nextElementSibling;
@@ -3251,7 +3490,7 @@
     }
 
     // =============================================================
-    // 17. SUBCATEGORIAS
+    // 18. SUBCATEGORIAS
     // =============================================================
     let subcategoryModalContext = { type: null, index: null };
 
@@ -3385,7 +3624,7 @@
     });
 
     // =============================================================
-    // 18. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
+    // 19. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
     // =============================================================
     document.addEventListener('click', function(e) {
         const target = e.target.closest('.edit-btn, .delete-btn');
@@ -3492,7 +3731,7 @@
     });
 
     // =============================================================
-    // 19. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
+    // 20. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
     // =============================================================
     document.getElementById('addCategoryBtn').addEventListener('click', async function() {
         const input = document.getElementById('newCategoryInput');
@@ -3543,7 +3782,7 @@
     });
 
     // =============================================================
-    // 20. POPULAR SELECTS
+    // 21. POPULAR SELECTS
     // =============================================================
     function populateSelects() {
         const catSelect = document.getElementById('expenseCategorySelect');
@@ -3606,7 +3845,7 @@
     });
 
     // =============================================================
-    // 21. PLATAFORMAS
+    // 22. PLATAFORMAS
     // =============================================================
     function renderPlatformsGroup(containerId, dataArray, removeFnName) {
         const container = document.getElementById(containerId);
@@ -3692,7 +3931,7 @@
     }
 
     // =============================================================
-    // 22. CRONÔMETRO E JORNADA
+    // 23. CRONÔMETRO E JORNADA
     // =============================================================
     function iniciarJornadaCron() {
         openStartJourneyModal();
@@ -4200,7 +4439,7 @@
     }
 
     // =============================================================
-    // 23. MODAL INICIAR JORNADA (FUEL GAUGE)
+    // 24. MODAL INICIAR JORNADA (FUEL GAUGE)
     // =============================================================
     function openStartJourneyModal() {
         document.getElementById('quickJourneyDate').value = getCurrentDate();
@@ -4335,7 +4574,7 @@
     });
 
     // =============================================================
-    // 24. AÇÃO RÁPIDA: REGISTRAR GASTO
+    // 25. AÇÃO RÁPIDA: REGISTRAR GASTO
     // =============================================================
     function openQuickExpense() {
         document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
@@ -4360,7 +4599,7 @@
     }
 
     // =============================================================
-    // 25. EVENTOS DOS FORMULÁRIOS
+    // 26. EVENTOS DOS FORMULÁRIOS
     // =============================================================
     document.getElementById('expenseForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -4453,7 +4692,7 @@
     });
 
     // =============================================================
-    // 26. FECHAR MODAIS E NAVEGAÇÃO
+    // 27. FECHAR MODAIS E NAVEGAÇÃO
     // =============================================================
     function closeModal(id) {
         document.getElementById(id).classList.remove('active');
@@ -4480,7 +4719,7 @@
     });
 
     // =============================================================
-    // 27. INICIALIZAÇÃO E CORREÇÃO DO BOTÃO "REGISTRAR PASSADO"
+    // 28. INICIALIZAÇÃO E CORREÇÃO DO BOTÃO "REGISTRAR PASSADO"
     // =============================================================
     function initApp() {
         resetExpenseForm();
@@ -4489,17 +4728,16 @@
         document.getElementById('loginEmail').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
         document.getElementById('signupConfirm').addEventListener('keydown', e => { if (e.key === 'Enter') handleSignup(); });
 
-        // CORREÇÃO: adiciona evento de clique ao botão "Registrar Passado"
         const btnManual = document.getElementById('btnManualJourney');
         if (btnManual) {
             btnManual.addEventListener('click', openManualJourneyModal);
         }
 
-        console.log('🚀 DriverControl - Toast corrigido (cooldown de 30s) e barra fixa!');
+        console.log('🚀 DriverControl - Dias de folga e switch "Folga eventual" implementados!');
     }
 
     // =============================================================
-    // 28. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
+    // 29. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
     // =============================================================
     function openManualJourneyModal() {
         document.getElementById('manualDate').value = getToday();
@@ -4516,6 +4754,18 @@
         buildManualFuelGauge();
         document.getElementById('manualJourneyModal').classList.add('active');
         populateSelects();
+    }
+
+    // =============================================================
+    // 30. MODAL FINALIZAR JORNADA
+    // =============================================================
+    function openFinishJourneyModal() {
+        document.getElementById('finishDateTime').value = getCurrentDate() + ' ' + getCurrentTimeWithTenths();
+        document.getElementById('finishKm').value = '';
+        finishPlatformsData = [{ name: '', rides: '', gross: '' }];
+        renderFinishPlatforms();
+        buildFinishFuelGauge();
+        document.getElementById('finishJourneyModal').classList.add('active');
     }
 
     initApp();
