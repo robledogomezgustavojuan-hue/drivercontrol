@@ -994,7 +994,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: calc(100% - 40px);
-            max-width: 440px; /* mesma largura do app-wrapper menos padding */
+            max-width: 440px;
             display: flex;
             justify-content: space-around;
             background: rgba(255, 255, 255, 0.92);
@@ -2046,6 +2046,9 @@
     let finishPlatformsData = [];
     let manualPlatformsData = [];
 
+    // Variáveis para controle de toast
+    let lastGoalToastTime = 0;
+
     // =============================================================
     // 3. UTILITÁRIOS
     // =============================================================
@@ -2595,7 +2598,7 @@
     }
 
     // =============================================================
-    // 9. DASHBOARD
+    // 9. DASHBOARD (com correção do toast)
     // =============================================================
     function renderDashboard() {
         const journeys = appData.journeys || [];
@@ -2658,14 +2661,23 @@
                     </span>
                 `;
 
+            // --- ALERTA DE META COM COOLDOWN (30 segundos) ---
             if (currentValue >= goalValue * 0.8 && currentValue < goalValue) {
-                showToast(`🎯 Meta diária quase batida! ${formatCurrency(currentValue)} de ${formatCurrency(goalValue)} (${percent.toFixed(0)}%)`, 'warning', 4000);
+                const nowTime = Date.now();
+                if (nowTime - lastGoalToastTime > 30000) {
+                    showToast(`🎯 Meta diária quase batida! ${formatCurrency(currentValue)} de ${formatCurrency(goalValue)} (${percent.toFixed(0)}%)`, 'warning', 5000);
+                    lastGoalToastTime = nowTime;
+                }
             }
             const now = new Date();
             const dayProgress = (now.getHours() * 60 + now.getMinutes()) / (24 * 60);
             const expectedValue = goalValue * dayProgress;
             if (currentValue < expectedValue * 0.7 && dayProgress > 0.5) {
-                showToast(`⚠️ Você está atrasado na meta diária. Faltam ${formatCurrency(goalValue - currentValue)}`, 'danger', 5000);
+                const nowTime = Date.now();
+                if (nowTime - lastGoalToastTime > 30000) {
+                    showToast(`⚠️ Você está atrasado na meta diária. Faltam ${formatCurrency(goalValue - currentValue)}`, 'danger', 5000);
+                    lastGoalToastTime = nowTime;
+                }
             }
         } else {
             goalEl.innerHTML = `<span style="color:#64748b;">Defina uma meta diária para acompanhar seu progresso.</span>`;
@@ -2994,10 +3006,17 @@
             info: '#5b7cfa'
         };
         toast.style.borderLeft = `4px solid ${colors[type] || colors.info}`;
-        clearTimeout(toast._timeout);
+        // Limpa o timeout anterior para não acumular
+        if (toast._timeout) {
+            clearTimeout(toast._timeout);
+            toast._timeout = null;
+        }
         toast._timeout = setTimeout(() => {
             toast.style.opacity = '0';
-            setTimeout(() => toast.style.display = 'none', 300);
+            setTimeout(() => {
+                toast.style.display = 'none';
+                toast._timeout = null;
+            }, 300);
         }, duration);
     }
 
@@ -4476,7 +4495,7 @@
             btnManual.addEventListener('click', openManualJourneyModal);
         }
 
-        console.log('🚀 DriverControl - Barra de navegação fixa e ícone de calendário no histórico!');
+        console.log('🚀 DriverControl - Toast corrigido (cooldown de 30s) e barra fixa!');
     }
 
     // =============================================================
