@@ -803,6 +803,25 @@
             background: #1e3a5f;
         }
 
+        /* ===== BOTÃO PDF INDIVIDUAL ===== */
+        .export-pdf-btn {
+            background: none;
+            border: none;
+            color: #5b7cfa;
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            transition: 0.2s;
+        }
+        .export-pdf-btn:hover {
+            background: #e0f2fe;
+        }
+        body.dark-theme .export-pdf-btn:hover {
+            background: #1e3a5f;
+            color: #818cf8;
+        }
+
         /* ===== ALINHAMENTO DO HISTÓRICO ===== */
         .journey-car-line {
             margin-bottom: 4px;
@@ -1349,6 +1368,7 @@
             justify-content: flex-end;
             gap: 6px;
             margin-top: 8px;
+            flex-wrap: wrap;
         }
         .delete-journey-btn, .edit-journey-btn {
             background: none;
@@ -3644,6 +3664,9 @@
                             <button class="delete-journey-btn" onclick="deleteJourney(${originalIndex})">
                                 <i class="fas fa-trash-alt"></i> Excluir
                             </button>
+                            <button class="export-pdf-btn" onclick="exportSingleJourneyPDF(${originalIndex})">
+                                <i class="fas fa-file-pdf"></i> PDF
+                            </button>
                         </div>
                     </div>
                 `;
@@ -3781,6 +3804,193 @@
             showToast('Erro ao gerar PDF. Verifique o console.', 'danger', 4000);
         }
     }
+
+    // ===== NOVA FUNÇÃO: EXPORTAR PDF INDIVIDUAL DA JORNADA =====
+    function exportSingleJourneyPDF(index) {
+        const journey = appData.journeys[index];
+        if (!journey) {
+            showToast('Jornada não encontrada.', 'danger', 3000);
+            return;
+        }
+
+        // Buscar gastos do mesmo dia
+        const dayExpenses = appData.expenses.filter(e => e.date === journey.date);
+        const totalDayExpenses = dayExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
+        const totalGross = journey.platforms.reduce((acc, p) => acc + (parseFloat(p.gross) || 0), 0);
+        const netProfit = totalGross - totalDayExpenses;
+
+        try {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'pt', 'a4');
+
+            // ===== Título =====
+            doc.setFontSize(18);
+            doc.setTextColor(40, 40, 40);
+            doc.text('Relatório Detalhado da Jornada', 40, 50);
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text(`Gerado em: ${new Date().toLocaleString('pt-BR')}`, 40, 70);
+
+            // ===== Informações gerais =====
+            const startY = 90;
+            const lineHeight = 20;
+            let y = startY;
+
+            doc.setFontSize(11);
+            doc.setTextColor(0, 0, 0);
+            const infoLines = [
+                `📅 Data: ${journey.date}`,
+                `⏱️ Início: ${journey.startTime}  |  Fim: ${journey.endTime}`,
+                `🚗 Carro: ${journey.car || 'Não informado'}`,
+                `🛣️ KM Inicial: ${journey.initialKm ?? 'N/I'}  |  Final: ${journey.finalKm ?? 'N/I'}  |  Rodados: ${journey.totalKm ?? 'N/I'} km`,
+                `⛽ Combustível: Início ${journey.fuelLevel ?? 'N/I'}%  |  Fim ${journey.finalFuel ?? 'N/I'}%`,
+                `⏳ Tempo de trabalho: ${formatTimeShort(journey.totalWorkMinutes * 60000)}  |  Tempo global: ${journey.globalTimeMs ? formatTimeShort(journey.globalTimeMs) : 'N/A'}`
+            ];
+
+            infoLines.forEach(line => {
+                doc.text(line, 40, y);
+                y += lineHeight;
+            });
+
+            y += 10; // espaço
+
+            // ===== Plataformas =====
+            if (journey.platforms && journey.platforms.length > 0) {
+                doc.setFontSize(12);
+                doc.setTextColor(0, 0, 150);
+                doc.text('Plataformas Utilizadas', 40, y);
+                y += 15;
+
+                const tableData = journey.platforms.map(p => [
+                    p.name || 'N/I',
+                    p.rides || '0',
+                    `R$ ${(parseFloat(p.gross) || 0).toFixed(2)}`
+                ]);
+                tableData.push(['', 'Total', `R$ ${totalGross.toFixed(2)}`]);
+
+                doc.autoTable({
+                    startY: y,
+                    head: [['Plataforma', 'Corridas', 'Valor']],
+                    body: tableData,
+                    theme: 'striped',
+                    headStyles: { fillColor: [91, 124, 250] },
+                    styles: { fontSize: 9 },
+                    columnStyles: {
+                        0: { cellWidth: 150 },
+                        1: { cellWidth: 80, halign: 'center' },
+                        2: { cellWidth: 100, halign: 'right' }
+                    }
+                });
+                y = doc.lastAutoTable.finalY + 10;
+            }
+
+            // ===== Pausas =====
+            if (journey.pauses && journey.pauses.length > 0) {
+                doc.setFontSize(12);
+                doc.setTextColor(0, 0, 150);
+                doc.text('Pausas Realizadas', 40, y);
+                y += 15;
+
+                const pauseData = journey.pauses.map(p => [
+                    p.name || 'Sem motivo',
+                    formatTimeShort(p.duration) || '0s'
+                ]);
+
+                doc.autoTable({
+                    startY: y,
+                    head: [['Motivo', 'Duração']],
+                    body: pauseData,
+                    theme: 'striped',
+                    headStyles: { fillColor: [100, 100, 100] },
+                    styles: { fontSize: 9 },
+                    columnStyles: {
+                        0: { cellWidth: 200 },
+                        1: { cellWidth: 100, halign: 'center' }
+                    }
+                });
+                y = doc.lastAutoTable.finalY + 10;
+            } else {
+                doc.text('Nenhuma pausa registrada.', 40, y);
+                y += 20;
+            }
+
+            // ===== Gastos do dia =====
+            if (dayExpenses.length > 0) {
+                doc.setFontSize(12);
+                doc.setTextColor(200, 0, 0);
+                doc.text('Gastos do Dia', 40, y);
+                y += 15;
+
+                const expenseData = dayExpenses.map(e => {
+                    let litrosInfo = e.litros ? `${(parseFloat(e.litros) || 0).toFixed(2)} L` : '';
+                    return [
+                        e.category || 'N/I',
+                        e.subcategory || '',
+                        e.paymentMethod || '',
+                        `R$ ${(parseFloat(e.amount) || 0).toFixed(2)}`,
+                        litrosInfo
+                    ];
+                });
+                expenseData.push([
+                    '',
+                    '',
+                    'Total',
+                    `R$ ${totalDayExpenses.toFixed(2)}`,
+                    ''
+                ]);
+
+                doc.autoTable({
+                    startY: y,
+                    head: [['Categoria', 'Subcategoria', 'Pagamento', 'Valor', 'Litros']],
+                    body: expenseData,
+                    theme: 'striped',
+                    headStyles: { fillColor: [200, 50, 50] },
+                    styles: { fontSize: 9 },
+                    columnStyles: {
+                        0: { cellWidth: 80 },
+                        1: { cellWidth: 80 },
+                        2: { cellWidth: 70 },
+                        3: { cellWidth: 70, halign: 'right' },
+                        4: { cellWidth: 50, halign: 'center' }
+                    }
+                });
+                y = doc.lastAutoTable.finalY + 10;
+            } else {
+                doc.text('Nenhum gasto registrado neste dia.', 40, y);
+                y += 20;
+            }
+
+            // ===== Resumo financeiro =====
+            doc.setFontSize(14);
+            doc.setTextColor(0, 100, 0);
+            doc.text(`📊 Resumo Financeiro`, 40, y);
+            y += 20;
+            doc.setFontSize(11);
+            doc.setTextColor(0, 0, 0);
+            doc.text(`   Ganhos brutos:     R$ ${totalGross.toFixed(2)}`, 40, y);
+            y += 18;
+            doc.text(`   Gastos do dia:     R$ ${totalDayExpenses.toFixed(2)}`, 40, y);
+            y += 18;
+            doc.setFontSize(12);
+            doc.setTextColor(netProfit >= 0 ? 0 : 200, netProfit >= 0 ? 100 : 0, 0);
+            doc.text(`   Lucro líquido:     R$ ${netProfit.toFixed(2)}`, 40, y);
+            y += 20;
+
+            // ===== Rodapé =====
+            doc.setFontSize(8);
+            doc.setTextColor(150, 150, 150);
+            doc.text('Documento gerado pelo DriverControl - Gestão Inteligente para Motoristas', 40, y + 20);
+
+            // Salvar PDF
+            const filename = `Jornada_${journey.date}_${journey.startTime.replace(/:/g,'-')}.pdf`;
+            doc.save(filename);
+            showToast('PDF da jornada gerado com sucesso!', 'success', 3000);
+        } catch (err) {
+            console.error('Erro ao gerar PDF:', err);
+            showToast('Erro ao gerar PDF. Verifique o console.', 'danger', 4000);
+        }
+    }
+    // ===== FIM DA NOVA FUNÇÃO =====
 
     function exportExpensesCSV() {
         const expenses = appData.expenses || [];
