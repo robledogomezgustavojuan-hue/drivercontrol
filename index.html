@@ -783,8 +783,8 @@
             color: #facc15;
         }
 
-        /* ===== BOTÃO EDITAR JORNADA ===== */
-        .edit-journey-btn {
+        /* ===== BOTÕES EDITAR JORNADA / GASTO ===== */
+        .edit-journey-btn, .edit-expense-btn {
             background: none;
             border: none;
             color: #cbd5e1;
@@ -794,452 +794,41 @@
             transition: 0.2s;
             border-radius: 30px;
         }
-        .edit-journey-btn:hover {
+        .edit-journey-btn:hover, .edit-expense-btn:hover {
             color: #5b7cfa;
             background: #e0f2fe;
         }
-        body.dark-theme .edit-journey-btn:hover {
+        body.dark-theme .edit-journey-btn:hover,
+        body.dark-theme .edit-expense-btn:hover {
             color: #818cf8;
             background: #1e3a5f;
         }
 
         /* ===== ALINHAMENTO DO HISTÓRICO ===== */
-        .journey-car-line {
-            margin-bottom: 4px;
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-        .net-profit-row-left {
-            justify-content: flex-start;
-        }
-
-        /* ===== RESTO DOS ESTILOS ===== */
-        @keyframes floatIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .app-wrapper {
-            width: 100%;
-            max-width: 480px;
-            position: relative;
-            z-index: 10;
-            animation: floatIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
-        }
-        .glass-card, .glass-inner {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            border-radius: 28px;
-            padding: 24px 22px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-            transition: box-shadow 0.2s;
-        }
-        .glass-inner {
-            padding: 18px 20px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-        }
-        .glass-inner .title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: #94a3b8;
-            font-weight: 600;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .glass-inner .title i {
-            color: #5b7cfa;
-            font-size: 0.9rem;
-        }
-        .auth-screen .app-logo {
-            text-align: center;
-            margin-bottom: 18px;
-        }
-        .auth-screen .app-logo i {
-            font-size: 3.4rem;
-            color: #5b7cfa;
-            display: inline-block;
-            margin-bottom: 4px;
-        }
-        .auth-screen .app-logo h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: #0f172a;
-        }
-        .auth-screen .app-logo p {
-            color: #94a3b8;
-            font-size: 0.85rem;
-            letter-spacing: 0.3px;
-            margin-top: -2px;
-        }
-        .auth-screen .subtitle {
-            color: #64748b;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .input-group {
-            margin-bottom: 14px;
-            position: relative;
-        }
-        .input-group label {
-            display: block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: #64748b;
-            margin-bottom: 4px;
-        }
-        .input-group .input-icon {
-            position: absolute;
-            left: 16px;
-            bottom: 14px;
-            color: #94a3b8;
-            font-size: 1rem;
-            transition: 0.2s;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 14px 16px 14px 46px;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            font-size: 1rem;
-            color: #0f172a;
-            outline: none;
-            transition: all 0.2s;
-            font-weight: 500;
-        }
-        .input-group input:focus {
-            border-color: #5b7cfa;
-            box-shadow: 0 0 0 3px rgba(91, 124, 250, 0.1);
-        }
-        .input-group input:focus + .input-icon {
-            color: #5b7cfa;
-        }
-        .input-group input::placeholder {
-            color: #cbd5e1;
-        }
-        .btn-primary {
-            width: 100%;
-            padding: 16px;
-            background: #5b7cfa;
-            border: none;
-            border-radius: 16px;
-            color: #fff;
-            font-size: 1.05rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 14px rgba(91, 124, 250, 0.25);
-            letter-spacing: 0.3px;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .btn-primary:active { transform: scale(0.97); }
-        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid #e2e8f0;
-            color: #475569;
-            box-shadow: none;
-        }
-        .btn-secondary:active { background: #f1f5f9; }
-        .error-msg {
-            background: #fee2e2;
-            border: 1px solid #fca5a5;
-            color: #dc2626;
-            padding: 10px 14px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            text-align: center;
-            margin-bottom: 10px;
-            display: none;
-        }
-        .error-msg.show { display: block; }
-        .hidden { display: none !important; }
-        #app-container {
-            display: none;
-            width: 100%;
-            max-width: 480px;
-            min-height: 90vh;
-            flex-direction: column;
-            gap: 16px;
-            animation: floatIn 0.6s ease forwards;
-            padding-bottom: 20px;
-        }
-        #app-container.active { display: flex; }
-        .page {
-            display: none;
-            flex-direction: column;
-            gap: 16px;
-            animation: fadePage 0.3s ease forwards;
-        }
-        .page.active { display: flex; }
-        @keyframes fadePage {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .profile-mini-card {
-            padding: 12px 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-        }
-        .profile-mini-card .profile-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 2px;
-        }
-        .profile-mini-card .profile-email {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-bottom: 2px;
-        }
-        .profile-mini-card .profile-car {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-        .grid-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-        }
-        .stat-item {
-            background: #f8fafc;
-            border-radius: 16px;
-            padding: 12px 6px;
-            text-align: center;
-            border: 1px solid #eef2f7;
-        }
-        .stat-item .value {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #0f172a;
-        }
-        .stat-item .label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            color: #94a3b8;
-            font-weight: 600;
-            margin-top: 2px;
-        }
-        .stat-item.green .value { color: #22c55e; }
-        .stat-item.red .value { color: #ef4444; }
-        .stat-item.blue .value { color: #5b7cfa; }
-        .action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        .action-btn {
-            background: #f8fafc;
-            border: 1px solid #eef2f7;
-            border-radius: 18px;
-            padding: 16px 8px;
-            text-align: center;
-            color: #0f172a;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-        .action-btn i {
-            font-size: 2rem;
-            color: #5b7cfa;
-        }
-        .action-btn span {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #64748b;
-        }
-        .action-btn:active { transform: scale(0.95); background: #eef2f7; }
-        .cronometro-display {
-            font-size: 3rem;
-            font-weight: 600;
-            text-align: center;
-            color: #0f172a;
-            letter-spacing: 1px;
-            font-family: 'JetBrains Mono', 'Courier New', monospace;
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 12px 0;
-            margin: 6px 0;
-            border: 1px solid #eef2f7;
-        }
-        .cronometro-status {
-            text-align: center;
-            font-size: 0.8rem;
-            color: #94a3b8;
-            margin-top: 6px;
-            margin-bottom: 12px;
-        }
-        .cronometro-botoes {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .cronometro-botoes .btn-cron {
-            flex: 1 1 auto;
-            min-width: 50px;
-            max-width: 100px;
-            padding: 10px 4px;
-            border: none;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            color: #fff;
-        }
-        .cronometro-botoes .btn-cron i { font-size: 0.9rem; }
-        .cronometro-botoes .btn-cron:active { transform: scale(0.94); }
-        .btn-cron.iniciar:not(:disabled) {
-            animation: pulseGreen 2.5s ease-in-out infinite;
-        }
-        .btn-cron.pausar:not(:disabled) {
-            animation: pulseYellow 2.5s ease-in-out infinite;
-        }
-        .btn-cron.reanudar:not(:disabled) {
-            animation: pulseBlue 2.5s ease-in-out infinite;
-        }
-        .btn-cron.finalizar:not(:disabled) {
-            animation: pulseRed 2.5s ease-in-out infinite;
-        }
-        .btn-cron.iniciar {
-            background: #22c55e;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
-        }
-        .btn-cron.iniciar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
-        .btn-cron.pausar {
-            background: #facc15;
-            color: #0f172a;
-            box-shadow: 0 4px 12px rgba(250, 204, 21, 0.2);
-        }
-        .btn-cron.pausar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
-        .btn-cron.reanudar {
-            background: #5b7cfa;
-            box-shadow: 0 4px 12px rgba(91, 124, 250, 0.2);
-        }
-        .btn-cron.reanudar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
-        .btn-cron.finalizar {
-            background: #ef4444;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
-        }
-        .btn-cron.finalizar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
-        .divider-ou {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #94a3b8;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin: 8px 0 4px 0;
-            width: 100%;
-        }
-        .divider-ou hr {
-            flex: 1;
-            border: 0;
-            border-top: 1px solid #e2e8f0;
-        }
-        .divider-ou span {
-            padding: 0 4px;
-            background: transparent;
-            color: #94a3b8;
-        }
-        .toggle-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: #64748b;
-            cursor: pointer;
-            user-select: none;
-        }
-        .toggle-wrapper .toggle-slider {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 22px;
-            background: #cbd5e1;
-            border-radius: 30px;
-            transition: 0.3s;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-        .toggle-wrapper .toggle-slider.active {
-            background: #5b7cfa;
-        }
-        .toggle-wrapper .toggle-slider .toggle-knob {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 18px;
-            height: 18px;
-            background: #fff;
-            border-radius: 50%;
-            transition: 0.3s;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-        }
-        .toggle-wrapper .toggle-slider.active .toggle-knob {
-            left: 20px;
-        }
-        .toggle-wrapper input[type="checkbox"] {
-            display: none;
-        }
-        .journey-history-card {
-            background: #fff;
-            border-radius: 18px;
-            padding: 14px 16px;
-            margin-bottom: 14px;
-            border-left: 4px solid #5b7cfa;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            transition: 0.2s;
-        }
-        .journey-history-card:last-child { margin-bottom: 0; }
         .journey-header {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             gap: 2px;
         }
-        .journey-header .date {
-            font-weight: 700;
-            color: #0f172a;
-            font-size: 1rem;
-        }
         .journey-header .car-tag {
-            font-size: 0.8rem;
-            color: #64748b;
-            background: #f1f5f9;
-            padding: 2px 12px;
-            border-radius: 30px;
-            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0f172a;
         }
+        body.dark-theme .journey-header .car-tag {
+            color: #f1f5f9;
+        }
+        .journey-header .date {
+            font-weight: 400;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        body.dark-theme .journey-header .date {
+            color: #94a3b8;
+        }
+
         .journey-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1250,6 +839,7 @@
         }
         .journey-grid span { display: flex; align-items: center; gap: 4px; }
         .journey-grid .label { color: #94a3b8; font-size: 0.7rem; }
+
         .journey-pauses {
             font-size: 0.75rem;
             color: #64748b;
@@ -1257,6 +847,7 @@
             margin-bottom: 8px;
         }
         .journey-pauses strong { color: #0f172a; }
+
         .platform-table {
             background: #f8fafc;
             border-radius: 12px;
@@ -1303,6 +894,7 @@
         }
         .platform-table .row-total .total-label { text-align: right; color: #64748b; }
         .platform-table .row-total .total-value { color: #5b7cfa; text-align: right; }
+
         .expenses-day-section {
             margin-top: 10px;
             border-top: 1px solid #f1f5f9;
@@ -1327,6 +919,7 @@
             font-size: 0.65rem;
             color: #dc2626;
         }
+
         .net-profit-row {
             display: flex;
             justify-content: flex-start;
@@ -1344,9 +937,10 @@
         }
         .net-profit-row .net-value.positive { color: #22c55e; }
         .net-profit-row .net-value.negative { color: #ef4444; }
+
         .journey-actions {
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-start;
             gap: 6px;
             margin-top: 8px;
         }
@@ -1377,6 +971,25 @@
             background: #1e3a5f;
         }
 
+        /* LINHA INDEPENDENTE PARA LITROS */
+        .litros-line {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 4px;
+            border-top: 1px dashed #eef2f7;
+            padding-top: 4px;
+        }
+        .litros-line strong {
+            color: #0f172a;
+        }
+        body.dark-theme .litros-line {
+            border-top-color: #334155;
+        }
+        body.dark-theme .litros-line strong {
+            color: #f1f5f9;
+        }
+
+        /* ===== FILTROS ===== */
         .filter-date {
             display: flex;
             gap: 8px;
@@ -1458,6 +1071,8 @@
             color: #fff;
             border-color: #5b7cfa;
         }
+
+        /* ===== LISTA DE GASTOS ===== */
         .list-item-glass {
             display: flex;
             justify-content: space-between;
@@ -1495,7 +1110,12 @@
             white-space: nowrap;
         }
         .list-item-glass .amount.negative { color: #ef4444; }
-        .delete-icon {
+        .list-item-glass .actions-expense {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .delete-icon, .edit-expense-btn {
             color: #cbd5e1;
             cursor: pointer;
             padding: 6px 8px;
@@ -1506,6 +1126,9 @@
             border-radius: 30px;
         }
         .delete-icon:hover { color: #ef4444; background: #fee2e2; }
+        .edit-expense-btn:hover { color: #5b7cfa; background: #e0f2fe; }
+        body.dark-theme .edit-expense-btn:hover { color: #818cf8; background: #1e3a5f; }
+
         .badge-glass {
             background: #f1f5f9;
             padding: 2px 12px;
@@ -1515,12 +1138,17 @@
             color: #64748b;
             text-transform: uppercase;
         }
+        .badge-glass.fixo { color: #22c55e; border: 1px solid #bbf7d0; background: #f0fdf4; }
+        .badge-glass.eventual { color: #f59e0b; border: 1px solid #fde68a; background: #fffbeb; }
+
         .empty-state-glass {
             text-align: center;
             padding: 30px 10px;
             color: #cbd5e1;
         }
         .empty-state-glass i { font-size: 2.5rem; margin-bottom: 8px; opacity: 0.4; }
+
+        /* ===== CONFIGURAÇÕES ===== */
         .config-accordion {
             margin-bottom: 8px;
             border: 1px solid #eef2f7;
@@ -1580,6 +1208,7 @@
         }
         .config-accordion .accordion-body .add-row input { flex: 1; }
         .config-accordion .accordion-body .add-row .btn-app-small { margin-top: 0; }
+
         .config-item {
             display: flex;
             justify-content: space-between;
@@ -1602,6 +1231,7 @@
         .config-item .actions button.delete:hover { color: #ef4444; }
         .config-item .actions button.edit:hover { color: #5b7cfa; }
         .config-item .actions button.sub-btn:hover { color: #f59e0b; }
+
         .app-input {
             width: 100%;
             padding: 12px 16px;
@@ -1632,6 +1262,7 @@
             padding-right: 40px;
             cursor: pointer;
         }
+
         .app-label {
             font-size: 0.7rem;
             font-weight: 600;
@@ -1642,6 +1273,7 @@
             margin-bottom: 4px;
             margin-top: 12px;
         }
+
         .btn-app {
             background: #5b7cfa;
             border: none;
@@ -1683,6 +1315,7 @@
             background: #ef4444;
             box-shadow: 0 4px 14px rgba(239,68,68,0.2);
         }
+
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1728,6 +1361,8 @@
             transition: 0.2s;
         }
         .modal-glass .close-modal:hover { color: #0f172a; transform: rotate(90deg); }
+
+        /* ===== FUEL GAUGE ===== */
         .fuel-gauge {
             display: flex;
             gap: 4px;
@@ -1753,6 +1388,8 @@
             margin-top: 2px;
         }
         .fuel-info .percent { color: #0f172a; font-weight: 700; }
+
+        /* ===== PAUSA ===== */
         .pause-options {
             display: flex;
             flex-wrap: wrap;
@@ -1772,6 +1409,7 @@
         .pause-options .pause-btn:active { transform: scale(0.95); background: #eef2f7; }
         .pause-options .pause-btn.back-btn { border-color: #fca5a5; color: #dc2626; }
         .pause-options .pause-btn.sub-item { border-color: #93c5fd; color: #2563eb; }
+
         .subcategory-list .sub-item {
             display: flex;
             justify-content: space-between;
@@ -1791,6 +1429,7 @@
         .subcategory-list .sub-item .sub-actions button:hover { color: #0f172a; }
         .subcategory-list .sub-item .sub-actions button.delete:hover { color: #ef4444; }
         .subcategory-list .sub-item .sub-actions button.edit:hover { color: #5b7cfa; }
+
         .platform-group-glass {
             background: #f8fafc;
             border-radius: 16px;
@@ -1798,6 +1437,7 @@
             margin-bottom: 12px;
             border-left: 3px solid #5b7cfa;
         }
+
         #toast {
             position: fixed;
             bottom: 80px;
@@ -1817,6 +1457,7 @@
             text-align: center;
             transition: opacity 0.3s;
         }
+
         #statusIndicator {
             position: fixed;
             top: 10px;
@@ -1832,6 +1473,7 @@
             display: none;
             transition: all 0.2s;
         }
+
         .spinner {
             display: inline-block;
             width: 18px;
@@ -1842,6 +1484,7 @@
             animation: spin 0.6s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+
         @media (max-width: 480px) {
             .glass-card { padding: 24px 18px; }
             .grid-stats { grid-template-columns: 1fr 1fr; }
@@ -2004,7 +1647,6 @@
             color: #0f172a;
         }
 
-        /* MODAL DE DIAS DE TRABALHO */
         .work-days-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -2043,6 +1685,133 @@
         .work-days-grid label input[type="checkbox"] {
             margin-bottom: 2px;
             accent-color: #5b7cfa;
+        }
+
+        /* ===== CRONÔMETRO ===== */
+        .cronometro-botoes {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .cronometro-botoes .btn-cron {
+            flex: 1 1 auto;
+            min-width: 50px;
+            max-width: 100px;
+            padding: 10px 4px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: #fff;
+        }
+        .cronometro-botoes .btn-cron i { font-size: 0.9rem; }
+        .cronometro-botoes .btn-cron:active { transform: scale(0.94); }
+        .btn-cron.iniciar:not(:disabled) {
+            animation: pulseGreen 2.5s ease-in-out infinite;
+        }
+        .btn-cron.pausar:not(:disabled) {
+            animation: pulseYellow 2.5s ease-in-out infinite;
+        }
+        .btn-cron.reanudar:not(:disabled) {
+            animation: pulseBlue 2.5s ease-in-out infinite;
+        }
+        .btn-cron.finalizar:not(:disabled) {
+            animation: pulseRed 2.5s ease-in-out infinite;
+        }
+        .btn-cron.iniciar {
+            background: #22c55e;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+        }
+        .btn-cron.iniciar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
+        .btn-cron.pausar {
+            background: #facc15;
+            color: #0f172a;
+            box-shadow: 0 4px 12px rgba(250, 204, 21, 0.2);
+        }
+        .btn-cron.pausar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
+        .btn-cron.reanudar {
+            background: #5b7cfa;
+            box-shadow: 0 4px 12px rgba(91, 124, 250, 0.2);
+        }
+        .btn-cron.reanudar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
+        .btn-cron.finalizar {
+            background: #ef4444;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+        }
+        .btn-cron.finalizar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
+
+        .divider-ou {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 8px 0 4px 0;
+            width: 100%;
+        }
+        .divider-ou hr {
+            flex: 1;
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+        .divider-ou span {
+            padding: 0 4px;
+            background: transparent;
+            color: #94a3b8;
+        }
+
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            user-select: none;
+        }
+        .toggle-wrapper .toggle-slider {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+            background: #cbd5e1;
+            border-radius: 30px;
+            transition: 0.3s;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .toggle-wrapper .toggle-slider.active {
+            background: #5b7cfa;
+        }
+        .toggle-wrapper .toggle-slider .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+        .toggle-wrapper .toggle-slider.active .toggle-knob {
+            left: 20px;
+        }
+        .toggle-wrapper input[type="checkbox"] {
+            display: none;
         }
     </style>
 </head>
@@ -2121,7 +1890,6 @@
 
     <!-- ==================== APP ==================== -->
     <div id="app-container">
-        <!-- HEADER com tema -->
         <header class="app-header-glass">
             <div class="brand">
                 <i class="fas fa-car-side"></i>
@@ -2137,7 +1905,6 @@
             </div>
         </header>
 
-        <!-- PERFIL MINI (sempre visível) -->
         <div class="glass-inner profile-mini-card">
             <div class="profile-name-wrapper">
                 <span class="profile-name" id="profileDisplayName">Usuário</span>
@@ -2149,7 +1916,6 @@
             <div class="profile-car" id="profileDisplayCar"></div>
         </div>
 
-        <!-- NAVEGAÇÃO SUPERIOR -->
         <div class="top-nav-wrapper">
             <nav class="top-nav-glass">
                 <button class="nav-item-glass active" data-page="page-dashboard"><i class="fas fa-home"></i><span>Início</span></button>
@@ -2255,7 +2021,6 @@
                 </div>
                 <div id="journeyList"><div class="empty-state-glass"><i class="fas fa-calendar-plus"></i><br>Nenhuma jornada finalizada.</div></div>
                 <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
-                    <button class="btn-app btn-app-small" onclick="exportJourneysCSV()"><i class="fas fa-file-csv"></i> CSV</button>
                     <button class="btn-app btn-app-small" onclick="exportJourneysPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
                 </div>
             </div>
@@ -2318,9 +2083,6 @@
                     <button class="btn-app btn-app-small" onclick="clearExpenseFilter()"><i class="fas fa-undo-alt"></i> Limpar</button>
                 </div>
                 <div id="expenseList"><div class="empty-state-glass"><i class="fas fa-receipt"></i><br>Nenhum gasto encontrado.</div></div>
-                <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
-                    <button class="btn-app btn-app-small" onclick="exportExpensesCSV()"><i class="fas fa-file-csv"></i> Exportar CSV</button>
-                </div>
             </div>
         </section>
 
@@ -2729,6 +2491,56 @@
     </div>
 </div>
 
+<!-- MODAL EDITAR GASTO -->
+<div id="editExpenseModal" class="modal-overlay">
+    <div class="modal-glass">
+        <button class="close-modal" onclick="closeModal('editExpenseModal')"><i class="fas fa-times"></i></button>
+        <div class="modal-title"><i class="fas fa-edit"></i> Editar Gasto</div>
+        <form id="editExpenseForm">
+            <input type="hidden" id="editExpenseIndex" value="">
+            <div class="form-group">
+                <label class="app-label">Data</label>
+                <input type="date" id="editExpenseDate" class="app-input" required>
+            </div>
+            <div class="form-group">
+                <label class="app-label">Hora (HH:MM)</label>
+                <input type="time" id="editExpenseTime" class="app-input" required>
+            </div>
+            <div class="form-group">
+                <label class="app-label">Categoria</label>
+                <select id="editExpenseCategory" class="app-input">
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="form-group" id="editSubcategoryField" style="display:none;">
+                <label class="app-label">Subcategoria</label>
+                <select id="editExpenseSubcategory" class="app-input">
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="app-label">Forma de Pagamento</label>
+                <select id="editExpensePayment" class="app-input">
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="app-label">Valor (R$)</label>
+                <input type="text" id="editExpenseAmount" class="app-input" placeholder="0,00" onblur="formatarValor(this)">
+            </div>
+            <div class="form-group">
+                <label class="app-label">Comentário</label>
+                <input type="text" id="editExpenseComment" class="app-input" placeholder="Observação">
+            </div>
+            <div class="form-group fuel-price-field" id="editFuelPriceField" style="display:none;">
+                <label class="app-label">Valor do litro (R$)</label>
+                <input type="text" id="editFuelPrice" class="app-input" placeholder="0,00" onblur="formatarValor(this)">
+            </div>
+            <button type="submit" class="btn-app" id="editExpenseBtn"><i class="fas fa-save"></i> Salvar Alterações</button>
+        </form>
+    </div>
+</div>
+
 <!-- ============================================================= -->
 <!-- ==================== JAVASCRIPT ============================= -->
 <!-- ============================================================= -->
@@ -2766,7 +2578,7 @@
         subcategories: {},
         folga: {},
         defaultCar: null,
-        workingDays: [1, 2, 3, 4, 5] // segunda a sexta por padrão
+        workingDays: [1, 2, 3, 4, 5]
     };
 
     let activeJourney = {
@@ -2806,11 +2618,10 @@
         return s1 === s2;
     }
 
-    // Semana: segunda (1) a domingo (0)
     function getStartOfWeek(date) {
         const d = new Date(date);
-        const day = d.getDay(); // 0=domingo, 1=segunda, ...
-        const diff = (day === 0 ? 6 : day - 1); // ajuste para segunda
+        const day = d.getDay();
+        const diff = (day === 0 ? 6 : day - 1);
         d.setDate(d.getDate() - diff);
         d.setHours(0, 0, 0, 0);
         return d;
@@ -2924,7 +2735,8 @@
                 'finishJourneyBtn': '<i class="fas fa-save"></i> Salvar e Finalizar',
                 'manualJourneyBtn': '<i class="fas fa-save"></i> Salvar Jornada',
                 'editJourneyBtn': '<i class="fas fa-save"></i> Salvar Alterações',
-                'saveWorkDaysBtn': '<i class="fas fa-save"></i> Salvar'
+                'saveWorkDaysBtn': '<i class="fas fa-save"></i> Salvar',
+                'editExpenseBtn': '<i class="fas fa-save"></i> Salvar Alterações'
             };
             btn.innerHTML = map[btnId] || 'Salvar';
         }
@@ -3347,7 +3159,7 @@
     }
 
     // =============================================================
-    // 9. DASHBOARD (com semana corrigida e dias de trabalho)
+    // 9. DASHBOARD
     // =============================================================
     function renderDashboard() {
         const journeys = appData.journeys || [];
@@ -3356,13 +3168,11 @@
         const hoje = getToday();
         const workingDays = appData.workingDays || [1, 2, 3, 4, 5];
 
-        // Função para verificar se um dia é dia de trabalho
         function isWorkingDay(date) {
-            const day = date.getDay(); // 0=domingo, 1=segunda, ...
+            const day = date.getDay();
             return workingDays.includes(day);
         }
 
-        // Diário (todos os dias, independente de trabalho)
         const dailyJourneys = journeys.filter(j => {
             const d = new Date(j.date + 'T00:00:00');
             return isSameDay(d, now);
@@ -3372,7 +3182,6 @@
             return isSameDay(d, now);
         });
 
-        // Semanal (apenas dias de trabalho)
         const weeklyJourneys = journeys.filter(j => {
             const d = new Date(j.date + 'T00:00:00');
             return isSameWeek(d, now) && isWorkingDay(d);
@@ -3382,7 +3191,6 @@
             return isSameWeek(d, now) && isWorkingDay(d);
         });
 
-        // Mensal (todos os dias)
         const monthlyJourneys = journeys.filter(j => {
             const d = new Date(j.date + 'T00:00:00');
             return isSameMonth(d, now);
@@ -3393,9 +3201,7 @@
         });
 
         function calcTotals(journeys, expenses) {
-            let earnings = 0,
-                km = 0,
-                rides = 0;
+            let earnings = 0, km = 0, rides = 0;
             journeys.forEach(j => {
                 j.platforms.forEach(p => {
                     earnings += parseFloat(p.gross) || 0;
@@ -3433,7 +3239,7 @@
     }
 
     // =============================================================
-    // 10. FOLGA - SWITCH
+    // 10. FOLGA
     // =============================================================
     function atualizarSwitchFolga() {
         const hoje = getToday();
@@ -3598,8 +3404,8 @@
             html += `
                     <div class="journey-history-card">
                         <div class="journey-header">
-                            <span class="date">📅 ${escapeHtml(j.date)}</span>
                             ${j.car ? `<span class="car-tag">🚗 ${escapeHtml(j.car)}</span>` : ''}
+                            <span class="date">📅 ${escapeHtml(j.date)}</span>
                         </div>
                         <div class="journey-grid">
                             <span><span class="label">⏱️</span> ${escapeHtml(j.startTime)} - ${escapeHtml(j.endTime)}</span>
@@ -3625,11 +3431,11 @@
                         <div class="expenses-day-section">
                             <div class="exp-total">
                                 💳 Gastos do dia: <strong>${formatCurrency(totalDayExpenses)}</strong> (${dayExpenses.length} registro(s))
-                                ${totalLitros > 0 ? ` · ⛽ ${totalLitros.toFixed(2)} L` : ''}
                             </div>
                             <div class="expenses-tags">
                                 ${expensesTagsHtml || '<span style="color:#64748b; font-size:0.7rem;">Nenhum gasto registrado</span>'}
                             </div>
+                            ${totalLitros > 0 ? `<div class="litros-line">⛽ Litros abastecidos: <strong>${totalLitros.toFixed(2)} L</strong></div>` : ''}
                         </div>
 
                         <div class="net-profit-row">
@@ -3720,91 +3526,109 @@
     });
 
     // =============================================================
-    // 15. EXPORTAÇÃO PROFISSIONAL (CSV e PDF)
+    // 15. EXPORTAÇÃO PDF PROFISSIONAL
     // =============================================================
-    function exportJourneysCSV() {
-        const journeys = appData.journeys || [];
-        if (journeys.length === 0) { showToast('Nenhuma jornada para exportar.', 'warning', 3000); return; }
-
-        let csv = 'Relatório de Jornadas\n';
-        csv += 'Data,Início,Fim,KM Rodados,Plataformas,Corridas,Valor Bruto (R$),Total Pausas (min),Lucro Líquido (R$),Tempo Global\n';
-        journeys.forEach(j => {
-            const totalGross = j.platforms.reduce((s, p) => s + (parseFloat(p.gross) || 0), 0);
-            const dayExpenses = appData.expenses.filter(e => e.date === j.date);
-            const totalExpenses = dayExpenses.reduce((s, e) => s + (parseFloat(e.amount) || 0), 0);
-            const net = totalGross - totalExpenses;
-            const platforms = j.platforms.map(p => `${p.name} (${p.rides} corridas, R$ ${(parseFloat(p.gross)||0).toFixed(2)})`).join('; ');
-            const totalRides = j.platforms.reduce((s, p) => s + (parseInt(p.rides)||0), 0);
-            const globalTime = j.globalTimeMs ? formatTimeShort(j.globalTimeMs) : 'N/A';
-            csv += `${j.date},${j.startTime},${j.endTime},${j.totalKm},"${platforms}",${totalRides},${totalGross.toFixed(2)},${j.breaks||0},${net.toFixed(2)},${globalTime}\n`;
-        });
-        downloadFile(csv, 'jornadas.csv', 'text/csv');
-        showToast('Jornadas exportadas com sucesso!', 'success', 3000);
-    }
-
     function exportJourneysPDF() {
         const journeys = appData.journeys || [];
-        if (journeys.length === 0) { showToast('Nenhuma jornada para exportar.', 'warning', 3000); return; }
+        if (journeys.length === 0) {
+            showToast('Nenhuma jornada para exportar.', 'warning', 3000);
+            return;
+        }
 
         try {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('p', 'pt', 'a4');
 
-            doc.setFontSize(16);
-            doc.text('Relatório de Jornadas', 40, 40);
+            // Cabeçalho
+            doc.setFontSize(18);
+            doc.setTextColor(40, 60, 90);
+            doc.text('📊 Relatório de Jornadas', 40, 40);
             doc.setFontSize(10);
-            doc.text(`Gerado em: ${new Date().toLocaleString('pt-BR')}`, 40, 55);
+            doc.setTextColor(100, 120, 140);
+            const driverName = appData.profile.name || 'Motorista';
+            doc.text(`Motorista: ${driverName}`, 40, 58);
+            doc.text(`Gerado em: ${new Date().toLocaleString('pt-BR')}`, 40, 70);
 
-            const rows = journeys.map(j => {
+            let yPos = 90;
+
+            journeys.forEach((j, idx) => {
                 const totalGross = j.platforms.reduce((s, p) => s + (parseFloat(p.gross) || 0), 0);
                 const dayExpenses = appData.expenses.filter(e => e.date === j.date);
                 const totalExpenses = dayExpenses.reduce((s, e) => s + (parseFloat(e.amount) || 0), 0);
                 const net = totalGross - totalExpenses;
-                const totalRides = j.platforms.reduce((s, p) => s + (parseInt(p.rides)||0), 0);
+                const totalRides = j.platforms.reduce((s, p) => s + (parseInt(p.rides) || 0), 0);
                 const globalTime = j.globalTimeMs ? formatTimeShort(j.globalTimeMs) : 'N/A';
-                return [j.date, j.startTime, j.endTime, j.totalKm, totalRides, `R$ ${totalGross.toFixed(2)}`, `R$ ${net.toFixed(2)}`, globalTime];
+                const fuelExpenses = dayExpenses.filter(e => e.category === 'Combustível' && e.litros);
+                const totalLitros = fuelExpenses.reduce((s, e) => s + (parseFloat(e.litros) || 0), 0);
+
+                // Tabela vertical para cada jornada
+                const rows = [
+                    [{ content: '📅 Data', styles: { fillColor: [240, 244, 248], textColor: [40, 60, 90] } },
+                     { content: j.date, styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '⏱️ Horário', styles: { fillColor: [240, 244, 248] } },
+                     { content: `${j.startTime} - ${j.endTime}`, styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '🚗 Carro', styles: { fillColor: [240, 244, 248] } },
+                     { content: j.car || 'Não informado', styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '🛣️ KM Rodados', styles: { fillColor: [240, 244, 248] } },
+                     { content: `${j.totalKm} km`, styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '⛽ Combustível', styles: { fillColor: [240, 244, 248] } },
+                     { content: `Início: ${j.fuelLevel || 'N/I'}% | Fim: ${j.finalFuel || 'N/I'}%`, styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '⏱️ Tempo Trabalhado', styles: { fillColor: [240, 244, 248] } },
+                     { content: formatTimeShort(j.totalWorkMinutes * 60000 || 0), styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '⏱️ Tempo Global', styles: { fillColor: [240, 244, 248] } },
+                     { content: globalTime, styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '⏸️ Pausas', styles: { fillColor: [240, 244, 248] } },
+                     { content: j.pauses && j.pauses.length > 0 ? j.pauses.map(p => `${p.name} (${formatTimeShort(p.duration)})`).join(', ') : 'Nenhuma', styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '📊 Corridas', styles: { fillColor: [240, 244, 248] } },
+                     { content: totalRides.toString(), styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '💰 Valor Bruto', styles: { fillColor: [240, 244, 248] } },
+                     { content: formatCurrency(totalGross), styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '💳 Gastos do Dia', styles: { fillColor: [240, 244, 248] } },
+                     { content: formatCurrency(totalExpenses), styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '⛽ Litros Abastecidos', styles: { fillColor: [240, 244, 248] } },
+                     { content: totalLitros > 0 ? `${totalLitros.toFixed(2)} L` : 'Nenhum', styles: { fillColor: [255, 255, 255] } }],
+                    [{ content: '📈 Lucro Líquido', styles: { fillColor: [240, 244, 248] } },
+                     { content: formatCurrency(net), styles: { fillColor: [255, 255, 255], textColor: net >= 0 ? [34, 197, 94] : [239, 68, 68] } }],
+                ];
+
+                // Detalhe das plataformas
+                let platformDetails = '';
+                j.platforms.forEach(p => {
+                    platformDetails += `${p.name}: ${p.rides} corridas, ${formatCurrency(p.gross)}\n`;
+                });
+
+                rows.push([
+                    { content: '📱 Plataformas', styles: { fillColor: [240, 244, 248] } },
+                    { content: platformDetails || 'Nenhuma', styles: { fillColor: [255, 255, 255] } }
+                ]);
+
+                doc.autoTable({
+                    body: rows,
+                    startY: yPos,
+                    styles: { fontSize: 8, cellPadding: 4, lineColor: [200, 200, 200], lineWidth: 0.5 },
+                    columnStyles: {
+                        0: { cellWidth: 90, halign: 'left' },
+                        1: { cellWidth: 'auto', halign: 'left' }
+                    },
+                    margin: { left: 40, right: 40 },
+                    tableWidth: 'auto',
+                });
+
+                yPos = doc.lastAutoTable.finalY + 12;
+
+                // Linha separadora entre jornadas
+                if (idx < journeys.length - 1) {
+                    doc.setDrawColor(200, 200, 200);
+                    doc.line(40, yPos - 6, 550, yPos - 6);
+                }
             });
 
-            doc.autoTable({
-                head: [['Data','Início','Fim','KM','Corridas','Bruto','Líquido','Global']],
-                body: rows,
-                startY: 70,
-                styles: { fontSize: 8 },
-                headStyles: { fillColor: [91, 124, 250] },
-                alternateRowStyles: { fillColor: [245, 247, 250] }
-            });
-
-            doc.save('jornadas.pdf');
+            doc.save('relatorio_jornadas.pdf');
             showToast('PDF gerado com sucesso!', 'success', 3000);
         } catch (err) {
             console.error('Erro ao gerar PDF:', err);
             showToast('Erro ao gerar PDF. Verifique o console.', 'danger', 4000);
         }
-    }
-
-    function exportExpensesCSV() {
-        const expenses = appData.expenses || [];
-        if (expenses.length === 0) { showToast('Nenhum gasto para exportar.', 'warning', 3000); return; }
-
-        let csv = 'Relatório de Gastos\n';
-        csv += 'Data,Hora,Categoria,Subcategoria,Forma de Pagamento,Valor (R$),Litros,Comentário\n';
-        expenses.forEach(e => {
-            const litros = e.litros ? parseFloat(e.litros).toFixed(2) : '';
-            csv += `${e.date},${e.time||''},${e.category},${e.subcategory||''},${e.paymentMethod||''},${(parseFloat(e.amount)||0).toFixed(2)},${litros},${e.comment||''}\n`;
-        });
-        downloadFile(csv, 'gastos.csv', 'text/csv');
-        showToast('Gastos exportados com sucesso!', 'success', 3000);
-    }
-
-    function downloadFile(content, filename, mimeType) {
-        const blob = new Blob([content], { type: mimeType + ';charset=utf-8;' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(link.href);
     }
 
     // =============================================================
@@ -3933,8 +3757,8 @@
                             </div>
                             ${e.comment ? `<div style="font-size:0.7rem; color:#64748b; margin-top:2px;">📝 ${escapeHtml(e.comment)}</div>` : ''}
                         </div>
-                        <div style="display:flex; align-items:center; gap:4px;">
-                            <span class="amount negative">${formatCurrency(e.amount)}</span>
+                        <div class="actions-expense">
+                            <button class="edit-expense-btn" onclick="openEditExpenseModal(${originalIndex})"><i class="fas fa-pen"></i></button>
                             <button class="delete-icon" onclick="deleteExpense(${originalIndex})"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
@@ -3987,7 +3811,133 @@
     });
 
     // =============================================================
-    // 18. PERFIL E CARROS
+    // 18. EDITAR GASTO
+    // =============================================================
+    function openEditExpenseModal(index) {
+        const expense = appData.expenses[index];
+        if (!expense) return;
+
+        document.getElementById('editExpenseIndex').value = index;
+        document.getElementById('editExpenseDate').value = expense.date;
+        document.getElementById('editExpenseTime').value = expense.time ? expense.time.slice(0, 5) : '12:00';
+        document.getElementById('editExpenseAmount').value = expense.amount.toFixed(2).replace('.', ',');
+        document.getElementById('editExpenseComment').value = expense.comment || '';
+
+        // Popular selects
+        const catSelect = document.getElementById('editExpenseCategory');
+        catSelect.innerHTML = '<option value="">Selecione...</option>';
+        appData.categories.forEach(c => {
+            catSelect.innerHTML += `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`;
+        });
+        catSelect.value = expense.category || '';
+
+        const paySelect = document.getElementById('editExpensePayment');
+        paySelect.innerHTML = '<option value="">Selecione...</option>';
+        appData.paymentMethods.forEach(p => {
+            paySelect.innerHTML += `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`;
+        });
+        paySelect.value = expense.paymentMethod || '';
+
+        // Subcategoria
+        atualizarEditSubcategoria(expense.category, expense.subcategory);
+
+        // Combustível
+        const fuelField = document.getElementById('editFuelPriceField');
+        if (expense.category === 'Combustível' && expense.litros) {
+            fuelField.style.display = 'block';
+            document.getElementById('editFuelPrice').value = (expense.amount / expense.litros).toFixed(2).replace('.', ',');
+        } else {
+            fuelField.style.display = 'none';
+            document.getElementById('editFuelPrice').value = '';
+        }
+
+        document.getElementById('editExpenseModal').classList.add('active');
+    }
+
+    function atualizarEditSubcategoria(categoria, selected) {
+        const field = document.getElementById('editSubcategoryField');
+        const select = document.getElementById('editExpenseSubcategory');
+        if (!categoria || !appData.subcategories[categoria] || appData.subcategories[categoria].length === 0) {
+            field.style.display = 'none';
+            select.value = '';
+            return;
+        }
+        field.style.display = 'block';
+        select.innerHTML = '<option value="">Selecione...</option>';
+        appData.subcategories[categoria].forEach(s => {
+            select.innerHTML += `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`;
+        });
+        if (selected && appData.subcategories[categoria].includes(selected)) {
+            select.value = selected;
+        }
+    }
+
+    document.getElementById('editExpenseCategory').addEventListener('change', function() {
+        const categoria = this.value;
+        const field = document.getElementById('editFuelPriceField');
+        if (categoria === 'Combustível') {
+            field.style.display = 'block';
+        } else {
+            field.style.display = 'none';
+            document.getElementById('editFuelPrice').value = '';
+        }
+        atualizarEditSubcategoria(categoria, '');
+    });
+
+    document.getElementById('editExpenseForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const index = parseInt(document.getElementById('editExpenseIndex').value);
+        const date = document.getElementById('editExpenseDate').value;
+        const time = document.getElementById('editExpenseTime').value;
+        const category = document.getElementById('editExpenseCategory').value.trim();
+        const subcategory = document.getElementById('editExpenseSubcategory').value.trim();
+        const paymentMethod = document.getElementById('editExpensePayment').value.trim();
+        let amount = document.getElementById('editExpenseAmount').value.replace(',', '.');
+        const comment = document.getElementById('editExpenseComment').value.trim();
+
+        if (!date || !category || !amount) {
+            showToast('Preencha Data, Categoria e Valor.', 'warning', 3000);
+            return;
+        }
+
+        const amountNum = parseFloat(amount);
+        if (isNaN(amountNum) || amountNum <= 0) {
+            showToast('Digite um valor válido.', 'warning', 3000);
+            return;
+        }
+
+        const expense = appData.expenses[index];
+        if (!expense) return;
+
+        expense.date = date;
+        expense.time = time || '00:00';
+        expense.category = category;
+        expense.subcategory = subcategory || '';
+        expense.paymentMethod = paymentMethod || 'Não informado';
+        expense.amount = amountNum;
+        expense.comment = comment || '';
+
+        // Litros
+        if (category === 'Combustível') {
+            const fuelPrice = document.getElementById('editFuelPrice').value.replace(',', '.');
+            const valPrice = parseFloat(fuelPrice);
+            if (!isNaN(valPrice) && valPrice > 0) {
+                expense.litros = amountNum / valPrice;
+            }
+        } else {
+            delete expense.litros;
+        }
+
+        setLoading('editExpenseBtn', true);
+        await saveUserData();
+        setLoading('editExpenseBtn', false);
+        closeModal('editExpenseModal');
+        renderAll();
+        showToast('Gasto atualizado com sucesso!', 'success', 3000);
+    });
+
+    // =============================================================
+    // 19. PERFIL E CARROS
     // =============================================================
     function renderProfileForm() {
         const p = appData.profile || {};
@@ -4043,7 +3993,7 @@
     }
 
     // =============================================================
-    // 19. CONFIGURAÇÕES
+    // 20. CONFIGURAÇÕES
     // =============================================================
     function toggleAccordion(header) {
         const body = header.nextElementSibling;
@@ -4119,7 +4069,7 @@
     }
 
     // =============================================================
-    // 20. SUBCATEGORIAS
+    // 21. SUBCATEGORIAS
     // =============================================================
     let subcategoryModalContext = { type: null, index: null };
 
@@ -4253,7 +4203,7 @@
     });
 
     // =============================================================
-    // 21. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
+    // 22. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
     // =============================================================
     document.addEventListener('click', function(e) {
         const target = e.target.closest('.edit-btn, .delete-btn');
@@ -4360,7 +4310,7 @@
     });
 
     // =============================================================
-    // 22. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
+    // 23. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
     // =============================================================
     document.getElementById('addCategoryBtn').addEventListener('click', async function() {
         const input = document.getElementById('newCategoryInput');
@@ -4411,7 +4361,7 @@
     });
 
     // =============================================================
-    // 23. POPULAR SELECTS
+    // 24. POPULAR SELECTS
     // =============================================================
     function populateSelects() {
         const catSelect = document.getElementById('expenseCategorySelect');
@@ -4475,7 +4425,7 @@
     }
 
     // =============================================================
-    // 24. PLATAFORMAS
+    // 25. PLATAFORMAS
     // =============================================================
     function renderPlatformsGroup(containerId, dataArray, removeFnName) {
         const container = document.getElementById(containerId);
@@ -4561,7 +4511,7 @@
     }
 
     // =============================================================
-    // 25. CRONÔMETRO E JORNADA
+    // 26. CRONÔMETRO E JORNADA
     // =============================================================
     function iniciarJornadaCron() {
         openStartJourneyModal();
@@ -5007,7 +4957,7 @@
     }
 
     // =============================================================
-    // 26. MODAL INICIAR JORNADA (FUEL GAUGE)
+    // 27. MODAL INICIAR JORNADA (FUEL GAUGE)
     // =============================================================
     function openStartJourneyModal() {
         document.getElementById('quickJourneyDate').value = getCurrentDate();
@@ -5142,7 +5092,7 @@
     });
 
     // =============================================================
-    // 27. AÇÃO RÁPIDA: REGISTRAR GASTO
+    // 28. AÇÃO RÁPIDA: REGISTRAR GASTO
     // =============================================================
     function openQuickExpense() {
         document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
@@ -5169,7 +5119,7 @@
     }
 
     // =============================================================
-    // 28. EVENTOS DOS FORMULÁRIOS
+    // 29. EVENTOS DOS FORMULÁRIOS
     // =============================================================
     document.getElementById('expenseForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -5277,7 +5227,7 @@
     });
 
     // =============================================================
-    // 29. FECHAR MODAIS E NAVEGAÇÃO
+    // 30. FECHAR MODAIS E NAVEGAÇÃO
     // =============================================================
     function closeModal(id) {
         document.getElementById(id).classList.remove('active');
@@ -5314,7 +5264,7 @@
     });
 
     // =============================================================
-    // 30. INICIALIZAÇÃO
+    // 31. INICIALIZAÇÃO
     // =============================================================
     function initApp() {
         resetExpenseForm();
@@ -5328,7 +5278,6 @@
             btnManual.addEventListener('click', openManualJourneyModal);
         }
 
-        // Tema no header
         const headerThemeSwitch = document.getElementById('headerThemeSwitch');
         const headerThemeIcon = document.getElementById('headerThemeIcon');
         const currentTheme = localStorage.getItem('driverControlTheme') || 'light';
@@ -5352,11 +5301,11 @@
             }
         });
 
-        console.log('🚀 DriverControl - Semana corrigida, dias de trabalho, tema no header e cronômetro global!');
+        console.log('🚀 DriverControl - PDF profissional, edição de gastos, layout melhorado e carro acima da data!');
     }
 
     // =============================================================
-    // 31. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
+    // 32. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
     // =============================================================
     function openManualJourneyModal() {
         document.getElementById('manualDate').value = getToday();
@@ -5376,7 +5325,7 @@
     }
 
     // =============================================================
-    // 32. MODAL FINALIZAR JORNADA
+    // 33. MODAL FINALIZAR JORNADA
     // =============================================================
     function openFinishJourneyModal() {
         document.getElementById('finishDateTime').value = getCurrentDate() + ' ' + getCurrentTimeWithTenths();
