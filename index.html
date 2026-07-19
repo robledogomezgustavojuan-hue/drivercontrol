@@ -685,9 +685,51 @@
             width: 100%;
         }
         body.dark-theme .top-nav-glass {
-            background: rgba(30, 41, 59, 0.85);
+            background: #1e293b;
             border-color: rgba(255, 255, 255, 0.05);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Botões da navegação no tema escuro com laranja neon */
+        body.dark-theme .nav-item-glass {
+            color: #94a3b8;
+        }
+        body.dark-theme .nav-item-glass.active {
+            color: #ffffff;
+            background: #ff6b00;
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+        }
+        body.dark-theme .nav-item-glass.active i {
+            color: #ffffff;
+        }
+
+        /* ===== EFEITO PULSANTE NO CARD DO CRONÔMETRO ===== */
+        .cronometro-card-active {
+            position: relative;
+            transition: box-shadow 0.3s ease;
+        }
+        .cronometro-card-active::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 30px;
+            padding: 2px;
+            background: linear-gradient(135deg, #5b7cfa, #22d3ee);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderPulse 1.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes borderPulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        /* ===== CRONÔMETRO GLOBAL NO TEMA ESCURO ===== */
+        body.dark-theme #cronometroGlobalDisplay {
+            color: #f1f5f9 !important;
         }
 
         /* ===== RESTO DOS ESTILOS (mantidos) ===== */
@@ -1988,12 +2030,13 @@
 
         <!-- DASHBOARD -->
         <section id="page-dashboard" class="page active">
-            <div class="glass-inner">
+            <!-- Card do cronômetro com classe para efeito pulsante -->
+            <div class="glass-inner" id="cronometroCard">
                 <div class="title"><i class="fas fa-stopwatch"></i> Cronômetro de Jornada</div>
                 <div class="cronometro-display" id="cronometroDisplay">00:00:00.00</div>
                 <div class="cronometro-status" id="cronometroStatus">⏸️ Aguardando início</div>
 
-                <!-- Cronômetro global (tempo total sem pausas) -->
+                <!-- Cronômetro global -->
                 <div style="text-align:center; font-size:0.75rem; color:#94a3b8; margin-top:-4px; margin-bottom:8px;">
                     <span>⏱️ Tempo total (global): <strong id="cronometroGlobalDisplay" style="color:#0f172a;">00:00:00.00</strong></span>
                 </div>
@@ -2572,6 +2615,16 @@
     // =============================================================
     // 3. UTILITÁRIOS
     // =============================================================
+    function getToday() {
+        return new Date().toLocaleDateString('en-CA');
+    }
+
+    function isSameDay(d1, d2) {
+        const s1 = d1.toLocaleDateString('en-CA');
+        const s2 = d2.toLocaleDateString('en-CA');
+        return s1 === s2;
+    }
+
     function formatCurrency(value) {
         return 'R$ ' + Number(value).toFixed(2).replace('.', ',');
     }
@@ -2588,10 +2641,6 @@
 
     function generateId() {
         return Date.now() + '-' + Math.random().toString(36).substr(2, 6);
-    }
-
-    function getToday() {
-        return new Date().toISOString().split('T')[0];
     }
 
     function getCurrentDate() {
@@ -2670,13 +2719,6 @@
         }
     }
 
-    // Períodos
-    function getStartOfDay(date) {
-        const d = new Date(date);
-        d.setHours(0, 0, 0, 0);
-        return d;
-    }
-
     function getStartOfWeek(date) {
         const d = new Date(date);
         const day = d.getDay();
@@ -2691,12 +2733,6 @@
         d.setDate(1);
         d.setHours(0, 0, 0, 0);
         return d;
-    }
-
-    function isSameDay(d1, d2) {
-        return d1.getFullYear() === d2.getFullYear() &&
-            d1.getMonth() === d2.getMonth() &&
-            d1.getDate() === d2.getDate();
     }
 
     function isSameWeek(d1, d2) {
@@ -3070,6 +3106,7 @@
         applyFilter();
         updateBadges();
         atualizarSwitchFolga();
+        atualizarEfeitoCardCronometro();
     }
 
     // =============================================================
@@ -3112,7 +3149,7 @@
     }
 
     // =============================================================
-    // 9. DASHBOARD (sem metas)
+    // 9. DASHBOARD
     // =============================================================
     function renderDashboard() {
         const journeys = appData.journeys || [];
@@ -3120,12 +3157,30 @@
         const now = new Date();
         const hoje = getToday();
 
-        const dailyJourneys = journeys.filter(j => isSameDay(new Date(j.date), now));
-        const dailyExpenses = expenses.filter(e => isSameDay(new Date(e.date), now));
-        const weeklyJourneys = journeys.filter(j => isSameWeek(new Date(j.date), now));
-        const weeklyExpenses = expenses.filter(e => isSameWeek(new Date(e.date), now));
-        const monthlyJourneys = journeys.filter(j => isSameMonth(new Date(j.date), now));
-        const monthlyExpenses = expenses.filter(e => isSameMonth(new Date(e.date), now));
+        const dailyJourneys = journeys.filter(j => {
+            const d = new Date(j.date + 'T00:00:00');
+            return isSameDay(d, now);
+        });
+        const dailyExpenses = expenses.filter(e => {
+            const d = new Date(e.date + 'T00:00:00');
+            return isSameDay(d, now);
+        });
+        const weeklyJourneys = journeys.filter(j => {
+            const d = new Date(j.date + 'T00:00:00');
+            return isSameWeek(d, now);
+        });
+        const weeklyExpenses = expenses.filter(e => {
+            const d = new Date(e.date + 'T00:00:00');
+            return isSameWeek(d, now);
+        });
+        const monthlyJourneys = journeys.filter(j => {
+            const d = new Date(j.date + 'T00:00:00');
+            return isSameMonth(d, now);
+        });
+        const monthlyExpenses = expenses.filter(e => {
+            const d = new Date(e.date + 'T00:00:00');
+            return isSameMonth(d, now);
+        });
 
         function calcTotals(journeys, expenses) {
             let earnings = 0,
@@ -3158,10 +3213,8 @@
         document.getElementById('monthlyExpenses').innerText = formatCurrency(monthly.expenses);
         document.getElementById('monthlyNet').innerText = formatCurrency(monthly.net);
 
-        // ===== VERIFICAÇÃO DE FOLGA EVENTUAL =====
         const isFolga = appData.folga && appData.folga[hoje] === true;
         const goalEl = document.getElementById('dailyGoalStatus');
-
         if (isFolga) {
             goalEl.innerHTML = `<div class="folga-status-msg folga">🌴 Hoje é dia de folga! Resumo apenas informativo.</div>`;
         } else {
@@ -3196,7 +3249,20 @@
     });
 
     // =============================================================
-    // 11. HISTÓRICO
+    // 11. EFEITO PULSANTE NO CARD DO CRONÔMETRO
+    // =============================================================
+    function atualizarEfeitoCardCronometro() {
+        const card = document.getElementById('cronometroCard');
+        if (!card) return;
+        if (activeJourney.running) {
+            card.classList.add('cronometro-card-active');
+        } else {
+            card.classList.remove('cronometro-card-active');
+        }
+    }
+
+    // =============================================================
+    // 12. HISTÓRICO
     // =============================================================
     function applyFilter() {
         const dateInput = document.getElementById('filterDate');
@@ -3242,7 +3308,6 @@
             const dayExpenses = expenses.filter(e => e.date === j.date);
             const totalDayExpenses = dayExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
 
-            // Calcular litros de combustível do dia
             const fuelExpenses = dayExpenses.filter(e => e.category === 'Combustível' && e.litros);
             const totalLitros = fuelExpenses.reduce((acc, e) => acc + (parseFloat(e.litros) || 0), 0);
 
@@ -3282,7 +3347,6 @@
                 expensesTagsHtml += `<span class="tag">${label} - ${formatCurrency(e.amount)}${litrosInfo}</span>`;
             });
 
-            // Tempo global
             const globalTime = j.globalTimeMs ? formatTimeShort(j.globalTimeMs) : 'N/A';
 
             html += `
@@ -3349,7 +3413,7 @@
     }
 
     // =============================================================
-    // 12. EXPORTAÇÃO PROFISSIONAL (CSV e PDF)
+    // 13. EXPORTAÇÃO PROFISSIONAL (CSV e PDF)
     // =============================================================
     function exportJourneysCSV() {
         const journeys = appData.journeys || [];
@@ -3429,7 +3493,7 @@
     }
 
     // =============================================================
-    // 13. TOAST, CONFIRM, EDIT TEXT, STATUS
+    // 14. TOAST, CONFIRM, EDIT TEXT, STATUS
     // =============================================================
     function showToast(message, type = 'info', duration = 5000) {
         const toast = document.getElementById('toast');
@@ -3509,7 +3573,7 @@
     window.addEventListener('offline', () => setStatus('⚠️ Offline', false));
 
     // =============================================================
-    // 14. GASTOS (com campo litros para combustível)
+    // 15. GASTOS (com campo litros para combustível)
     // =============================================================
     function renderExpenseList() {
         const container = document.getElementById('expenseList');
@@ -3603,7 +3667,7 @@
     });
 
     // =============================================================
-    // 15. PERFIL E CARROS
+    // 16. PERFIL E CARROS
     // =============================================================
     function renderProfileForm() {
         const p = appData.profile || {};
@@ -3640,7 +3704,7 @@
     }
 
     // =============================================================
-    // 16. CONFIGURAÇÕES
+    // 17. CONFIGURAÇÕES
     // =============================================================
     function toggleAccordion(header) {
         const body = header.nextElementSibling;
@@ -3716,7 +3780,7 @@
     }
 
     // =============================================================
-    // 17. SUBCATEGORIAS
+    // 18. SUBCATEGORIAS
     // =============================================================
     let subcategoryModalContext = { type: null, index: null };
 
@@ -3850,7 +3914,7 @@
     });
 
     // =============================================================
-    // 18. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
+    // 19. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
     // =============================================================
     document.addEventListener('click', function(e) {
         const target = e.target.closest('.edit-btn, .delete-btn');
@@ -3957,7 +4021,7 @@
     });
 
     // =============================================================
-    // 19. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
+    // 20. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
     // =============================================================
     document.getElementById('addCategoryBtn').addEventListener('click', async function() {
         const input = document.getElementById('newCategoryInput');
@@ -4008,7 +4072,7 @@
     });
 
     // =============================================================
-    // 20. POPULAR SELECTS
+    // 21. POPULAR SELECTS
     // =============================================================
     function populateSelects() {
         const catSelect = document.getElementById('expenseCategorySelect');
@@ -4072,7 +4136,7 @@
     }
 
     // =============================================================
-    // 21. PLATAFORMAS
+    // 22. PLATAFORMAS
     // =============================================================
     function renderPlatformsGroup(containerId, dataArray, removeFnName) {
         const container = document.getElementById(containerId);
@@ -4158,7 +4222,7 @@
     }
 
     // =============================================================
-    // 22. CRONÔMETRO E JORNADA
+    // 23. CRONÔMETRO E JORNADA
     // =============================================================
     function iniciarJornadaCron() {
         openStartJourneyModal();
@@ -4180,8 +4244,6 @@
 
         const fuel = parseInt(document.getElementById('quickFuelSlider').value);
         const now = new Date();
-        const dateStr = now.toISOString().split('T')[0];
-        const timeStr = now.toTimeString().slice(0, 8);
 
         startCronometro(parseFloat(km), fuel, car);
 
@@ -4215,6 +4277,7 @@
 
         atualizarBotoesCron();
         atualizarStatus('🟢 Jornada em andamento');
+        atualizarEfeitoCardCronometro();
     }
 
     function atualizarCronometro() {
@@ -4394,9 +4457,11 @@
         const breaksMinutes = Math.round(totalPauseMs / 60000);
         const globalTimeMs = endTime - globalStart;
 
+        const dateStr = new Date(startTime).toLocaleDateString('en-CA');
+
         const journey = {
             id: generateId(),
-            date: new Date(startTime).toISOString().split('T')[0],
+            date: dateStr,
             startTime: new Date(startTime).toTimeString().slice(0, 8),
             endTime: new Date(endTime).toTimeString().slice(0, 8),
             totalKm: parseFloat(finishKm) - activeJourney.initialKm,
@@ -4523,6 +4588,7 @@
         atualizarStatus('⏸️ Aguardando início');
         atualizarBotoesCron();
         localStorage.removeItem('activeJourney');
+        atualizarEfeitoCardCronometro();
     }
 
     function atualizarStatus(msg) {
@@ -4596,12 +4662,13 @@
                     atualizarStatus('🟢 Jornada em andamento');
                 }
                 atualizarCronometro();
+                atualizarEfeitoCardCronometro();
             }
         } catch (e) { console.warn('Erro ao recuperar jornada ativa', e); }
     }
 
     // =============================================================
-    // 23. MODAL INICIAR JORNADA (FUEL GAUGE)
+    // 24. MODAL INICIAR JORNADA (FUEL GAUGE)
     // =============================================================
     function openStartJourneyModal() {
         document.getElementById('quickJourneyDate').value = getCurrentDate();
@@ -4736,7 +4803,7 @@
     });
 
     // =============================================================
-    // 24. AÇÃO RÁPIDA: REGISTRAR GASTO
+    // 25. AÇÃO RÁPIDA: REGISTRAR GASTO
     // =============================================================
     function openQuickExpense() {
         document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
@@ -4763,7 +4830,7 @@
     }
 
     // =============================================================
-    // 25. EVENTOS DOS FORMULÁRIOS
+    // 26. EVENTOS DOS FORMULÁRIOS
     // =============================================================
     document.getElementById('expenseForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -4871,7 +4938,7 @@
     });
 
     // =============================================================
-    // 26. FECHAR MODAIS E NAVEGAÇÃO
+    // 27. FECHAR MODAIS E NAVEGAÇÃO
     // =============================================================
     function closeModal(id) {
         document.getElementById(id).classList.remove('active');
@@ -4905,7 +4972,7 @@
     });
 
     // =============================================================
-    // 27. INICIALIZAÇÃO
+    // 28. INICIALIZAÇÃO
     // =============================================================
     function initApp() {
         resetExpenseForm();
@@ -4942,11 +5009,11 @@
             }
         });
 
-        console.log('🚀 DriverControl - Metas removidas, demais funcionalidades mantidas!');
+        console.log('🚀 DriverControl - Efeito pulsante no card, cores do cronômetro global e navegação ajustadas!');
     }
 
     // =============================================================
-    // 28. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
+    // 29. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
     // =============================================================
     function openManualJourneyModal() {
         document.getElementById('manualDate').value = getToday();
@@ -4966,7 +5033,7 @@
     }
 
     // =============================================================
-    // 29. MODAL FINALIZAR JORNADA
+    // 30. MODAL FINALIZAR JORNADA
     // =============================================================
     function openFinishJourneyModal() {
         document.getElementById('finishDateTime').value = getCurrentDate() + ' ' + getCurrentTimeWithTenths();
