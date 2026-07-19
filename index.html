@@ -111,34 +111,6 @@
         body.dark-theme .input-group input::placeholder {
             color: #475569;
         }
-        body.dark-theme .goals-tabs {
-            background: #1e293b;
-        }
-        body.dark-theme .goals-tabs .tab {
-            color: #94a3b8;
-        }
-        body.dark-theme .goals-tabs .tab.active {
-            background: #334155;
-            color: #f1f5f9;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        body.dark-theme .goal-progress .bar-bg {
-            background: #334155;
-        }
-        body.dark-theme .goal-stats {
-            color: #94a3b8;
-        }
-        body.dark-theme .goal-stats .current {
-            color: #f1f5f9;
-        }
-        body.dark-theme .goal-actions button {
-            background: #1e293b;
-            border-color: #334155;
-            color: #94a3b8;
-        }
-        body.dark-theme .goal-actions button:hover {
-            background: #334155;
-        }
         body.dark-theme .action-btn {
             background: rgba(51, 65, 85, 0.6);
             border-color: #334155;
@@ -190,23 +162,6 @@
         body.dark-theme .btn-danger {
             background: #ef4444;
             box-shadow: 0 4px 14px rgba(239,68,68,0.2);
-        }
-        body.dark-theme .bottom-nav-glass {
-            background: rgba(30, 41, 59, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-color: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-        }
-        body.dark-theme .nav-item-glass {
-            color: #64748b;
-        }
-        body.dark-theme .nav-item-glass.active {
-            color: #f1f5f9;
-            background: rgba(129, 140, 248, 0.1);
-        }
-        body.dark-theme .nav-item-glass.active i {
-            color: #818cf8;
         }
         body.dark-theme .modal-glass {
             background: #1e293b;
@@ -287,6 +242,12 @@
             border-color: #7f1d1d;
             color: #fca5a5;
         }
+        body.dark-theme .litros-line {
+            border-top-color: #334155;
+        }
+        body.dark-theme .litros-line strong {
+            color: #f1f5f9;
+        }
         body.dark-theme .net-profit-row {
             color: #94a3b8;
             border-top-color: #334155;
@@ -299,6 +260,11 @@
         body.dark-theme .delete-journey-btn:hover {
             color: #f87171;
             background: #450a0a;
+        }
+        body.dark-theme .edit-journey-btn:hover,
+        body.dark-theme .edit-expense-btn:hover {
+            color: #818cf8;
+            background: #1e3a5f;
         }
         body.dark-theme .filter-date label {
             color: #94a3b8;
@@ -507,12 +473,12 @@
         body.dark-theme .subcategory-list .sub-item .sub-actions button.edit:hover {
             color: #818cf8;
         }
-        body.dark-theme .days-off-grid label {
+        body.dark-theme .work-days-grid label {
             background: #1e293b;
             border-color: #334155;
             color: #94a3b8;
         }
-        body.dark-theme .days-off-grid label.active {
+        body.dark-theme .work-days-grid label.active {
             background: #1e3a5f;
             border-color: #818cf8;
             color: #f1f5f9;
@@ -545,7 +511,6 @@
             color: #f1f5f9;
         }
 
-        /* Toggle tema no header */
         .header-theme-toggle {
             display: flex;
             align-items: center;
@@ -920,6 +885,17 @@
             color: #dc2626;
         }
 
+        .litros-line {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 4px;
+            border-top: 1px dashed #eef2f7;
+            padding-top: 4px;
+        }
+        .litros-line strong {
+            color: #0f172a;
+        }
+
         .net-profit-row {
             display: flex;
             justify-content: flex-start;
@@ -969,24 +945,6 @@
         body.dark-theme .edit-journey-btn:hover {
             color: #818cf8;
             background: #1e3a5f;
-        }
-
-        /* LINHA INDEPENDENTE PARA LITROS */
-        .litros-line {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-top: 4px;
-            border-top: 1px dashed #eef2f7;
-            padding-top: 4px;
-        }
-        .litros-line strong {
-            color: #0f172a;
-        }
-        body.dark-theme .litros-line {
-            border-top-color: #334155;
-        }
-        body.dark-theme .litros-line strong {
-            color: #f1f5f9;
         }
 
         /* ===== FILTROS ===== */
@@ -1502,7 +1460,6 @@
             .cronometro-botoes .btn-cron { font-size: 0.5rem; min-width: 40px; padding: 6px 2px; }
             .cronometro-botoes .btn-cron i { font-size: 0.7rem; }
             select.app-input { padding-right: 30px; font-size: 0.85rem; }
-            .goal-stats { flex-wrap: wrap; gap: 4px; }
             .filter-date { flex-wrap: wrap; }
             .filter-date .btn-filter { font-size: 0.7rem; padding: 6px 12px; }
             .date-filter-wrapper { flex: 0.4; min-width: 40px; max-width: 50px; }
@@ -1905,6 +1862,7 @@
             </div>
         </header>
 
+        <!-- PERFIL MINI -->
         <div class="glass-inner profile-mini-card">
             <div class="profile-name-wrapper">
                 <span class="profile-name" id="profileDisplayName">Usuário</span>
@@ -1916,6 +1874,7 @@
             <div class="profile-car" id="profileDisplayCar"></div>
         </div>
 
+        <!-- NAVEGAÇÃO SUPERIOR -->
         <div class="top-nav-wrapper">
             <nav class="top-nav-glass">
                 <button class="nav-item-glass active" data-page="page-dashboard"><i class="fas fa-home"></i><span>Início</span></button>
@@ -3561,7 +3520,6 @@
                 const fuelExpenses = dayExpenses.filter(e => e.category === 'Combustível' && e.litros);
                 const totalLitros = fuelExpenses.reduce((s, e) => s + (parseFloat(e.litros) || 0), 0);
 
-                // Tabela vertical para cada jornada
                 const rows = [
                     [{ content: '📅 Data', styles: { fillColor: [240, 244, 248], textColor: [40, 60, 90] } },
                      { content: j.date, styles: { fillColor: [255, 255, 255] } }],
@@ -3591,12 +3549,10 @@
                      { content: formatCurrency(net), styles: { fillColor: [255, 255, 255], textColor: net >= 0 ? [34, 197, 94] : [239, 68, 68] } }],
                 ];
 
-                // Detalhe das plataformas
                 let platformDetails = '';
                 j.platforms.forEach(p => {
                     platformDetails += `${p.name}: ${p.rides} corridas, ${formatCurrency(p.gross)}\n`;
                 });
-
                 rows.push([
                     { content: '📱 Plataformas', styles: { fillColor: [240, 244, 248] } },
                     { content: platformDetails || 'Nenhuma', styles: { fillColor: [255, 255, 255] } }
@@ -3616,7 +3572,6 @@
 
                 yPos = doc.lastAutoTable.finalY + 12;
 
-                // Linha separadora entre jornadas
                 if (idx < journeys.length - 1) {
                     doc.setDrawColor(200, 200, 200);
                     doc.line(40, yPos - 6, 550, yPos - 6);
@@ -3712,7 +3667,7 @@
     window.addEventListener('offline', () => setStatus('⚠️ Offline', false));
 
     // =============================================================
-    // 17. GASTOS (com campo litros e filtro padrão por dia atual)
+    // 17. GASTOS
     // =============================================================
     function renderExpenseList() {
         const container = document.getElementById('expenseList');
@@ -3823,7 +3778,6 @@
         document.getElementById('editExpenseAmount').value = expense.amount.toFixed(2).replace('.', ',');
         document.getElementById('editExpenseComment').value = expense.comment || '';
 
-        // Popular selects
         const catSelect = document.getElementById('editExpenseCategory');
         catSelect.innerHTML = '<option value="">Selecione...</option>';
         appData.categories.forEach(c => {
@@ -3838,10 +3792,8 @@
         });
         paySelect.value = expense.paymentMethod || '';
 
-        // Subcategoria
         atualizarEditSubcategoria(expense.category, expense.subcategory);
 
-        // Combustível
         const fuelField = document.getElementById('editFuelPriceField');
         if (expense.category === 'Combustível' && expense.litros) {
             fuelField.style.display = 'block';
@@ -3917,7 +3869,6 @@
         expense.amount = amountNum;
         expense.comment = comment || '';
 
-        // Litros
         if (category === 'Combustível') {
             const fuelPrice = document.getElementById('editFuelPrice').value.replace(',', '.');
             const valPrice = parseFloat(fuelPrice);
@@ -5301,7 +5252,7 @@
             }
         });
 
-        console.log('🚀 DriverControl - PDF profissional, edição de gastos, layout melhorado e carro acima da data!');
+        console.log('🚀 DriverControl - Todas as funcionalidades corrigidas e estáveis!');
     }
 
     // =============================================================
