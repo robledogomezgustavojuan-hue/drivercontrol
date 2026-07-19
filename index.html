@@ -29,13 +29,672 @@
             justify-content: center;
             padding: 20px;
             color: #1e293b;
+            transition: background 0.3s, color 0.3s;
         }
 
+        /* ===== TEMA ESCURO ===== */
+        body.dark-theme {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+
+        body.dark-theme .glass-card,
+        body.dark-theme .glass-inner {
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-theme .glass-inner .title {
+            color: #94a3b8;
+        }
+        body.dark-theme .glass-inner .title i {
+            color: #818cf8;
+        }
+        body.dark-theme .app-header-glass .brand span {
+            color: #f1f5f9;
+        }
+        body.dark-theme .profile-mini-card .profile-name {
+            color: #f1f5f9;
+        }
+        body.dark-theme .profile-mini-card .profile-email {
+            color: #94a3b8;
+        }
+        body.dark-theme .profile-mini-card .profile-car {
+            color: #64748b;
+        }
+        body.dark-theme .stat-item {
+            background: rgba(51, 65, 85, 0.6);
+            border-color: #334155;
+        }
+        body.dark-theme .stat-item .value {
+            color: #f1f5f9;
+        }
+        body.dark-theme .stat-item .label {
+            color: #94a3b8;
+        }
+        body.dark-theme .stat-item.green .value { color: #4ade80; }
+        body.dark-theme .stat-item.red .value { color: #f87171; }
+        body.dark-theme .stat-item.blue .value { color: #818cf8; }
+        body.dark-theme .cronometro-display {
+            background: rgba(51, 65, 85, 0.5);
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        body.dark-theme .cronometro-status {
+            color: #94a3b8;
+        }
+        body.dark-theme .btn-secondary {
+            border-color: #334155;
+            color: #94a3b8;
+        }
+        body.dark-theme .btn-secondary:active {
+            background: #1e293b;
+        }
+        body.dark-theme .input-group input {
+            background: #1e293b;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        body.dark-theme .input-group input:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
+        }
+        body.dark-theme .input-group .input-icon {
+            color: #64748b;
+        }
+        body.dark-theme .input-group label {
+            color: #94a3b8;
+        }
+        body.dark-theme .input-group input::placeholder {
+            color: #475569;
+        }
+        body.dark-theme .goals-tabs {
+            background: #1e293b;
+        }
+        body.dark-theme .goals-tabs .tab {
+            color: #94a3b8;
+        }
+        body.dark-theme .goals-tabs .tab.active {
+            background: #334155;
+            color: #f1f5f9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        body.dark-theme .goal-progress .bar-bg {
+            background: #334155;
+        }
+        body.dark-theme .goal-stats {
+            color: #94a3b8;
+        }
+        body.dark-theme .goal-stats .current {
+            color: #f1f5f9;
+        }
+        body.dark-theme .goal-actions button {
+            background: #1e293b;
+            border-color: #334155;
+            color: #94a3b8;
+        }
+        body.dark-theme .goal-actions button:hover {
+            background: #334155;
+        }
+        body.dark-theme .action-btn {
+            background: rgba(51, 65, 85, 0.6);
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        body.dark-theme .action-btn i {
+            color: #818cf8;
+        }
+        body.dark-theme .action-btn span {
+            color: #94a3b8;
+        }
+        body.dark-theme .action-btn:active {
+            background: #334155;
+        }
+        body.dark-theme .app-input {
+            background: #1e293b;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        body.dark-theme .app-input:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.1);
+        }
+        body.dark-theme .app-input::placeholder {
+            color: #475569;
+        }
+        body.dark-theme .app-input option {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+        body.dark-theme select.app-input {
+            background: #1e293b;
+        }
+        body.dark-theme .app-label {
+            color: #94a3b8;
+        }
+        body.dark-theme .btn-app {
+            background: #818cf8;
+            box-shadow: 0 4px 14px rgba(129, 140, 248, 0.25);
+        }
+        body.dark-theme .btn-app-outline {
+            background: transparent;
+            border-color: #334155;
+            color: #94a3b8;
+        }
+        body.dark-theme .btn-app-outline:active {
+            background: #1e293b;
+        }
+        body.dark-theme .btn-danger {
+            background: #ef4444;
+            box-shadow: 0 4px 14px rgba(239,68,68,0.2);
+        }
+        body.dark-theme .bottom-nav-glass {
+            background: rgba(30, 41, 59, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        body.dark-theme .nav-item-glass {
+            color: #64748b;
+        }
+        body.dark-theme .nav-item-glass.active {
+            color: #f1f5f9;
+            background: rgba(129, 140, 248, 0.1);
+        }
+        body.dark-theme .nav-item-glass.active i {
+            color: #818cf8;
+        }
+        body.dark-theme .modal-glass {
+            background: #1e293b;
+        }
+        body.dark-theme .modal-glass .modal-title {
+            color: #f1f5f9;
+        }
+        body.dark-theme .modal-glass .modal-title i {
+            color: #818cf8;
+        }
+        body.dark-theme .modal-glass .close-modal {
+            color: #94a3b8;
+        }
+        body.dark-theme .modal-glass .close-modal:hover {
+            color: #f1f5f9;
+        }
+        body.dark-theme .modal-glass p {
+            color: #94a3b8;
+        }
+        body.dark-theme .journey-history-card {
+            background: #1e293b;
+            border-left-color: #818cf8;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        body.dark-theme .journey-header .date {
+            color: #f1f5f9;
+        }
+        body.dark-theme .journey-header .car-tag {
+            background: #334155;
+            color: #94a3b8;
+        }
+        body.dark-theme .journey-grid {
+            color: #94a3b8;
+        }
+        body.dark-theme .journey-grid .label {
+            color: #64748b;
+        }
+        body.dark-theme .journey-pauses {
+            color: #94a3b8;
+        }
+        body.dark-theme .journey-pauses strong {
+            color: #f1f5f9;
+        }
+        body.dark-theme .platform-table {
+            background: rgba(51, 65, 85, 0.5);
+        }
+        body.dark-theme .platform-table .row-header {
+            color: #94a3b8;
+            border-bottom-color: #334155;
+        }
+        body.dark-theme .platform-table .row-item {
+            color: #f1f5f9;
+        }
+        body.dark-theme .platform-table .row-item .p-value {
+            color: #818cf8;
+        }
+        body.dark-theme .platform-table .row-total {
+            color: #f1f5f9;
+            border-top-color: #334155;
+        }
+        body.dark-theme .platform-table .row-total .total-label {
+            color: #94a3b8;
+        }
+        body.dark-theme .platform-table .row-total .total-value {
+            color: #818cf8;
+        }
+        body.dark-theme .expenses-day-section {
+            border-top-color: #334155;
+        }
+        body.dark-theme .expenses-day-section .exp-total {
+            color: #94a3b8;
+        }
+        body.dark-theme .expenses-day-section .exp-total strong {
+            color: #f87171;
+        }
+        body.dark-theme .expenses-tags .tag {
+            background: #450a0a;
+            border-color: #7f1d1d;
+            color: #fca5a5;
+        }
+        body.dark-theme .net-profit-row {
+            color: #94a3b8;
+            border-top-color: #334155;
+        }
+        body.dark-theme .net-profit-row .net-value.positive { color: #4ade80; }
+        body.dark-theme .net-profit-row .net-value.negative { color: #f87171; }
+        body.dark-theme .delete-journey-btn {
+            color: #64748b;
+        }
+        body.dark-theme .delete-journey-btn:hover {
+            color: #f87171;
+            background: #450a0a;
+        }
+        body.dark-theme .filter-date label {
+            color: #94a3b8;
+        }
+        body.dark-theme .date-filter-wrapper input[type="date"] {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        body.dark-theme .date-filter-wrapper .calendar-icon {
+            color: #94a3b8;
+        }
+        body.dark-theme .filter-date .btn-filter {
+            background: #1e293b;
+            border-color: #334155;
+            color: #94a3b8;
+        }
+        body.dark-theme .filter-date .btn-filter.active {
+            background: #818cf8;
+            color: #fff;
+            border-color: #818cf8;
+        }
+        body.dark-theme .list-item-glass {
+            border-bottom-color: #334155;
+        }
+        body.dark-theme .list-item-glass .info .main {
+            color: #f1f5f9;
+        }
+        body.dark-theme .list-item-glass .info .sub {
+            color: #94a3b8;
+        }
+        body.dark-theme .list-item-glass .info .sub .category-badge {
+            background: #1e3a5f;
+            border-color: #1e3a5f;
+            color: #93c5fd;
+        }
+        body.dark-theme .list-item-glass .amount.negative {
+            color: #f87171;
+        }
+        body.dark-theme .badge-glass {
+            background: #334155;
+            color: #94a3b8;
+        }
+        body.dark-theme .badge-glass.fixo {
+            color: #4ade80;
+            border-color: #166534;
+            background: #052e16;
+        }
+        body.dark-theme .badge-glass.eventual {
+            color: #facc15;
+            border-color: #713f12;
+            background: #422006;
+        }
+        body.dark-theme .config-accordion {
+            border-color: #334155;
+            background: #1e293b;
+        }
+        body.dark-theme .config-accordion .accordion-header {
+            background: #1a2538;
+            border-bottom-color: #334155;
+        }
+        body.dark-theme .config-accordion .accordion-header:hover {
+            background: #263348;
+        }
+        body.dark-theme .config-accordion .accordion-header .left .title-text {
+            color: #f1f5f9;
+        }
+        body.dark-theme .config-accordion .accordion-header .left .badge-count {
+            background: #1e3a5f;
+            color: #93c5fd;
+        }
+        body.dark-theme .config-accordion .accordion-header .arrow {
+            color: #94a3b8;
+        }
+        body.dark-theme .config-accordion .accordion-body {
+            border-top-color: #334155;
+        }
+        body.dark-theme .config-item {
+            border-bottom-color: #334155;
+        }
+        body.dark-theme .config-item .name {
+            color: #f1f5f9;
+        }
+        body.dark-theme .config-item .actions button {
+            color: #64748b;
+        }
+        body.dark-theme .config-item .actions button:hover {
+            color: #f1f5f9;
+        }
+        body.dark-theme .config-item .actions button.delete:hover {
+            color: #f87171;
+        }
+        body.dark-theme .config-item .actions button.edit:hover {
+            color: #818cf8;
+        }
+        body.dark-theme .config-item .actions button.sub-btn:hover {
+            color: #facc15;
+        }
+        body.dark-theme .empty-state-glass {
+            color: #64748b;
+        }
+        body.dark-theme .profile-stats-mini {
+            background: rgba(51, 65, 85, 0.5);
+            border-color: #334155;
+        }
+        body.dark-theme .profile-stats-mini .stat {
+            color: #94a3b8;
+        }
+        body.dark-theme .profile-stats-mini .stat i {
+            color: #818cf8;
+        }
+        body.dark-theme .profile-stats-mini .stat strong {
+            color: #f1f5f9;
+        }
+        body.dark-theme .logout-btn {
+            background: #450a0a;
+            border-color: #7f1d1d;
+            color: #f87171;
+        }
+        body.dark-theme .logout-btn:active {
+            background: #7f1d1d;
+        }
+        body.dark-theme .logout-btn i {
+            color: #f87171;
+        }
+        body.dark-theme .toggle-wrapper {
+            color: #94a3b8;
+        }
+        body.dark-theme .toggle-wrapper .toggle-slider {
+            background: #475569;
+        }
+        body.dark-theme .toggle-wrapper .toggle-slider.active {
+            background: #818cf8;
+        }
+        body.dark-theme .toggle-wrapper .toggle-slider .toggle-knob {
+            background: #fff;
+        }
+        body.dark-theme .folga-status-msg {
+            background: #052e16;
+            border-color: #166534;
+            color: #4ade80;
+        }
+        body.dark-theme .folga-status-msg.folga {
+            background: #422006;
+            border-color: #713f12;
+            color: #facc15;
+        }
+        body.dark-theme .fuel-segment {
+            background: #334155;
+            border-color: #1e293b;
+        }
+        body.dark-theme .fuel-segment.active {
+            background: #818cf8;
+            border-color: #818cf8;
+        }
+        body.dark-theme .fuel-info {
+            color: #94a3b8;
+        }
+        body.dark-theme .fuel-info .percent {
+            color: #f1f5f9;
+        }
+        body.dark-theme .pause-options .pause-btn {
+            background: #1e293b;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        body.dark-theme .pause-options .pause-btn:active {
+            background: #334155;
+        }
+        body.dark-theme .pause-options .pause-btn.back-btn {
+            border-color: #7f1d1d;
+            color: #f87171;
+        }
+        body.dark-theme .pause-options .pause-btn.sub-item {
+            border-color: #1e3a5f;
+            color: #93c5fd;
+        }
+        body.dark-theme .platform-group-glass {
+            background: rgba(51, 65, 85, 0.5);
+            border-left-color: #818cf8;
+        }
+        body.dark-theme #toast {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        body.dark-theme #statusIndicator {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        body.dark-theme .subcategory-list .sub-item {
+            border-bottom-color: #334155;
+        }
+        body.dark-theme .subcategory-list .sub-item .sub-name {
+            color: #f1f5f9;
+        }
+        body.dark-theme .subcategory-list .sub-item .sub-actions button {
+            color: #64748b;
+        }
+        body.dark-theme .subcategory-list .sub-item .sub-actions button:hover {
+            color: #f1f5f9;
+        }
+        body.dark-theme .subcategory-list .sub-item .sub-actions button.delete:hover {
+            color: #f87171;
+        }
+        body.dark-theme .subcategory-list .sub-item .sub-actions button.edit:hover {
+            color: #818cf8;
+        }
+        body.dark-theme .days-off-grid label {
+            background: #1e293b;
+            border-color: #334155;
+            color: #94a3b8;
+        }
+        body.dark-theme .days-off-grid label.active {
+            background: #1e3a5f;
+            border-color: #818cf8;
+            color: #f1f5f9;
+        }
+
+        /* ===== TOGGLE TEMA ===== */
+        .theme-toggle-wrapper {
+            position: fixed;
+            top: 10px;
+            right: 60px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(4px);
+            padding: 4px 10px 4px 8px;
+            border-radius: 30px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: 0.3s;
+            cursor: pointer;
+            user-select: none;
+        }
+        body.dark-theme .theme-toggle-wrapper {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: #334155;
+        }
+        .theme-toggle-wrapper .toggle-icon {
+            font-size: 1.2rem;
+            color: #facc15;
+        }
+        body.dark-theme .theme-toggle-wrapper .toggle-icon {
+            color: #818cf8;
+        }
+        .theme-toggle-wrapper .toggle-slider-mini {
+            position: relative;
+            width: 32px;
+            height: 18px;
+            background: #cbd5e1;
+            border-radius: 30px;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+        body.dark-theme .theme-toggle-wrapper .toggle-slider-mini {
+            background: #475569;
+        }
+        .theme-toggle-wrapper .toggle-slider-mini .knob-mini {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 14px;
+            height: 14px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+        body.dark-theme .theme-toggle-wrapper .toggle-slider-mini .knob-mini {
+            left: 16px;
+        }
+        .theme-toggle-wrapper input[type="checkbox"] {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .theme-toggle-wrapper {
+                top: 6px;
+                right: 10px;
+                padding: 2px 8px 2px 6px;
+            }
+            .theme-toggle-wrapper .toggle-icon {
+                font-size: 1rem;
+            }
+            .theme-toggle-wrapper .toggle-slider-mini {
+                width: 28px;
+                height: 16px;
+            }
+            .theme-toggle-wrapper .toggle-slider-mini .knob-mini {
+                width: 12px;
+                height: 12px;
+            }
+            body.dark-theme .theme-toggle-wrapper .toggle-slider-mini .knob-mini {
+                left: 14px;
+            }
+            #statusIndicator {
+                top: 6px;
+                right: 56px;
+                font-size: 0.6rem;
+                padding: 4px 12px;
+            }
+        }
+
+        /* ===== BOTÃO EDITAR PERFIL ===== */
+        .edit-profile-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 2px 6px;
+            border-radius: 30px;
+            transition: 0.2s;
+            margin-left: 6px;
+        }
+        .edit-profile-btn:hover {
+            color: #5b7cfa;
+            background: rgba(91, 124, 250, 0.08);
+        }
+        body.dark-theme .edit-profile-btn:hover {
+            color: #818cf8;
+            background: rgba(129, 140, 248, 0.12);
+        }
+        .profile-name-wrapper {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        /* ===== ESPAÇAMENTO DOS CARDS DE RESUMO ===== */
+        .resumo-card {
+            padding: 18px 20px;
+            margin-bottom: 8px;
+        }
+        .resumo-card .title {
+            margin-bottom: 16px;
+        }
+        .resumo-card .grid-stats {
+            margin-bottom: 4px;
+        }
+
+        .folga-status-msg {
+            margin-top: 10px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #22c55e;
+        }
+        .folga-status-msg.folga {
+            background: #fefce8;
+            border-color: #fde68a;
+            color: #ca8a04;
+        }
+
+        /* ===== NAVEGAÇÃO SUPERIOR ===== */
+        .top-nav-wrapper {
+            width: 100%;
+            margin-bottom: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: transparent;
+            padding: 0 2px;
+        }
+        .top-nav-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            padding: 6px 4px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        body.dark-theme .top-nav-glass {
+            background: rgba(30, 41, 59, 0.85);
+            border-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== RESTO DOS ESTILOS (mantidos) ===== */
         @keyframes floatIn {
             from { opacity: 0; transform: translateY(20px) scale(0.98); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
-
         .app-wrapper {
             width: 100%;
             max-width: 480px;
@@ -43,8 +702,6 @@
             z-index: 10;
             animation: floatIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
         }
-
-        /* ===== CARDS ===== */
         .glass-card, .glass-inner {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(4px);
@@ -55,12 +712,10 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
             transition: box-shadow 0.2s;
         }
-
         .glass-inner {
             padding: 18px 20px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
         }
-
         .glass-inner .title {
             font-size: 0.7rem;
             text-transform: uppercase;
@@ -76,8 +731,6 @@
             color: #5b7cfa;
             font-size: 0.9rem;
         }
-
-        /* ===== AUTENTICAÇÃO ===== */
         .auth-screen .app-logo {
             text-align: center;
             margin-bottom: 18px;
@@ -106,7 +759,6 @@
             text-align: center;
             margin-bottom: 10px;
         }
-
         .input-group {
             margin-bottom: 14px;
             position: relative;
@@ -150,7 +802,6 @@
         .input-group input::placeholder {
             color: #cbd5e1;
         }
-
         .btn-primary {
             width: 100%;
             padding: 16px;
@@ -179,7 +830,6 @@
             box-shadow: none;
         }
         .btn-secondary:active { background: #f1f5f9; }
-
         .error-msg {
             background: #fee2e2;
             border: 1px solid #fca5a5;
@@ -193,8 +843,6 @@
         }
         .error-msg.show { display: block; }
         .hidden { display: none !important; }
-
-        /* ===== APP CONTAINER ===== */
         #app-container {
             display: none;
             width: 100%;
@@ -203,11 +851,9 @@
             flex-direction: column;
             gap: 16px;
             animation: floatIn 0.6s ease forwards;
-            padding-bottom: 80px; /* Espaço para a barra fixa */
+            padding-bottom: 20px;
         }
         #app-container.active { display: flex; }
-
-        /* ===== HEADER ===== */
         .app-header-glass {
             background: transparent;
             padding: 6px 0 2px 0;
@@ -230,7 +876,6 @@
             letter-spacing: -0.3px;
             color: #0f172a;
         }
-
         .page {
             display: none;
             flex-direction: column;
@@ -242,8 +887,6 @@
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* ===== PERFIL MINI ===== */
         .profile-mini-card {
             padding: 12px 16px;
             display: flex;
@@ -267,8 +910,6 @@
             color: #94a3b8;
             font-weight: 500;
         }
-
-        /* ===== ESTATÍSTICAS ===== */
         .grid-stats {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -296,8 +937,6 @@
         .stat-item.green .value { color: #22c55e; }
         .stat-item.red .value { color: #ef4444; }
         .stat-item.blue .value { color: #5b7cfa; }
-
-        /* ===== METAS ===== */
         .goals-tabs {
             display: flex;
             gap: 4px;
@@ -366,8 +1005,6 @@
             transition: 0.2s;
         }
         .goal-actions button:hover { background: #e2e8f0; }
-
-        /* ===== AÇÕES RÁPIDAS ===== */
         .action-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -397,8 +1034,6 @@
             color: #64748b;
         }
         .action-btn:active { transform: scale(0.95); background: #eef2f7; }
-
-        /* ===== CRONÔMETRO ===== */
         .cronometro-display {
             font-size: 3rem;
             font-weight: 600;
@@ -419,8 +1054,6 @@
             margin-top: 6px;
             margin-bottom: 12px;
         }
-
-        /* ===== BOTÕES DO CRONÔMETRO COM EFEITO PULSANTE SUAVE ===== */
         .cronometro-botoes {
             display: flex;
             gap: 6px;
@@ -448,30 +1081,6 @@
         }
         .cronometro-botoes .btn-cron i { font-size: 0.9rem; }
         .cronometro-botoes .btn-cron:active { transform: scale(0.94); }
-
-        /* Animações de pulsação suave */
-        @keyframes pulseGreen {
-            0% { box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2); transform: scale(1); }
-            50% { box-shadow: 0 4px 28px rgba(34, 197, 94, 0.5); transform: scale(1.03); }
-            100% { box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2); transform: scale(1); }
-        }
-        @keyframes pulseYellow {
-            0% { box-shadow: 0 4px 12px rgba(250, 204, 21, 0.2); transform: scale(1); }
-            50% { box-shadow: 0 4px 28px rgba(250, 204, 21, 0.5); transform: scale(1.03); }
-            100% { box-shadow: 0 4px 12px rgba(250, 204, 21, 0.2); transform: scale(1); }
-        }
-        @keyframes pulseBlue {
-            0% { box-shadow: 0 4px 12px rgba(91, 124, 250, 0.2); transform: scale(1); }
-            50% { box-shadow: 0 4px 28px rgba(91, 124, 250, 0.5); transform: scale(1.03); }
-            100% { box-shadow: 0 4px 12px rgba(91, 124, 250, 0.2); transform: scale(1); }
-        }
-        @keyframes pulseRed {
-            0% { box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); transform: scale(1); }
-            50% { box-shadow: 0 4px 28px rgba(239, 68, 68, 0.5); transform: scale(1.03); }
-            100% { box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); transform: scale(1); }
-        }
-
-        /* Aplicação dos efeitos apenas quando o botão está ATIVO (não desabilitado) */
         .btn-cron.iniciar:not(:disabled) {
             animation: pulseGreen 2.5s ease-in-out infinite;
         }
@@ -484,34 +1093,27 @@
         .btn-cron.finalizar:not(:disabled) {
             animation: pulseRed 2.5s ease-in-out infinite;
         }
-
-        /* Estilos base dos botões (sem a animação, que é aplicada acima) */
         .btn-cron.iniciar {
             background: #22c55e;
             box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
         }
         .btn-cron.iniciar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
-
         .btn-cron.pausar {
             background: #facc15;
             color: #0f172a;
             box-shadow: 0 4px 12px rgba(250, 204, 21, 0.2);
         }
         .btn-cron.pausar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
-
         .btn-cron.reanudar {
             background: #5b7cfa;
             box-shadow: 0 4px 12px rgba(91, 124, 250, 0.2);
         }
         .btn-cron.reanudar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
-
         .btn-cron.finalizar {
             background: #ef4444;
             box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
         }
         .btn-cron.finalizar:disabled { opacity: 0.4; box-shadow: none; cursor: not-allowed; animation: none; }
-
-        /* ===== SEPARADOR "OU" ESTILIZADO ===== */
         .divider-ou {
             display: flex;
             align-items: center;
@@ -534,8 +1136,6 @@
             background: transparent;
             color: #94a3b8;
         }
-
-        /* ===== TOGGLE SWITCH ===== */
         .toggle-wrapper {
             display: flex;
             align-items: center;
@@ -577,8 +1177,6 @@
         .toggle-wrapper input[type="checkbox"] {
             display: none;
         }
-
-        /* ===== HISTÓRICO ===== */
         .journey-history-card {
             background: #fff;
             border-radius: 18px;
@@ -619,7 +1217,6 @@
         }
         .journey-grid span { display: flex; align-items: center; gap: 4px; }
         .journey-grid .label { color: #94a3b8; font-size: 0.7rem; }
-
         .journey-pauses {
             font-size: 0.75rem;
             color: #64748b;
@@ -627,7 +1224,6 @@
             margin-bottom: 8px;
         }
         .journey-pauses strong { color: #0f172a; }
-
         .platform-table {
             background: #f8fafc;
             border-radius: 12px;
@@ -661,7 +1257,6 @@
         .platform-table .row-item .p-name { font-weight: 500; }
         .platform-table .row-item .p-rides { text-align: center; }
         .platform-table .row-item .p-value { color: #5b7cfa; text-align: right; font-weight: 600; }
-
         .platform-table .row-total {
             display: grid;
             grid-template-columns: 2fr 1fr 1.5fr;
@@ -675,7 +1270,6 @@
         }
         .platform-table .row-total .total-label { text-align: right; color: #64748b; }
         .platform-table .row-total .total-value { color: #5b7cfa; text-align: right; }
-
         .expenses-day-section {
             margin-top: 10px;
             border-top: 1px solid #f1f5f9;
@@ -700,7 +1294,6 @@
             font-size: 0.65rem;
             color: #dc2626;
         }
-
         .net-profit-row {
             display: flex;
             justify-content: flex-end;
@@ -718,7 +1311,6 @@
         }
         .net-profit-row .net-value.positive { color: #22c55e; }
         .net-profit-row .net-value.negative { color: #ef4444; }
-
         .delete-journey-btn {
             background: none;
             border: none;
@@ -730,8 +1322,6 @@
             border-radius: 30px;
         }
         .delete-journey-btn:hover { color: #ef4444; background: #fee2e2; }
-
-        /* ===== FILTROS ===== */
         .filter-date {
             display: flex;
             gap: 8px;
@@ -813,8 +1403,6 @@
             color: #fff;
             border-color: #5b7cfa;
         }
-
-        /* ===== GASTOS ===== */
         .list-item-glass {
             display: flex;
             justify-content: space-between;
@@ -852,7 +1440,6 @@
             white-space: nowrap;
         }
         .list-item-glass .amount.negative { color: #ef4444; }
-
         .delete-icon {
             color: #cbd5e1;
             cursor: pointer;
@@ -864,7 +1451,6 @@
             border-radius: 30px;
         }
         .delete-icon:hover { color: #ef4444; background: #fee2e2; }
-
         .badge-glass {
             background: #f1f5f9;
             padding: 2px 12px;
@@ -876,15 +1462,12 @@
         }
         .badge-glass.fixo { color: #22c55e; border: 1px solid #bbf7d0; background: #f0fdf4; }
         .badge-glass.eventual { color: #f59e0b; border: 1px solid #fde68a; background: #fffbeb; }
-
         .empty-state-glass {
             text-align: center;
             padding: 30px 10px;
             color: #cbd5e1;
         }
         .empty-state-glass i { font-size: 2.5rem; margin-bottom: 8px; opacity: 0.4; }
-
-        /* ===== CONFIGURAÇÕES ===== */
         .config-accordion {
             margin-bottom: 8px;
             border: 1px solid #eef2f7;
@@ -944,7 +1527,6 @@
         }
         .config-accordion .accordion-body .add-row input { flex: 1; }
         .config-accordion .accordion-body .add-row .btn-app-small { margin-top: 0; }
-
         .config-item {
             display: flex;
             justify-content: space-between;
@@ -967,8 +1549,6 @@
         .config-item .actions button.delete:hover { color: #ef4444; }
         .config-item .actions button.edit:hover { color: #5b7cfa; }
         .config-item .actions button.sub-btn:hover { color: #f59e0b; }
-
-        /* ===== BOTÕES E INPUTS ===== */
         .app-input {
             width: 100%;
             padding: 12px 16px;
@@ -993,14 +1573,12 @@
             accent-color: #5b7cfa;
         }
         .app-input[disabled] { opacity: 0.6; color: #94a3b8; }
-
         select.app-input {
             appearance: auto;
             -webkit-appearance: auto;
             padding-right: 40px;
             cursor: pointer;
         }
-
         .app-label {
             font-size: 0.7rem;
             font-weight: 600;
@@ -1011,7 +1589,6 @@
             margin-bottom: 4px;
             margin-top: 12px;
         }
-
         .btn-app {
             background: #5b7cfa;
             border: none;
@@ -1053,56 +1630,7 @@
             background: #ef4444;
             box-shadow: 0 4px 14px rgba(239,68,68,0.2);
         }
-
-        /* ===== NAVEGAÇÃO INFERIOR - FIXA ===== */
-        .bottom-nav-glass {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 40px);
-            max-width: 440px;
-            display: flex;
-            justify-content: space-around;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 30px;
-            padding: 8px 4px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            z-index: 100;
-        }
-        .nav-item-glass {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: none;
-            border: none;
-            color: #cbd5e1;
-            font-size: 0.5rem;
-            font-weight: 600;
-            padding: 6px 10px;
-            border-radius: 30px;
-            transition: 0.2s;
-            cursor: pointer;
-            gap: 2px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .nav-item-glass i {
-            font-size: 1.4rem;
-            transition: 0.2s;
-        }
-        .nav-item-glass.active {
-            color: #0f172a;
-            background: rgba(91, 124, 250, 0.06);
-        }
-        .nav-item-glass.active i {
-            color: #5b7cfa;
-        }
-
-        /* ===== MODAIS ===== */
+        /* Navegação inferior removida, agora superior */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1148,8 +1676,6 @@
             transition: 0.2s;
         }
         .modal-glass .close-modal:hover { color: #0f172a; transform: rotate(90deg); }
-
-        /* ===== FUEL GAUGE ===== */
         .fuel-gauge {
             display: flex;
             gap: 4px;
@@ -1175,8 +1701,6 @@
             margin-top: 2px;
         }
         .fuel-info .percent { color: #0f172a; font-weight: 700; }
-
-        /* ===== PAUSA ===== */
         .pause-options {
             display: flex;
             flex-wrap: wrap;
@@ -1196,7 +1720,6 @@
         .pause-options .pause-btn:active { transform: scale(0.95); background: #eef2f7; }
         .pause-options .pause-btn.back-btn { border-color: #fca5a5; color: #dc2626; }
         .pause-options .pause-btn.sub-item { border-color: #93c5fd; color: #2563eb; }
-
         .subcategory-list .sub-item {
             display: flex;
             justify-content: space-between;
@@ -1216,7 +1739,6 @@
         .subcategory-list .sub-item .sub-actions button:hover { color: #0f172a; }
         .subcategory-list .sub-item .sub-actions button.delete:hover { color: #ef4444; }
         .subcategory-list .sub-item .sub-actions button.edit:hover { color: #5b7cfa; }
-
         .platform-group-glass {
             background: #f8fafc;
             border-radius: 16px;
@@ -1224,8 +1746,6 @@
             margin-bottom: 12px;
             border-left: 3px solid #5b7cfa;
         }
-
-        /* ===== TOAST E STATUS ===== */
         #toast {
             position: fixed;
             bottom: 80px;
@@ -1245,7 +1765,6 @@
             text-align: center;
             transition: opacity 0.3s;
         }
-
         #statusIndicator {
             position: fixed;
             top: 10px;
@@ -1261,7 +1780,6 @@
             display: none;
             transition: all 0.2s;
         }
-
         .spinner {
             display: inline-block;
             width: 18px;
@@ -1272,8 +1790,6 @@
             animation: spin 0.6s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ===== RESPONSIVIDADE ===== */
         @media (max-width: 480px) {
             .glass-card { padding: 24px 18px; }
             .grid-stats { grid-template-columns: 1fr 1fr; }
@@ -1296,10 +1812,8 @@
             .filter-date .btn-filter { font-size: 0.7rem; padding: 6px 12px; }
             .date-filter-wrapper { flex: 0.4; min-width: 40px; max-width: 50px; }
             .date-filter-wrapper .calendar-icon { font-size: 1rem; }
-            .bottom-nav-glass {
-                width: calc(100% - 20px);
-                bottom: 6px;
-                padding: 6px 2px;
+            .top-nav-glass {
+                padding: 4px 2px;
             }
             .nav-item-glass {
                 padding: 4px 6px;
@@ -1308,15 +1822,10 @@
             .nav-item-glass i {
                 font-size: 1.2rem;
             }
-            #app-container {
-                padding-bottom: 70px;
-            }
         }
-
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-thumb { background: #5b7cfa; border-radius: 10px; }
         ::-webkit-scrollbar-track { background: transparent; }
-
         .btn-pulse {
             animation: pulse 2s infinite;
         }
@@ -1325,11 +1834,6 @@
             70% { transform: scale(1.02); box-shadow: 0 0 0 12px rgba(91,124,250,0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(91,124,250,0); }
         }
-
-        /* ============================================================= */
-        /* ===== ABA PERFIL REFORMULADA ===== */
-        /* ============================================================= */
-
         .profile-header-compact {
             display: flex;
             flex-direction: column;
@@ -1372,7 +1876,6 @@
             color: #0f172a;
             font-weight: 700;
         }
-
         .profile-card-compact {
             padding: 14px 16px;
         }
@@ -1397,7 +1900,6 @@
             padding: 6px 14px;
             font-size: 0.75rem;
         }
-
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1406,7 +1908,6 @@
         .form-row .full-width {
             grid-column: 1 / -1;
         }
-
         .car-list-compact .list-item-glass {
             padding: 8px 0;
         }
@@ -1416,7 +1917,6 @@
         .car-list-compact .list-item-glass .info .sub {
             font-size: 0.65rem;
         }
-
         .logout-btn {
             background: #fef2f2;
             border: 1px solid #fecaca;
@@ -1435,38 +1935,6 @@
         }
         .logout-btn:active { transform: scale(0.97); background: #fee2e2; }
         .logout-btn i { color: #dc2626; }
-
-        /* ===== ESPAÇAMENTO DOS CARDS DE RESUMO ===== */
-        .resumo-card {
-            padding: 18px 20px;
-            margin-bottom: 8px;
-        }
-        .resumo-card .title {
-            margin-bottom: 16px;
-        }
-        .resumo-card .grid-stats {
-            margin-bottom: 4px;
-        }
-
-        /* ===== TOGGLE FOLGA ===== */
-        .folga-status-msg {
-            margin-top: 10px;
-            padding: 10px 14px;
-            border-radius: 14px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-align: center;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: #22c55e;
-        }
-        .folga-status-msg.folga {
-            background: #fefce8;
-            border-color: #fde68a;
-            color: #ca8a04;
-        }
-
-        /* ===== CHECKBOX DE DIAS DA SEMANA ===== */
         .days-off-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -1496,6 +1964,20 @@
         .days-off-grid label input[type="checkbox"] {
             margin-bottom: 2px;
             accent-color: #5b7cfa;
+        }
+
+        /* Campo valor do litro (combustível) */
+        .fuel-price-field {
+            display: none;
+            margin-top: 8px;
+        }
+        .fuel-price-field .calc-info {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        .fuel-price-field .calc-info strong {
+            color: #0f172a;
         }
     </style>
 </head>
@@ -1581,18 +2063,41 @@
             </div>
         </header>
 
+        <!-- PERFIL MINI (sempre visível) -->
+        <div class="glass-inner profile-mini-card">
+            <div class="profile-name-wrapper">
+                <span class="profile-name" id="profileDisplayName">Usuário</span>
+                <button class="edit-profile-btn" onclick="goToProfile()" title="Editar perfil">
+                    <i class="fas fa-pen"></i>
+                </button>
+            </div>
+            <div class="profile-email" id="profileDisplayEmail"></div>
+            <div class="profile-car" id="profileDisplayCar"></div>
+        </div>
+
+        <!-- NAVEGAÇÃO SUPERIOR -->
+        <div class="top-nav-wrapper">
+            <nav class="top-nav-glass">
+                <button class="nav-item-glass active" data-page="page-dashboard"><i class="fas fa-home"></i><span>Início</span></button>
+                <button class="nav-item-glass" data-page="page-history"><i class="fas fa-clock-rotate-left"></i><span>Histórico</span></button>
+                <button class="nav-item-glass" data-page="page-expenses"><i class="fas fa-coins"></i><span>Gastos</span></button>
+                <button class="nav-item-glass" data-page="page-settings"><i class="fas fa-cog"></i><span>Config.</span></button>
+                <button class="nav-item-glass" data-page="page-profile"><i class="fas fa-user"></i><span>Perfil</span></button>
+            </nav>
+        </div>
+
         <!-- DASHBOARD -->
         <section id="page-dashboard" class="page active">
-            <div class="glass-inner profile-mini-card">
-                <div class="profile-name" id="profileDisplayName">Usuário</div>
-                <div class="profile-email" id="profileDisplayEmail"></div>
-                <div class="profile-car" id="profileDisplayCar"></div>
-            </div>
-
             <div class="glass-inner">
                 <div class="title"><i class="fas fa-stopwatch"></i> Cronômetro de Jornada</div>
                 <div class="cronometro-display" id="cronometroDisplay">00:00:00.00</div>
                 <div class="cronometro-status" id="cronometroStatus">⏸️ Aguardando início</div>
+
+                <!-- Cronômetro global (tempo total sem pausas) -->
+                <div style="text-align:center; font-size:0.75rem; color:#94a3b8; margin-top:-4px; margin-bottom:8px;">
+                    <span>⏱️ Tempo total (global): <strong id="cronometroGlobalDisplay" style="color:#0f172a;">00:00:00.00</strong></span>
+                </div>
+
                 <div class="cronometro-botoes">
                     <button class="btn-cron iniciar" id="cronIniciar" onclick="iniciarJornadaCron()"><i class="fas fa-play"></i> Iniciar</button>
                     <button class="btn-cron pausar" id="cronPausar" onclick="abrirModalPausa()" disabled><i class="fas fa-pause"></i> Pausar</button>
@@ -1691,7 +2196,7 @@
             </div>
         </section>
 
-        <!-- GASTOS -->
+        <!-- GASTOS (sem campo Tipo) -->
         <section id="page-expenses" class="page">
             <div class="glass-inner">
                 <div class="title"><i class="fas fa-plus-circle"></i> Adicionar Gasto</div>
@@ -1713,19 +2218,22 @@
                         </select>
                     </div>
 
+                    <!-- Campo valor do litro (combustível) -->
+                    <div class="fuel-price-field" id="fuelPriceField">
+                        <label class="app-label">Valor do litro (R$)</label>
+                        <input type="text" id="fuelPrice" class="app-input" placeholder="0,00" onblur="formatarValor(this)" oninput="calcularLitros()">
+                        <div class="calc-info">
+                            💧 Litros abastecidos: <strong id="litrosCalc">0,00</strong> L
+                        </div>
+                    </div>
+
                     <label class="app-label">Forma de Pagamento</label>
                     <select id="paymentMethodSelect" class="app-input">
                         <option value="">Selecione...</option>
                     </select>
 
-                    <label class="app-label">Tipo</label>
-                    <select id="expenseType" class="app-input">
-                        <option value="Fixo">Fixo</option>
-                        <option value="Eventual">Eventual</option>
-                    </select>
-
                     <label class="app-label">Valor (R$)</label>
-                    <input type="text" id="expenseAmount" class="app-input" placeholder="0,00" onblur="formatarValor(this)">
+                    <input type="text" id="expenseAmount" class="app-input" placeholder="0,00" onblur="formatarValor(this)" oninput="calcularLitros()">
 
                     <label class="app-label">Comentário (opcional)</label>
                     <input type="text" id="expenseComment" class="app-input" placeholder="Alguma observação">
@@ -1756,7 +2264,12 @@
         <section id="page-profile" class="page">
             <div class="glass-inner profile-card-compact">
                 <div class="profile-header-compact">
-                    <div class="profile-name" id="profileHeroName">Usuário</div>
+                    <div class="profile-name-wrapper">
+                        <span class="profile-name" id="profileHeroName">Usuário</span>
+                        <button class="edit-profile-btn" onclick="document.getElementById('profileName').focus()" title="Editar perfil">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </div>
                     <div class="profile-email" id="profileDisplayEmail"></div>
                     <div class="profile-stats-mini">
                         <div class="stat"><i class="fas fa-car"></i> <strong id="profileCarsCount">0</strong> veículo(s)</div>
@@ -1881,14 +2394,6 @@
             </div>
         </section>
 
-        <!-- BARRA DE NAVEGAÇÃO FIXA -->
-        <nav class="bottom-nav-glass">
-            <button class="nav-item-glass active" data-page="page-dashboard"><i class="fas fa-home"></i><span>Início</span></button>
-            <button class="nav-item-glass" data-page="page-history"><i class="fas fa-clock-rotate-left"></i><span>Histórico</span></button>
-            <button class="nav-item-glass" data-page="page-expenses"><i class="fas fa-coins"></i><span>Gastos</span></button>
-            <button class="nav-item-glass" data-page="page-settings"><i class="fas fa-cog"></i><span>Config.</span></button>
-            <button class="nav-item-glass" data-page="page-profile"><i class="fas fa-user"></i><span>Perfil</span></button>
-        </nav>
     </div>
 </div>
 
@@ -1897,6 +2402,15 @@
 
 <!-- ==================== INDICADOR DE STATUS ==================== -->
 <div id="statusIndicator"><span id="statusText">Salvo</span></div>
+
+<!-- ==================== TOGGLE TEMA ==================== -->
+<div class="theme-toggle-wrapper" id="themeToggle" title="Alternar tema">
+    <span class="toggle-icon" id="themeIcon"><i class="fas fa-sun"></i></span>
+    <label class="toggle-slider-mini">
+        <span class="knob-mini"></span>
+        <input type="checkbox" id="themeSwitch">
+    </label>
+</div>
 
 <!-- ==================== MODAIS ==================== -->
 <div id="confirmModal" class="modal-overlay">
@@ -2120,7 +2634,6 @@
                 </select>
             </div>
 
-            <!-- Dias de folga recorrentes -->
             <div class="form-group">
                 <label class="app-label">Dias de folga (recorrentes)</label>
                 <div class="days-off-grid" id="daysOffGrid">
@@ -2182,11 +2695,12 @@
             weekly: { value: 0, type: 'bruto', daysOff: [] },
             monthly: { value: 0, type: 'bruto', daysOff: [] }
         },
-        folga: {} // { "2026-07-04": true }
+        folga: {}
     };
 
     let activeJourney = {
         startTime: null,
+        globalStartTime: null, // tempo global (não pausa)
         paused: false,
         pauseStart: null,
         pauses: [],
@@ -2428,7 +2942,7 @@
                 expenses: [],
                 categories: ['Combustível', 'Alimentação', 'Aluguel', 'Manutenção'],
                 paymentMethods: ['Pix', 'Cartão de Débito', 'Cartão de Crédito', 'Dinheiro'],
-                pauseReasons: ['Descanso', 'Diligências familiares', 'Diligências pessoais', 'Banheiro', 'Soneca'],
+                pauseReasons: ['Descanso', 'Alimentação', 'Manutenção', 'Diligências familiares', 'Diligências pessoais', 'Banheiro', 'Soneca'],
                 platforms: ['Uber', '99', 'InDriver', 'Bolt', 'Cabify', 'Urbano norte'],
                 subcategories: {
                     'Combustível': ['Etanol comum', 'Etanol aditivado', 'Gasolina comum', 'Gasolina aditivada',
@@ -2570,7 +3084,7 @@
                     paymentMethods: data.paymentMethods || ['Pix', 'Cartão de Débito', 'Cartão de Crédito',
                         'Dinheiro'
                     ],
-                    pauseReasons: data.pauseReasons || ['Descanso', 'Diligências familiares',
+                    pauseReasons: data.pauseReasons || ['Descanso', 'Alimentação', 'Manutenção', 'Diligências familiares',
                         'Diligências pessoais', 'Banheiro', 'Soneca'
                     ],
                     platforms: data.platforms || ['Uber', '99', 'InDriver', 'Bolt', 'Cabify', 'Urbano norte'],
@@ -2622,8 +3136,8 @@
                     expenses: [],
                     categories: ['Combustível', 'Alimentação', 'Aluguel', 'Manutenção'],
                     paymentMethods: ['Pix', 'Cartão de Débito', 'Cartão de Crédito', 'Dinheiro'],
-                    pauseReasons: ['Descanso', 'Diligências familiares', 'Diligências pessoais', 'Banheiro',
-                        'Soneca'
+                    pauseReasons: ['Descanso', 'Alimentação', 'Manutenção', 'Diligências familiares',
+                        'Diligências pessoais', 'Banheiro', 'Soneca'
                     ],
                     platforms: ['Uber', '99', 'InDriver', 'Bolt', 'Cabify', 'Urbano norte'],
                     subcategories: {
@@ -2767,6 +3281,14 @@
         if (journeysCountEl) journeysCountEl.innerText = (appData.journeys || []).length;
     }
 
+    function goToProfile() {
+        document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
+        document.querySelector('.nav-item-glass[data-page="page-profile"]').classList.add('active');
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page-profile').classList.add('active');
+        setTimeout(() => document.getElementById('profileName').focus(), 300);
+    }
+
     // =============================================================
     // 9. DASHBOARD (com correção do toast e folga)
     // =============================================================
@@ -2816,21 +3338,19 @@
 
         // ===== VERIFICAÇÃO DE FOLGA =====
         const isFolgaEventual = appData.folga && appData.folga[hoje] === true;
-        const diaSemana = now.getDay(); // 0=domingo, 1=segunda, ...
+        const diaSemana = now.getDay();
         const dailyGoal = appData.goals.daily || { value: 0, type: 'bruto', daysOff: [] };
         const daysOff = dailyGoal.daysOff || [];
         const isFolgaRecorrente = daysOff.includes(diaSemana);
 
         const goalEl = document.getElementById('dailyGoalStatus');
 
-        // Se for folga (eventual ou recorrente), mostra mensagem de folga
         if (isFolgaEventual || isFolgaRecorrente) {
             const motivo = isFolgaEventual ? '🌴 Folga eventual' : '📅 Dia de folga recorrente';
             goalEl.innerHTML = `<div class="folga-status-msg folga">${motivo} — Meta não aplicada.</div>`;
             return;
         }
 
-        // Caso contrário, mostra o progresso da meta
         const goalValue = dailyGoal.value;
         const goalType = dailyGoal.type || 'bruto';
 
@@ -2847,7 +3367,7 @@
                     </div>
                 `;
 
-            // Alertas de meta (cooldown de 30s)
+            // Toast de meta quase batida (mantido)
             if (currentValue >= goalValue * 0.8 && currentValue < goalValue) {
                 const nowTime = Date.now();
                 if (nowTime - lastGoalToastTime > 30000) {
@@ -2855,16 +3375,7 @@
                     lastGoalToastTime = nowTime;
                 }
             }
-            const nowDate = new Date();
-            const dayProgress = (nowDate.getHours() * 60 + nowDate.getMinutes()) / (24 * 60);
-            const expectedValue = goalValue * dayProgress;
-            if (currentValue < expectedValue * 0.7 && dayProgress > 0.5) {
-                const nowTime = Date.now();
-                if (nowTime - lastGoalToastTime > 30000) {
-                    showToast(`⚠️ Você está atrasado na meta diária. Faltam ${formatCurrency(goalValue - currentValue)}`, 'danger', 5000);
-                    lastGoalToastTime = nowTime;
-                }
-            }
+            // Toast de atraso foi removido
         } else {
             goalEl.innerHTML = `<div style="color:#64748b; font-size:0.8rem; text-align:center; margin-top:8px;">Defina uma meta diária para acompanhar seu progresso.</div>`;
         }
@@ -2880,7 +3391,6 @@
         const goalType = goal.type || 'bruto';
         const now = new Date();
 
-        // Filtra jornadas e gastos considerando dias de folga
         function isDayOff(date) {
             const day = date.getDay();
             const daysOff = goal.daysOff || [];
@@ -2955,7 +3465,6 @@
         document.getElementById('editGoalInput').value = goal.value || '';
         document.getElementById('editGoalTypeSelect').value = goal.type || 'bruto';
 
-        // Atualizar checkboxes de dias de folga
         const daysOff = goal.daysOff || [];
         document.querySelectorAll('#daysOffGrid input[type="checkbox"]').forEach(cb => {
             cb.checked = daysOff.includes(parseInt(cb.value));
@@ -2965,7 +3474,6 @@
         document.getElementById('editGoalModal').classList.add('active');
     }
 
-    // Atualiza o estilo dos labels dos dias de folga
     document.querySelectorAll('#daysOffGrid input[type="checkbox"]').forEach(cb => {
         cb.addEventListener('change', function() {
             this.closest('label').classList.toggle('active', this.checked);
@@ -2982,7 +3490,6 @@
             return;
         }
 
-        // Coleta os dias de folga selecionados
         const daysOff = [];
         document.querySelectorAll('#daysOffGrid input[type="checkbox"]:checked').forEach(cb => {
             daysOff.push(parseInt(cb.value));
@@ -3070,6 +3577,10 @@
             const dayExpenses = expenses.filter(e => e.date === j.date);
             const totalDayExpenses = dayExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
 
+            // Calcular litros de combustível do dia
+            const fuelExpenses = dayExpenses.filter(e => e.category === 'Combustível' && e.litros);
+            const totalLitros = fuelExpenses.reduce((acc, e) => acc + (parseFloat(e.litros) || 0), 0);
+
             const lucroLiquido = totalDia - totalDayExpenses;
             const lucroClass = lucroLiquido >= 0 ? 'positive' : 'negative';
 
@@ -3101,8 +3612,13 @@
             dayExpenses.forEach(e => {
                 let label = escapeHtml(e.category);
                 if (e.subcategory) label += ` - ${escapeHtml(e.subcategory)}`;
-                expensesTagsHtml += `<span class="tag">${label} - ${formatCurrency(e.amount)}</span>`;
+                let litrosInfo = '';
+                if (e.litros) litrosInfo = ` (${parseFloat(e.litros).toFixed(2)} L)`;
+                expensesTagsHtml += `<span class="tag">${label} - ${formatCurrency(e.amount)}${litrosInfo}</span>`;
             });
+
+            // Tempo global
+            const globalTime = j.globalTimeMs ? formatTimeShort(j.globalTimeMs) : 'N/A';
 
             html += `
                     <div class="journey-history-card">
@@ -3116,6 +3632,7 @@
                             <span><span class="label">⛽ Início</span> ${escapeHtml(j.fuelLevel !== undefined ? j.fuelLevel : 'N/I')}%</span>
                             ${j.finalFuel !== undefined ? `<span><span class="label">⛽ Fim</span> ${escapeHtml(j.finalFuel)}%</span>` : '<span><span class="label">⛽ Fim</span> N/I</span>'}
                             <span><span class="label">⏳ Trabalho</span> ${formatTimeShort(j.totalWorkMinutes * 60000 || 0)}</span>
+                            <span><span class="label">⏱️ Global</span> ${globalTime}</span>
                         </div>
                         <div class="journey-pauses">
                             <strong>⏸️ Pausas:</strong> ${pausesStr}
@@ -3133,6 +3650,7 @@
                         <div class="expenses-day-section">
                             <div class="exp-total">
                                 💳 Gastos do dia: <strong>${formatCurrency(totalDayExpenses)}</strong> (${dayExpenses.length} registro(s))
+                                ${totalLitros > 0 ? ` · ⛽ ${totalLitros.toFixed(2)} L` : ''}
                             </div>
                             <div class="expenses-tags">
                                 ${expensesTagsHtml || '<span style="color:#64748b; font-size:0.7rem;">Nenhum gasto registrado</span>'}
@@ -3166,12 +3684,14 @@
     }
 
     // =============================================================
-    // 13. EXPORTAÇÃO
+    // 13. EXPORTAÇÃO PROFISSIONAL (CSV e PDF)
     // =============================================================
     function exportJourneysCSV() {
         const journeys = appData.journeys || [];
         if (journeys.length === 0) { showToast('Nenhuma jornada para exportar.', 'warning', 3000); return; }
-        let csv = 'Data,Início,Fim,KM Rodados,Plataformas,Corridas,Valor Bruto,Total Pausas (min),Lucro Líquido\n';
+
+        let csv = 'Relatório de Jornadas\n';
+        csv += 'Data,Início,Fim,KM Rodados,Plataformas,Corridas,Valor Bruto (R$),Total Pausas (min),Lucro Líquido (R$),Tempo Global\n';
         journeys.forEach(j => {
             const totalGross = j.platforms.reduce((s, p) => s + (parseFloat(p.gross) || 0), 0);
             const dayExpenses = appData.expenses.filter(e => e.date === j.date);
@@ -3179,18 +3699,56 @@
             const net = totalGross - totalExpenses;
             const platforms = j.platforms.map(p => `${p.name} (${p.rides} corridas, R$ ${(parseFloat(p.gross)||0).toFixed(2)})`).join('; ');
             const totalRides = j.platforms.reduce((s, p) => s + (parseInt(p.rides)||0), 0);
-            csv += `${j.date},${j.startTime},${j.endTime},${j.totalKm},"${platforms}",${totalRides},${totalGross.toFixed(2)},${j.breaks||0},${net.toFixed(2)}\n`;
+            const globalTime = j.globalTimeMs ? formatTimeShort(j.globalTimeMs) : 'N/A';
+            csv += `${j.date},${j.startTime},${j.endTime},${j.totalKm},"${platforms}",${totalRides},${totalGross.toFixed(2)},${j.breaks||0},${net.toFixed(2)},${globalTime}\n`;
         });
         downloadFile(csv, 'jornadas.csv', 'text/csv');
         showToast('Jornadas exportadas com sucesso!', 'success', 3000);
     }
 
+    function exportJourneysPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'pt', 'a4');
+        const journeys = appData.journeys || [];
+        if (journeys.length === 0) { showToast('Nenhuma jornada.', 'warning', 3000); return; }
+
+        doc.setFontSize(16);
+        doc.text('Relatório de Jornadas', 40, 40);
+        doc.setFontSize(10);
+        doc.text(`Gerado em: ${new Date().toLocaleString('pt-BR')}`, 40, 55);
+
+        const rows = journeys.map(j => {
+            const totalGross = j.platforms.reduce((s, p) => s + (parseFloat(p.gross) || 0), 0);
+            const dayExpenses = appData.expenses.filter(e => e.date === j.date);
+            const totalExpenses = dayExpenses.reduce((s, e) => s + (parseFloat(e.amount) || 0), 0);
+            const net = totalGross - totalExpenses;
+            const totalRides = j.platforms.reduce((s, p) => s + (parseInt(p.rides)||0), 0);
+            const globalTime = j.globalTimeMs ? formatTimeShort(j.globalTimeMs) : 'N/A';
+            return [j.date, j.startTime, j.endTime, j.totalKm, totalRides, `R$ ${totalGross.toFixed(2)}`, `R$ ${net.toFixed(2)}`, globalTime];
+        });
+
+        doc.autoTable({
+            head: [['Data','Início','Fim','KM','Corridas','Bruto','Líquido','Global']],
+            body: rows,
+            startY: 70,
+            styles: { fontSize: 8 },
+            headStyles: { fillColor: [91, 124, 250] },
+            alternateRowStyles: { fillColor: [245, 247, 250] }
+        });
+
+        doc.save('jornadas.pdf');
+        showToast('PDF gerado com sucesso!', 'success', 3000);
+    }
+
     function exportExpensesCSV() {
         const expenses = appData.expenses || [];
         if (expenses.length === 0) { showToast('Nenhum gasto para exportar.', 'warning', 3000); return; }
-        let csv = 'Data,Hora,Categoria,Subcategoria,Forma de Pagamento,Tipo,Valor,Comentário\n';
+
+        let csv = 'Relatório de Gastos\n';
+        csv += 'Data,Hora,Categoria,Subcategoria,Forma de Pagamento,Valor (R$),Litros,Comentário\n';
         expenses.forEach(e => {
-            csv += `${e.date},${e.time||''},${e.category},${e.subcategory||''},${e.paymentMethod||''},${e.type||''},${(parseFloat(e.amount)||0).toFixed(2)},${e.comment||''}\n`;
+            const litros = e.litros ? parseFloat(e.litros).toFixed(2) : '';
+            csv += `${e.date},${e.time||''},${e.category},${e.subcategory||''},${e.paymentMethod||''},${(parseFloat(e.amount)||0).toFixed(2)},${litros},${e.comment||''}\n`;
         });
         downloadFile(csv, 'gastos.csv', 'text/csv');
         showToast('Gastos exportados com sucesso!', 'success', 3000);
@@ -3203,31 +3761,6 @@
         link.download = filename;
         link.click();
         URL.revokeObjectURL(link.href);
-    }
-
-    function exportJourneysPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('p', 'pt', 'a4');
-        doc.text('Relatório de Jornadas', 40, 40);
-        const journeys = appData.journeys || [];
-        if (journeys.length === 0) { showToast('Nenhuma jornada.', 'warning', 3000); return; }
-        const rows = journeys.map(j => {
-            const totalGross = j.platforms.reduce((s, p) => s + (parseFloat(p.gross) || 0), 0);
-            const dayExpenses = appData.expenses.filter(e => e.date === j.date);
-            const totalExpenses = dayExpenses.reduce((s, e) => s + (parseFloat(e.amount) || 0), 0);
-            const net = totalGross - totalExpenses;
-            const totalRides = j.platforms.reduce((s, p) => s + (parseInt(p.rides)||0), 0);
-            return [j.date, j.startTime, j.endTime, j.totalKm, totalRides, totalGross.toFixed(2), net.toFixed(2)];
-        });
-        doc.autoTable({
-            head: [['Data','Início','Fim','KM','Corridas','Bruto','Líquido']],
-            body: rows,
-            startY: 60,
-            styles: { fontSize: 8 },
-            headStyles: { fillColor: [91, 124, 250] }
-        });
-        doc.save('jornadas.pdf');
-        showToast('PDF gerado com sucesso!', 'success', 3000);
     }
 
     // =============================================================
@@ -3311,7 +3844,7 @@
     window.addEventListener('offline', () => setStatus('⚠️ Offline', false));
 
     // =============================================================
-    // 15. GASTOS (LISTA E FILTROS)
+    // 15. GASTOS (com campo litros para combustível)
     // =============================================================
     function renderExpenseList() {
         const container = document.getElementById('expenseList');
@@ -3338,14 +3871,15 @@
             const originalIndex = appData.expenses.indexOf(e);
             let label = escapeHtml(e.category);
             if (e.subcategory) label += ` - ${escapeHtml(e.subcategory)}`;
+            let litrosInfo = '';
+            if (e.litros) litrosInfo = ` (${parseFloat(e.litros).toFixed(2)} L)`;
             html += `
                     <div class="list-item-glass">
                         <div class="info">
                             <span class="main">${escapeHtml(e.category)}${e.subcategory ? ' ('+escapeHtml(e.subcategory)+')' : ''}</span>
                             <div class="sub">
                                 <span><i class="far fa-clock"></i> ${escapeHtml(e.time || e.date)}</span>
-                                <span class="category-badge">${label}</span>
-                                <span class="badge-glass ${escapeHtml(String(e.type).toLowerCase())}">${escapeHtml(e.type)}</span>
+                                <span class="category-badge">${label}${litrosInfo}</span>
                                 ${e.paymentMethod ? `<span>💳 ${escapeHtml(e.paymentMethod)}</span>` : ''}
                             </div>
                             ${e.comment ? `<div style="font-size:0.7rem; color:#64748b; margin-top:2px;">📝 ${escapeHtml(e.comment)}</div>` : ''}
@@ -3375,6 +3909,35 @@
             showToast('Gasto removido.', 'info', 3000);
         });
     }
+
+    // Função para calcular litros automaticamente
+    function calcularLitros() {
+        const amount = document.getElementById('expenseAmount').value.replace(',', '.');
+        const price = document.getElementById('fuelPrice').value.replace(',', '.');
+        const valAmount = parseFloat(amount);
+        const valPrice = parseFloat(price);
+        if (!isNaN(valAmount) && !isNaN(valPrice) && valPrice > 0) {
+            const litros = valAmount / valPrice;
+            document.getElementById('litrosCalc').innerText = litros.toFixed(2);
+        } else {
+            document.getElementById('litrosCalc').innerText = '0,00';
+        }
+    }
+
+    // Mostrar/ocultar campo de valor do litro
+    document.getElementById('expenseCategorySelect').addEventListener('change', function() {
+        const categoria = this.value;
+        const field = document.getElementById('fuelPriceField');
+        if (categoria === 'Combustível') {
+            field.style.display = 'block';
+            calcularLitros();
+        } else {
+            field.style.display = 'none';
+            document.getElementById('fuelPrice').value = '';
+            document.getElementById('litrosCalc').innerText = '0,00';
+        }
+        atualizarCampoSubcategoria(categoria);
+    });
 
     // =============================================================
     // 16. PERFIL E CARROS
@@ -3801,6 +4364,12 @@
         });
         if (appData.paymentMethods.includes(currentPay)) paySelect.value = currentPay;
 
+        // Atualizar campo combustível
+        if (currentCat === 'Combustível') {
+            document.getElementById('fuelPriceField').style.display = 'block';
+        } else {
+            document.getElementById('fuelPriceField').style.display = 'none';
+        }
         atualizarCampoSubcategoria(catSelect.value);
     }
 
@@ -3839,10 +4408,6 @@
         });
         if (appData.subcategories[categoria].includes(currentSub)) select.value = currentSub;
     }
-
-    document.getElementById('expenseCategorySelect').addEventListener('change', function() {
-        atualizarCampoSubcategoria(this.value);
-    });
 
     // =============================================================
     // 22. PLATAFORMAS
@@ -3960,10 +4525,7 @@
 
         closeModal('startJourneyModal');
 
-        document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
-        document.querySelector('.nav-item-glass[data-page="page-dashboard"]').classList.add('active');
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById('page-dashboard').classList.add('active');
+        goToDashboard();
 
         showToast('Jornada iniciada! O cronômetro está rodando.', 'success', 3000);
     });
@@ -3971,6 +4533,7 @@
     function startCronometro(initialKm, initialFuel, car) {
         const now = Date.now();
         activeJourney.startTime = now;
+        activeJourney.globalStartTime = now; // inicia o global
         activeJourney.initialKm = initialKm;
         activeJourney.initialFuel = initialFuel;
         activeJourney.paused = false;
@@ -3994,6 +4557,7 @@
 
     function atualizarCronometro() {
         if (!activeJourney.running) return;
+        // Cronômetro normal (com pausas)
         let elapsed = Date.now() - activeJourney.startTime;
         let totalPauseMs = 0;
         activeJourney.pauses.forEach(p => {
@@ -4004,6 +4568,10 @@
         }
         const displayMs = elapsed - totalPauseMs;
         document.getElementById('cronometroDisplay').innerText = formatTime(displayMs);
+
+        // Cronômetro global (sem pausas)
+        const globalMs = Date.now() - activeJourney.globalStartTime;
+        document.getElementById('cronometroGlobalDisplay').innerText = formatTime(globalMs);
     }
 
     function abrirModalPausa() {
@@ -4084,42 +4652,6 @@
     function confirmarPausa(motivo) {
         if (!motivo || motivo.trim() === '') return;
         closeModal('pauseModal');
-        const isAlimentacao = motivo.toLowerCase().includes('alimentação') || motivo.toLowerCase().includes('café') ||
-            motivo.toLowerCase().includes('lanche') || motivo.toLowerCase().includes('almoço') ||
-            motivo.toLowerCase().includes('janta') || motivo.toLowerCase().includes('salgado');
-        const isManutencao = motivo.toLowerCase().includes('manutenção') || motivo.toLowerCase().includes('óleo') ||
-            motivo.toLowerCase().includes('filtro') || motivo.toLowerCase().includes('pneu') ||
-            motivo.toLowerCase().includes('freio') || motivo.toLowerCase().includes('vela') ||
-            motivo.toLowerCase().includes('amortecedor') || motivo.toLowerCase().includes('correia') ||
-            motivo.toLowerCase().includes('arrefecimento') || motivo.toLowerCase().includes('parabrisas') ||
-            motivo.toLowerCase().includes('bateria') || motivo.toLowerCase().includes('alinhamento');
-
-        if (isAlimentacao || isManutencao) {
-            showConfirm('Registrar gasto?', 'Este motivo está relacionado a gastos. Deseja registrar um gasto agora?',
-            () => {
-                document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
-                document.querySelector('.nav-item-glass[data-page="page-expenses"]').classList.add('active');
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById('page-expenses').classList.add('active');
-                document.getElementById('expenseDate').value = getToday();
-                document.getElementById('expenseTime').value = getCurrentTimeWithTenths();
-                const cat = isAlimentacao ? 'Alimentação' : 'Manutenção';
-                if (appData.categories.includes(cat)) {
-                    document.getElementById('expenseCategorySelect').value = cat;
-                    atualizarCampoSubcategoria(cat);
-                    const subs = appData.subcategories[cat] || [];
-                    if (subs.length > 0) {
-                        const match = subs.find(s => motivo.toLowerCase().includes(s.toLowerCase()));
-                        if (match) {
-                            document.getElementById('expenseSubcategorySelect').value = match;
-                        }
-                    }
-                }
-                document.getElementById('expenseCategorySelect').focus();
-                executarPausa(motivo);
-            });
-            return;
-        }
         executarPausa(motivo);
     }
 
@@ -4131,35 +4663,6 @@
             return;
         }
         closeModal('pauseModal');
-        const isAlimentacao = motivo.toLowerCase().includes('alimentação') || motivo.toLowerCase().includes('café') ||
-            motivo.toLowerCase().includes('lanche') || motivo.toLowerCase().includes('almoço') ||
-            motivo.toLowerCase().includes('janta') || motivo.toLowerCase().includes('salgado');
-        const isManutencao = motivo.toLowerCase().includes('manutenção') || motivo.toLowerCase().includes('óleo') ||
-            motivo.toLowerCase().includes('filtro') || motivo.toLowerCase().includes('pneu') ||
-            motivo.toLowerCase().includes('freio') || motivo.toLowerCase().includes('vela') ||
-            motivo.toLowerCase().includes('amortecedor') || motivo.toLowerCase().includes('correia') ||
-            motivo.toLowerCase().includes('arrefecimento') || motivo.toLowerCase().includes('parabrisas') ||
-            motivo.toLowerCase().includes('bateria') || motivo.toLowerCase().includes('alinhamento');
-
-        if (isAlimentacao || isManutencao) {
-            showConfirm('Registrar gasto?', 'Este motivo está relacionado a gastos. Deseja registrar um gasto agora?',
-            () => {
-                document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
-                document.querySelector('.nav-item-glass[data-page="page-expenses"]').classList.add('active');
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById('page-expenses').classList.add('active');
-                document.getElementById('expenseDate').value = getToday();
-                document.getElementById('expenseTime').value = getCurrentTimeWithTenths();
-                const cat = isAlimentacao ? 'Alimentação' : 'Manutenção';
-                if (appData.categories.includes(cat)) {
-                    document.getElementById('expenseCategorySelect').value = cat;
-                    atualizarCampoSubcategoria(cat);
-                }
-                document.getElementById('expenseCategorySelect').focus();
-                executarPausa(motivo);
-            });
-            return;
-        }
         executarPausa(motivo);
     }
 
@@ -4187,16 +4690,6 @@
         atualizarBotoesCron();
         atualizarStatus('🟢 Jornada em andamento');
         salvarJornadaAtiva();
-
-        showConfirm('Registrar gasto?', 'Deseja registrar um gasto relacionado a esta pausa?', () => {
-            document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
-            document.querySelector('.nav-item-glass[data-page="page-expenses"]').classList.add('active');
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-expenses').classList.add('active');
-            document.getElementById('expenseDate').value = getToday();
-            document.getElementById('expenseTime').value = getCurrentTimeWithTenths();
-            document.getElementById('expenseCategorySelect').focus();
-        });
     }
 
     function finalizarJornada() {
@@ -4230,6 +4723,7 @@
 
         const endTime = Date.now();
         const startTime = activeJourney.startTime;
+        const globalStart = activeJourney.globalStartTime;
         let totalPauseMs = 0;
         activeJourney.pauses.forEach(p => {
             if (p.end) totalPauseMs += (p.end - p.start);
@@ -4238,6 +4732,7 @@
         const totalWorkMs = (endTime - startTime) - totalPauseMs;
         const totalWorkMinutes = Math.round(totalWorkMs / 60000);
         const breaksMinutes = Math.round(totalPauseMs / 60000);
+        const globalTimeMs = endTime - globalStart;
 
         const journey = {
             id: generateId(),
@@ -4250,6 +4745,7 @@
             finalFuel: finishFuel,
             breaks: breaksMinutes,
             totalWorkMinutes: totalWorkMinutes,
+            globalTimeMs: globalTimeMs,
             pauses: activeJourney.pauses.filter(p => p.end !== null).map(p => ({
                 name: p.name,
                 duration: p.end - p.start
@@ -4268,10 +4764,7 @@
         setLoading('finishJourneyBtn', false);
         renderAll();
 
-        document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
-        document.querySelector('.nav-item-glass[data-page="page-dashboard"]').classList.add('active');
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById('page-dashboard').classList.add('active');
+        goToDashboard();
 
         showToast('Jornada finalizada e salva com sucesso!', 'success', 3000);
     });
@@ -4314,6 +4807,9 @@
         if (totalWorkMinutes < 0) totalWorkMinutes += 1440;
         totalWorkMinutes = totalWorkMinutes - breaks;
 
+        // Para jornada manual, não temos tempo global real, usamos o tempo total trabalhado + pausas
+        const totalMinutes = (endMinutes - startMinutes + 1440) % 1440;
+
         const journey = {
             id: generateId(),
             date: date,
@@ -4325,6 +4821,7 @@
             finalFuel: undefined,
             breaks: breaks,
             totalWorkMinutes: Math.max(0, totalWorkMinutes),
+            globalTimeMs: totalMinutes * 60000, // estimativa
             pauses: breaks > 0 ? [{ name: 'Manual', duration: breaks * 60000 }] : [],
             platforms: platforms,
             car: car || ''
@@ -4338,6 +4835,8 @@
         setLoading('manualJourneyBtn', false);
         renderAll();
 
+        goToDashboard();
+
         showToast('Jornada passada registrada com sucesso!', 'success', 3000);
     });
 
@@ -4350,6 +4849,7 @@
         activeJourney.paused = false;
         activeJourney.pauseStart = null;
         activeJourney.startTime = null;
+        activeJourney.globalStartTime = null;
         activeJourney.initialKm = null;
         activeJourney.initialFuel = null;
         activeJourney.pauses = [];
@@ -4360,6 +4860,7 @@
         activeJourney.car = '';
 
         document.getElementById('cronometroDisplay').innerText = '00:00:00.00';
+        document.getElementById('cronometroGlobalDisplay').innerText = '00:00:00.00';
         atualizarStatus('⏸️ Aguardando início');
         atualizarBotoesCron();
         localStorage.removeItem('activeJourney');
@@ -4400,6 +4901,7 @@
         }
         const data = {
             startTime: activeJourney.startTime,
+            globalStartTime: activeJourney.globalStartTime,
             initialKm: activeJourney.initialKm,
             initialFuel: activeJourney.initialFuel,
             paused: activeJourney.paused,
@@ -4418,6 +4920,7 @@
             const data = JSON.parse(saved);
             if (data.running && data.startTime) {
                 activeJourney.startTime = data.startTime;
+                activeJourney.globalStartTime = data.globalStartTime || data.startTime;
                 activeJourney.initialKm = data.initialKm;
                 activeJourney.initialFuel = data.initialFuel;
                 activeJourney.paused = data.paused || false;
@@ -4593,9 +5096,11 @@
         document.getElementById('expenseSubcategorySelect').value = '';
         document.getElementById('subcategoryField').style.display = 'none';
         document.getElementById('paymentMethodSelect').value = '';
-        document.getElementById('expenseType').value = 'Fixo';
         document.getElementById('expenseAmount').value = '';
         document.getElementById('expenseComment').value = '';
+        document.getElementById('fuelPrice').value = '';
+        document.getElementById('fuelPriceField').style.display = 'none';
+        document.getElementById('litrosCalc').innerText = '0,00';
     }
 
     // =============================================================
@@ -4608,9 +5113,19 @@
         const category = document.getElementById('expenseCategorySelect').value.trim();
         const subcategory = document.getElementById('expenseSubcategorySelect').value.trim();
         const paymentMethod = document.getElementById('paymentMethodSelect').value.trim();
-        const type = document.getElementById('expenseType').value;
         let amount = document.getElementById('expenseAmount').value.replace(',', '.');
         const comment = document.getElementById('expenseComment').value.trim();
+
+        // Campos de combustível
+        let fuelPrice = document.getElementById('fuelPrice').value.replace(',', '.');
+        let litros = null;
+        if (category === 'Combustível' && fuelPrice) {
+            const valAmount = parseFloat(amount);
+            const valPrice = parseFloat(fuelPrice);
+            if (!isNaN(valAmount) && !isNaN(valPrice) && valPrice > 0) {
+                litros = valAmount / valPrice;
+            }
+        }
 
         if (!date || !category || !amount) {
             showToast('Preencha Data, Categoria e Valor.', 'warning', 3000);
@@ -4637,23 +5152,27 @@
         }
 
         setLoading('saveExpenseBtn', true);
-        appData.expenses.push({
+        const expense = {
             id: generateId(),
             date,
             time: time || getCurrentTimeWithTenths(),
             category,
             subcategory: subcategory || '',
             paymentMethod: paymentMethod || 'Não informado',
-            type,
             amount: amountNum,
             comment: comment || ''
-        });
+        };
+        if (litros !== null) {
+            expense.litros = litros;
+        }
+        appData.expenses.push(expense);
 
         await saveUserData();
         renderAll();
         setLoading('saveExpenseBtn', false);
 
         resetExpenseForm();
+        goToDashboard();
         showToast('Gasto registrado na nuvem!', 'success', 3000);
     });
 
@@ -4665,6 +5184,7 @@
         await saveUserData();
         renderAll();
         setLoading('saveProfileBtn', false);
+        goToDashboard();
         showToast('Perfil atualizado na nuvem!', 'success', 3000);
     });
 
@@ -4688,6 +5208,7 @@
         document.getElementById('carModel').value = '';
         document.getElementById('carPlate').value = '';
         document.getElementById('carYear').value = '';
+        goToDashboard();
         showToast('Carro adicionado na nuvem!', 'success', 3000);
     });
 
@@ -4705,6 +5226,13 @@
         if (id === 'manualJourneyModal') {
             manualPlatformsData = [];
         }
+    }
+
+    function goToDashboard() {
+        document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
+        document.querySelector('.nav-item-glass[data-page="page-dashboard"]').classList.add('active');
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page-dashboard').classList.add('active');
     }
 
     document.querySelectorAll('.nav-item-glass').forEach(item => {
@@ -4733,7 +5261,31 @@
             btnManual.addEventListener('click', openManualJourneyModal);
         }
 
-        console.log('🚀 DriverControl - Dias de folga e switch "Folga eventual" implementados!');
+        // Tema
+        const themeSwitch = document.getElementById('themeSwitch');
+        const themeIcon = document.getElementById('themeIcon');
+        const currentTheme = localStorage.getItem('driverControlTheme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeSwitch.checked = true;
+            themeIcon.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            themeIcon.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-theme');
+                themeIcon.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('driverControlTheme', 'dark');
+            } else {
+                document.body.classList.remove('dark-theme');
+                themeIcon.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('driverControlTheme', 'light');
+            }
+        });
+
+        console.log('🚀 DriverControl - Todas as funcionalidades corrigidas e melhoradas!');
     }
 
     // =============================================================
