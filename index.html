@@ -937,74 +937,6 @@
         .stat-item.green .value { color: #22c55e; }
         .stat-item.red .value { color: #ef4444; }
         .stat-item.blue .value { color: #5b7cfa; }
-        .goals-tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 12px;
-            background: #f1f5f9;
-            border-radius: 30px;
-            padding: 4px;
-        }
-        .goals-tabs .tab {
-            flex: 1;
-            background: none;
-            border: none;
-            padding: 8px 0;
-            border-radius: 30px;
-            color: #64748b;
-            font-weight: 600;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .goals-tabs .tab.active {
-            background: #fff;
-            color: #0f172a;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .goal-progress {
-            margin: 8px 0 12px 0;
-        }
-        .goal-progress .bar-bg {
-            width: 100%;
-            height: 8px;
-            background: #eef2f7;
-            border-radius: 30px;
-            overflow: hidden;
-            margin-top: 6px;
-        }
-        .goal-progress .bar-fill {
-            height: 100%;
-            border-radius: 30px;
-            transition: width 0.6s ease;
-            background: linear-gradient(90deg, #22c55e, #5b7cfa);
-        }
-        .goal-progress .bar-fill.medium { background: linear-gradient(90deg, #facc15, #f59e0b); }
-        .goal-progress .bar-fill.low { background: linear-gradient(90deg, #f87171, #ef4444); }
-        .goal-stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-        .goal-stats .current { color: #0f172a; font-weight: 600; }
-        .goal-actions {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 6px;
-        }
-        .goal-actions button {
-            background: #f1f5f9;
-            border: 1px solid #e2e8f0;
-            border-radius: 30px;
-            padding: 4px 14px;
-            color: #475569;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .goal-actions button:hover { background: #e2e8f0; }
         .action-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1630,7 +1562,6 @@
             background: #ef4444;
             box-shadow: 0 4px 14px rgba(239,68,68,0.2);
         }
-        /* Navegação inferior removida, agora superior */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1935,38 +1866,7 @@
         }
         .logout-btn:active { transform: scale(0.97); background: #fee2e2; }
         .logout-btn i { color: #dc2626; }
-        .days-off-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 6px;
-            margin-top: 6px;
-            margin-bottom: 12px;
-        }
-        .days-off-grid label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: #64748b;
-            cursor: pointer;
-            padding: 6px 0;
-            border-radius: 10px;
-            background: #f8fafc;
-            border: 1px solid #eef2f7;
-            transition: 0.2s;
-        }
-        .days-off-grid label.active {
-            background: #e0f2fe;
-            border-color: #5b7cfa;
-            color: #0f172a;
-        }
-        .days-off-grid label input[type="checkbox"] {
-            margin-bottom: 2px;
-            accent-color: #5b7cfa;
-        }
 
-        /* Campo valor do litro (combustível) */
         .fuel-price-field {
             display: none;
             margin-top: 8px;
@@ -2148,16 +2048,6 @@
                     <div class="stat-item red"><div class="value" id="monthlyExpenses">R$ 0</div><div class="label">Gastos</div></div>
                     <div class="stat-item blue"><div class="value" id="monthlyNet">R$ 0</div><div class="label">Lucro</div></div>
                 </div>
-            </div>
-
-            <div class="glass-inner">
-                <div class="title"><i class="fas fa-bullseye"></i> Metas</div>
-                <div class="goals-tabs">
-                    <button class="tab active" data-period="daily" onclick="changeGoalTab('daily')">Diário</button>
-                    <button class="tab" data-period="weekly" onclick="changeGoalTab('weekly')">Semanal</button>
-                    <button class="tab" data-period="monthly" onclick="changeGoalTab('monthly')">Mensal</button>
-                </div>
-                <div id="goalContent"></div>
             </div>
 
             <div class="glass-inner">
@@ -2617,44 +2507,6 @@
     </div>
 </div>
 
-<div id="editGoalModal" class="modal-overlay">
-    <div class="modal-glass">
-        <button class="close-modal" onclick="closeModal('editGoalModal')"><i class="fas fa-times"></i></button>
-        <div class="modal-title"><i class="fas fa-edit"></i> Editar Meta</div>
-        <form id="editGoalForm">
-            <div class="form-group">
-                <label class="app-label" id="editGoalLabel">Meta Diária (R$)</label>
-                <input type="number" id="editGoalInput" class="app-input" placeholder="Ex: 500" step="0.01" min="0">
-            </div>
-            <div class="form-group">
-                <label class="app-label">Tipo da Meta</label>
-                <select id="editGoalTypeSelect" class="app-input">
-                    <option value="bruto">Bruta (ganhos totais)</option>
-                    <option value="liquido">Líquida (ganhos - gastos)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="app-label">Dias de folga (recorrentes)</label>
-                <div class="days-off-grid" id="daysOffGrid">
-                    <label data-day="0"><input type="checkbox" value="0"> Dom</label>
-                    <label data-day="1"><input type="checkbox" value="1"> Seg</label>
-                    <label data-day="2"><input type="checkbox" value="2"> Ter</label>
-                    <label data-day="3"><input type="checkbox" value="3"> Qua</label>
-                    <label data-day="4"><input type="checkbox" value="4"> Qui</label>
-                    <label data-day="5"><input type="checkbox" value="5"> Sex</label>
-                    <label data-day="6"><input type="checkbox" value="6"> Sáb</label>
-                </div>
-                <p style="font-size:0.7rem; color:#94a3b8; margin-top:4px;">
-                    <i class="fas fa-info-circle"></i> Os dias selecionados serão ignorados no cálculo da meta. O switch "Folga eventual" tem prioridade.
-                </p>
-            </div>
-
-            <button type="submit" class="btn-app" id="editGoalBtn"><i class="fas fa-save"></i> Salvar Meta</button>
-        </form>
-    </div>
-</div>
-
 <!-- ============================================================= -->
 <!-- ==================== JAVASCRIPT ============================= -->
 <!-- ============================================================= -->
@@ -2690,17 +2542,12 @@
         pauseReasons: [],
         platforms: ['Uber', '99', 'InDriver', 'Bolt', 'Cabify', 'Urbano norte'],
         subcategories: {},
-        goals: {
-            daily: { value: 0, type: 'bruto', daysOff: [] },
-            weekly: { value: 0, type: 'bruto', daysOff: [] },
-            monthly: { value: 0, type: 'bruto', daysOff: [] }
-        },
         folga: {}
     };
 
     let activeJourney = {
         startTime: null,
-        globalStartTime: null, // tempo global (não pausa)
+        globalStartTime: null,
         paused: false,
         pauseStart: null,
         pauses: [],
@@ -2717,14 +2564,10 @@
 
     let dashboardInterval = null;
     let pauseState = { step: 'main', parent: null };
-    let currentGoalTab = 'daily';
-    let editingGoalPeriod = 'daily';
     let filterDate = '';
 
     let finishPlatformsData = [];
     let manualPlatformsData = [];
-
-    let lastGoalToastTime = 0;
 
     // =============================================================
     // 3. UTILITÁRIOS
@@ -2821,8 +2664,7 @@
                 'addCarBtn': '<i class="fas fa-plus"></i> Adicionar',
                 'quickJourneyBtn': '<i class="fas fa-play"></i> Iniciar Jornada',
                 'finishJourneyBtn': '<i class="fas fa-save"></i> Salvar e Finalizar',
-                'manualJourneyBtn': '<i class="fas fa-save"></i> Salvar Jornada',
-                'editGoalBtn': '<i class="fas fa-save"></i> Salvar Meta'
+                'manualJourneyBtn': '<i class="fas fa-save"></i> Salvar Jornada'
             };
             btn.innerHTML = map[btnId] || 'Salvar';
         }
@@ -2976,11 +2818,6 @@
                     'Diligências familiares': ['Buscar/levar filhos', 'Compras para casa', 'Consulta médica da família'],
                     'Diligências pessoais': ['Banco', 'Farmácia', 'Correios/Cartório']
                 },
-                goals: {
-                    daily: { value: 0, type: 'bruto', daysOff: [] },
-                    weekly: { value: 0, type: 'bruto', daysOff: [] },
-                    monthly: { value: 0, type: 'bruto', daysOff: [] }
-                },
                 folga: {}
             };
 
@@ -3029,7 +2866,6 @@
             dashboardInterval = setInterval(() => {
                 if (currentUser) {
                     renderDashboard();
-                    renderGoal(currentGoalTab);
                 }
             }, 2000);
 
@@ -3052,8 +2888,6 @@
             setLoading('signupBtn', false);
             appData = { profile: { name: '', phone: '', photoURL: '' }, cars: [], journeys: [], expenses: [],
                 categories: [], paymentMethods: [], pauseReasons: [], platforms: [], subcategories: {},
-                goals: { daily: { value: 0, type: 'bruto', daysOff: [] }, weekly: { value: 0, type: 'bruto',
-                        daysOff: [] }, monthly: { value: 0, type: 'bruto', daysOff: [] } },
                 folga: {}
             };
             resetCronometro();
@@ -3115,11 +2949,6 @@
                             'Líquido hidráulico'
                         ]
                     },
-                    goals: data.goals || {
-                        daily: { value: 0, type: 'bruto', daysOff: [] },
-                        weekly: { value: 0, type: 'bruto', daysOff: [] },
-                        monthly: { value: 0, type: 'bruto', daysOff: [] }
-                    },
                     folga: data.folga || {}
                 };
                 console.log('📄 Dados carregados do Firestore:', appData);
@@ -3167,11 +2996,6 @@
                             'Líquido hidráulico'
                         ]
                     },
-                    goals: {
-                        daily: { value: 0, type: 'bruto', daysOff: [] },
-                        weekly: { value: 0, type: 'bruto', daysOff: [] },
-                        monthly: { value: 0, type: 'bruto', daysOff: [] }
-                    },
                     folga: {}
                 };
                 await docRef.set(defaultData);
@@ -3202,7 +3026,6 @@
                 pauseReasons: appData.pauseReasons,
                 platforms: appData.platforms,
                 subcategories: appData.subcategories,
-                goals: appData.goals,
                 folga: appData.folga,
                 name: appData.profile.name,
                 phone: appData.profile.phone,
@@ -3238,7 +3061,6 @@
         atualizarBotoesCron();
         atualizarCampoSubcategoria(document.getElementById('expenseCategorySelect').value);
         populateCarSelects();
-        renderGoal(currentGoalTab);
         if (document.getElementById('finishJourneyModal').classList.contains('active')) {
             renderFinishPlatforms();
         }
@@ -3290,7 +3112,7 @@
     }
 
     // =============================================================
-    // 9. DASHBOARD (com correção do toast e folga)
+    // 9. DASHBOARD (sem metas)
     // =============================================================
     function renderDashboard() {
         const journeys = appData.journeys || [];
@@ -3336,176 +3158,19 @@
         document.getElementById('monthlyExpenses').innerText = formatCurrency(monthly.expenses);
         document.getElementById('monthlyNet').innerText = formatCurrency(monthly.net);
 
-        // ===== VERIFICAÇÃO DE FOLGA =====
-        const isFolgaEventual = appData.folga && appData.folga[hoje] === true;
-        const diaSemana = now.getDay();
-        const dailyGoal = appData.goals.daily || { value: 0, type: 'bruto', daysOff: [] };
-        const daysOff = dailyGoal.daysOff || [];
-        const isFolgaRecorrente = daysOff.includes(diaSemana);
-
+        // ===== VERIFICAÇÃO DE FOLGA EVENTUAL =====
+        const isFolga = appData.folga && appData.folga[hoje] === true;
         const goalEl = document.getElementById('dailyGoalStatus');
 
-        if (isFolgaEventual || isFolgaRecorrente) {
-            const motivo = isFolgaEventual ? '🌴 Folga eventual' : '📅 Dia de folga recorrente';
-            goalEl.innerHTML = `<div class="folga-status-msg folga">${motivo} — Meta não aplicada.</div>`;
-            return;
-        }
-
-        const goalValue = dailyGoal.value;
-        const goalType = dailyGoal.type || 'bruto';
-
-        if (goalValue > 0) {
-            const currentValue = (goalType === 'liquido') ? daily.net : daily.earnings;
-            const percent = Math.min(100, (currentValue / goalValue) * 100);
-            const achieved = currentValue >= goalValue;
-            const icon = achieved ? '✅' : '❌';
-            const falta = achieved ? 'Meta superada!' : `Faltam ${formatCurrency(goalValue - currentValue)}`;
-            const label = goalType === 'liquido' ? 'líquido' : 'bruto';
-            goalEl.innerHTML = `
-                    <div class="folga-status-msg" style="background:#f0fdf4; border-color:#bbf7d0; color:#22c55e;">
-                        ${icon} Meta ${label}: ${formatCurrency(currentValue)} de ${formatCurrency(goalValue)} (${percent.toFixed(0)}%) - ${falta}
-                    </div>
-                `;
-
-            // Toast de meta quase batida (mantido)
-            if (currentValue >= goalValue * 0.8 && currentValue < goalValue) {
-                const nowTime = Date.now();
-                if (nowTime - lastGoalToastTime > 30000) {
-                    showToast(`🎯 Meta diária quase batida! ${formatCurrency(currentValue)} de ${formatCurrency(goalValue)} (${percent.toFixed(0)}%)`, 'warning', 5000);
-                    lastGoalToastTime = nowTime;
-                }
-            }
-            // Toast de atraso foi removido
+        if (isFolga) {
+            goalEl.innerHTML = `<div class="folga-status-msg folga">🌴 Hoje é dia de folga! Resumo apenas informativo.</div>`;
         } else {
-            goalEl.innerHTML = `<div style="color:#64748b; font-size:0.8rem; text-align:center; margin-top:8px;">Defina uma meta diária para acompanhar seu progresso.</div>`;
+            goalEl.innerHTML = '';
         }
     }
 
     // =============================================================
-    // 10. METAS
-    // =============================================================
-    function renderGoal(period) {
-        const container = document.getElementById('goalContent');
-        const goal = appData.goals[period] || { value: 0, type: 'bruto', daysOff: [] };
-        const goalValue = goal.value;
-        const goalType = goal.type || 'bruto';
-        const now = new Date();
-
-        function isDayOff(date) {
-            const day = date.getDay();
-            const daysOff = goal.daysOff || [];
-            return daysOff.includes(day);
-        }
-
-        let earnings = 0;
-        let expenses = 0;
-        if (period === 'daily') {
-            const dailyJourneys = appData.journeys.filter(j => isSameDay(new Date(j.date), now) && !isDayOff(new Date(j.date)));
-            earnings = dailyJourneys.reduce((acc, j) => acc + j.platforms.reduce((s, p) => s + (parseFloat(p.gross) ||
-                0), 0), 0);
-            const dailyExpenses = appData.expenses.filter(e => isSameDay(new Date(e.date), now) && !isDayOff(new Date(e.date)));
-            expenses = dailyExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
-        } else if (period === 'weekly') {
-            const weeklyJourneys = appData.journeys.filter(j => isSameWeek(new Date(j.date), now) && !isDayOff(new Date(j.date)));
-            earnings = weeklyJourneys.reduce((acc, j) => acc + j.platforms.reduce((s, p) => s + (parseFloat(p.gross) ||
-                0), 0), 0);
-            const weeklyExpenses = appData.expenses.filter(e => isSameWeek(new Date(e.date), now) && !isDayOff(new Date(e.date)));
-            expenses = weeklyExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
-        } else if (period === 'monthly') {
-            const monthlyJourneys = appData.journeys.filter(j => isSameMonth(new Date(j.date), now) && !isDayOff(new Date(j.date)));
-            earnings = monthlyJourneys.reduce((acc, j) => acc + j.platforms.reduce((s, p) => s + (parseFloat(p.gross) ||
-                0), 0), 0);
-            const monthlyExpenses = appData.expenses.filter(e => isSameMonth(new Date(e.date), now) && !isDayOff(new Date(e.date)));
-            expenses = monthlyExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
-        }
-
-        const currentValue = (goalType === 'liquido') ? (earnings - expenses) : earnings;
-        const percent = goalValue > 0 ? Math.min(100, (currentValue / goalValue) * 100) : 0;
-        const achieved = currentValue >= goalValue && goalValue > 0;
-        const falta = achieved ? 0 : (goalValue - currentValue);
-
-        const barClass = percent >= 80 ? '' : (percent >= 50 ? 'medium' : 'low');
-
-        const periodNames = { daily: 'Diária', weekly: 'Semanal', monthly: 'Mensal' };
-        const typeLabel = goalType === 'liquido' ? 'Líquida' : 'Bruta';
-
-        container.innerHTML = `
-                <div class="goal-progress">
-                    <div class="goal-stats">
-                        <span>Meta ${periodNames[period]} (${typeLabel})</span>
-                        <span class="current">${formatCurrency(currentValue)}</span>
-                        <span>de ${formatCurrency(goalValue)}</span>
-                    </div>
-                    <div class="bar-bg">
-                        <div class="bar-fill ${barClass}" style="width: ${percent}%;"></div>
-                    </div>
-                    <div class="goal-stats" style="margin-top:4px;">
-                        <span>${percent.toFixed(0)}%</span>
-                        <span>${achieved ? '✅ Meta cumprida!' : 'Faltam ' + formatCurrency(Math.max(0, falta))}</span>
-                    </div>
-                </div>
-                <div class="goal-actions">
-                    <button onclick="openEditGoalModal('${period}')">Editar meta</button>
-                </div>
-            `;
-    }
-
-    function changeGoalTab(period) {
-        currentGoalTab = period;
-        document.querySelectorAll('.goals-tabs .tab').forEach(t => t.classList.remove('active'));
-        document.querySelector(`.goals-tabs .tab[data-period="${period}"]`).classList.add('active');
-        renderGoal(period);
-    }
-
-    function openEditGoalModal(period) {
-        editingGoalPeriod = period;
-        const periodNames = { daily: 'Diária', weekly: 'Semanal', monthly: 'Mensal' };
-        document.getElementById('editGoalLabel').innerText = `Meta ${periodNames[period]} (R$)`;
-        const goal = appData.goals[period] || { value: 0, type: 'bruto', daysOff: [] };
-        document.getElementById('editGoalInput').value = goal.value || '';
-        document.getElementById('editGoalTypeSelect').value = goal.type || 'bruto';
-
-        const daysOff = goal.daysOff || [];
-        document.querySelectorAll('#daysOffGrid input[type="checkbox"]').forEach(cb => {
-            cb.checked = daysOff.includes(parseInt(cb.value));
-            cb.closest('label').classList.toggle('active', cb.checked);
-        });
-
-        document.getElementById('editGoalModal').classList.add('active');
-    }
-
-    document.querySelectorAll('#daysOffGrid input[type="checkbox"]').forEach(cb => {
-        cb.addEventListener('change', function() {
-            this.closest('label').classList.toggle('active', this.checked);
-        });
-    });
-
-    document.getElementById('editGoalForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const period = editingGoalPeriod;
-        const value = parseFloat(document.getElementById('editGoalInput').value);
-        const type = document.getElementById('editGoalTypeSelect').value;
-        if (isNaN(value) || value < 0) {
-            showToast('Digite um valor válido (maior ou igual a zero).', 'danger', 3000);
-            return;
-        }
-
-        const daysOff = [];
-        document.querySelectorAll('#daysOffGrid input[type="checkbox"]:checked').forEach(cb => {
-            daysOff.push(parseInt(cb.value));
-        });
-
-        setLoading('editGoalBtn', true);
-        appData.goals[period] = { value, type, daysOff };
-        await saveUserData();
-        closeModal('editGoalModal');
-        setLoading('editGoalBtn', false);
-        renderAll();
-        showToast('Meta atualizada com sucesso!', 'success', 3000);
-    });
-
-    // =============================================================
-    // 11. FOLGA - SWITCH
+    // 10. FOLGA - SWITCH
     // =============================================================
     function atualizarSwitchFolga() {
         const hoje = getToday();
@@ -3527,11 +3192,11 @@
         await saveUserData();
         renderDashboard();
         atualizarSwitchFolga();
-        showToast(isChecked ? 'Dia marcado como folga eventual.' : 'Folga eventual removida.', 'info', 3000);
+        showToast(isChecked ? 'Dia marcado como folga.' : 'Folga removida.', 'info', 3000);
     });
 
     // =============================================================
-    // 12. HISTÓRICO
+    // 11. HISTÓRICO
     // =============================================================
     function applyFilter() {
         const dateInput = document.getElementById('filterDate');
@@ -3684,7 +3349,7 @@
     }
 
     // =============================================================
-    // 13. EXPORTAÇÃO PROFISSIONAL (CSV e PDF)
+    // 12. EXPORTAÇÃO PROFISSIONAL (CSV e PDF)
     // =============================================================
     function exportJourneysCSV() {
         const journeys = appData.journeys || [];
@@ -3764,7 +3429,7 @@
     }
 
     // =============================================================
-    // 14. TOAST, CONFIRM, EDIT TEXT, STATUS
+    // 13. TOAST, CONFIRM, EDIT TEXT, STATUS
     // =============================================================
     function showToast(message, type = 'info', duration = 5000) {
         const toast = document.getElementById('toast');
@@ -3844,7 +3509,7 @@
     window.addEventListener('offline', () => setStatus('⚠️ Offline', false));
 
     // =============================================================
-    // 15. GASTOS (com campo litros para combustível)
+    // 14. GASTOS (com campo litros para combustível)
     // =============================================================
     function renderExpenseList() {
         const container = document.getElementById('expenseList');
@@ -3910,7 +3575,6 @@
         });
     }
 
-    // Função para calcular litros automaticamente
     function calcularLitros() {
         const amount = document.getElementById('expenseAmount').value.replace(',', '.');
         const price = document.getElementById('fuelPrice').value.replace(',', '.');
@@ -3924,7 +3588,6 @@
         }
     }
 
-    // Mostrar/ocultar campo de valor do litro
     document.getElementById('expenseCategorySelect').addEventListener('change', function() {
         const categoria = this.value;
         const field = document.getElementById('fuelPriceField');
@@ -3940,7 +3603,7 @@
     });
 
     // =============================================================
-    // 16. PERFIL E CARROS
+    // 15. PERFIL E CARROS
     // =============================================================
     function renderProfileForm() {
         const p = appData.profile || {};
@@ -3977,7 +3640,7 @@
     }
 
     // =============================================================
-    // 17. CONFIGURAÇÕES
+    // 16. CONFIGURAÇÕES
     // =============================================================
     function toggleAccordion(header) {
         const body = header.nextElementSibling;
@@ -4053,7 +3716,7 @@
     }
 
     // =============================================================
-    // 18. SUBCATEGORIAS
+    // 17. SUBCATEGORIAS
     // =============================================================
     let subcategoryModalContext = { type: null, index: null };
 
@@ -4187,7 +3850,7 @@
     });
 
     // =============================================================
-    // 19. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
+    // 18. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
     // =============================================================
     document.addEventListener('click', function(e) {
         const target = e.target.closest('.edit-btn, .delete-btn');
@@ -4294,7 +3957,7 @@
     });
 
     // =============================================================
-    // 20. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
+    // 19. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
     // =============================================================
     document.getElementById('addCategoryBtn').addEventListener('click', async function() {
         const input = document.getElementById('newCategoryInput');
@@ -4345,7 +4008,7 @@
     });
 
     // =============================================================
-    // 21. POPULAR SELECTS
+    // 20. POPULAR SELECTS
     // =============================================================
     function populateSelects() {
         const catSelect = document.getElementById('expenseCategorySelect');
@@ -4364,7 +4027,6 @@
         });
         if (appData.paymentMethods.includes(currentPay)) paySelect.value = currentPay;
 
-        // Atualizar campo combustível
         if (currentCat === 'Combustível') {
             document.getElementById('fuelPriceField').style.display = 'block';
         } else {
@@ -4410,7 +4072,7 @@
     }
 
     // =============================================================
-    // 22. PLATAFORMAS
+    // 21. PLATAFORMAS
     // =============================================================
     function renderPlatformsGroup(containerId, dataArray, removeFnName) {
         const container = document.getElementById(containerId);
@@ -4496,7 +4158,7 @@
     }
 
     // =============================================================
-    // 23. CRONÔMETRO E JORNADA
+    // 22. CRONÔMETRO E JORNADA
     // =============================================================
     function iniciarJornadaCron() {
         openStartJourneyModal();
@@ -4533,7 +4195,7 @@
     function startCronometro(initialKm, initialFuel, car) {
         const now = Date.now();
         activeJourney.startTime = now;
-        activeJourney.globalStartTime = now; // inicia o global
+        activeJourney.globalStartTime = now;
         activeJourney.initialKm = initialKm;
         activeJourney.initialFuel = initialFuel;
         activeJourney.paused = false;
@@ -4557,7 +4219,6 @@
 
     function atualizarCronometro() {
         if (!activeJourney.running) return;
-        // Cronômetro normal (com pausas)
         let elapsed = Date.now() - activeJourney.startTime;
         let totalPauseMs = 0;
         activeJourney.pauses.forEach(p => {
@@ -4569,7 +4230,6 @@
         const displayMs = elapsed - totalPauseMs;
         document.getElementById('cronometroDisplay').innerText = formatTime(displayMs);
 
-        // Cronômetro global (sem pausas)
         const globalMs = Date.now() - activeJourney.globalStartTime;
         document.getElementById('cronometroGlobalDisplay').innerText = formatTime(globalMs);
     }
@@ -4807,7 +4467,6 @@
         if (totalWorkMinutes < 0) totalWorkMinutes += 1440;
         totalWorkMinutes = totalWorkMinutes - breaks;
 
-        // Para jornada manual, não temos tempo global real, usamos o tempo total trabalhado + pausas
         const totalMinutes = (endMinutes - startMinutes + 1440) % 1440;
 
         const journey = {
@@ -4821,7 +4480,7 @@
             finalFuel: undefined,
             breaks: breaks,
             totalWorkMinutes: Math.max(0, totalWorkMinutes),
-            globalTimeMs: totalMinutes * 60000, // estimativa
+            globalTimeMs: totalMinutes * 60000,
             pauses: breaks > 0 ? [{ name: 'Manual', duration: breaks * 60000 }] : [],
             platforms: platforms,
             car: car || ''
@@ -4942,7 +4601,7 @@
     }
 
     // =============================================================
-    // 24. MODAL INICIAR JORNADA (FUEL GAUGE)
+    // 23. MODAL INICIAR JORNADA (FUEL GAUGE)
     // =============================================================
     function openStartJourneyModal() {
         document.getElementById('quickJourneyDate').value = getCurrentDate();
@@ -5077,7 +4736,7 @@
     });
 
     // =============================================================
-    // 25. AÇÃO RÁPIDA: REGISTRAR GASTO
+    // 24. AÇÃO RÁPIDA: REGISTRAR GASTO
     // =============================================================
     function openQuickExpense() {
         document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
@@ -5104,7 +4763,7 @@
     }
 
     // =============================================================
-    // 26. EVENTOS DOS FORMULÁRIOS
+    // 25. EVENTOS DOS FORMULÁRIOS
     // =============================================================
     document.getElementById('expenseForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -5116,7 +4775,6 @@
         let amount = document.getElementById('expenseAmount').value.replace(',', '.');
         const comment = document.getElementById('expenseComment').value.trim();
 
-        // Campos de combustível
         let fuelPrice = document.getElementById('fuelPrice').value.replace(',', '.');
         let litros = null;
         if (category === 'Combustível' && fuelPrice) {
@@ -5213,7 +4871,7 @@
     });
 
     // =============================================================
-    // 27. FECHAR MODAIS E NAVEGAÇÃO
+    // 26. FECHAR MODAIS E NAVEGAÇÃO
     // =============================================================
     function closeModal(id) {
         document.getElementById(id).classList.remove('active');
@@ -5247,7 +4905,7 @@
     });
 
     // =============================================================
-    // 28. INICIALIZAÇÃO E CORREÇÃO DO BOTÃO "REGISTRAR PASSADO"
+    // 27. INICIALIZAÇÃO
     // =============================================================
     function initApp() {
         resetExpenseForm();
@@ -5261,7 +4919,6 @@
             btnManual.addEventListener('click', openManualJourneyModal);
         }
 
-        // Tema
         const themeSwitch = document.getElementById('themeSwitch');
         const themeIcon = document.getElementById('themeIcon');
         const currentTheme = localStorage.getItem('driverControlTheme') || 'light';
@@ -5285,11 +4942,11 @@
             }
         });
 
-        console.log('🚀 DriverControl - Todas as funcionalidades corrigidas e melhoradas!');
+        console.log('🚀 DriverControl - Metas removidas, demais funcionalidades mantidas!');
     }
 
     // =============================================================
-    // 29. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
+    // 28. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
     // =============================================================
     function openManualJourneyModal() {
         document.getElementById('manualDate').value = getToday();
@@ -5309,7 +4966,7 @@
     }
 
     // =============================================================
-    // 30. MODAL FINALIZAR JORNADA
+    // 29. MODAL FINALIZAR JORNADA
     // =============================================================
     function openFinishJourneyModal() {
         document.getElementById('finishDateTime').value = getCurrentDate() + ' ' + getCurrentTimeWithTenths();
