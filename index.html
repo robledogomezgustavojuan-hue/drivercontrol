@@ -199,7 +199,7 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         }
         body.dark-theme .nav-item-glass {
-            color: #64748b;
+            color: #94a3b8;
         }
         body.dark-theme .nav-item-glass.active {
             color: #f1f5f9;
@@ -228,14 +228,13 @@
         }
         body.dark-theme .journey-history-card {
             background: #1e293b;
-            border-left-color: #818cf8;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #334155;
+            box-shadow: none;
         }
         body.dark-theme .journey-header .date {
             color: #f1f5f9;
         }
         body.dark-theme .journey-header .car-tag {
-            background: #334155;
             color: #94a3b8;
         }
         body.dark-theme .journey-grid {
@@ -273,19 +272,28 @@
         body.dark-theme .platform-table .row-total .total-value {
             color: #818cf8;
         }
-        body.dark-theme .expenses-day-section {
-            border-top-color: #334155;
+        body.dark-theme .expenses-table {
+            background: rgba(51, 65, 85, 0.5);
         }
-        body.dark-theme .expenses-day-section .exp-total {
+        body.dark-theme .expenses-table .row-header {
             color: #94a3b8;
+            border-bottom-color: #334155;
         }
-        body.dark-theme .expenses-day-section .exp-total strong {
+        body.dark-theme .expenses-table .row-item {
+            color: #f1f5f9;
+        }
+        body.dark-theme .expenses-table .row-item .exp-value {
             color: #f87171;
         }
-        body.dark-theme .expenses-tags .tag {
-            background: #450a0a;
-            border-color: #7f1d1d;
-            color: #fca5a5;
+        body.dark-theme .expenses-table .row-total {
+            color: #f1f5f9;
+            border-top-color: #334155;
+        }
+        body.dark-theme .expenses-table .row-total .total-label {
+            color: #94a3b8;
+        }
+        body.dark-theme .expenses-table .row-total .total-value {
+            color: #f87171;
         }
         body.dark-theme .net-profit-row {
             color: #94a3b8;
@@ -704,30 +712,84 @@
             padding: 0 2px;
         }
         .top-nav-glass {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 30px;
-            padding: 6px 4px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 40px;
+            padding: 6px 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
             display: flex;
             justify-content: space-around;
             width: 100%;
         }
         body.dark-theme .top-nav-glass {
-            background: #1e293b;
-            border-color: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
         }
 
+        .nav-item-glass {
+            background: transparent;
+            border: none;
+            border-radius: 40px;
+            padding: 8px 12px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #64748b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            min-width: 50px;
+            letter-spacing: 0.3px;
+            position: relative;
+        }
+        .nav-item-glass i {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            transition: color 0.2s;
+        }
+        .nav-item-glass span {
+            font-size: 0.6rem;
+            line-height: 1.2;
+            opacity: 0.8;
+        }
+        .nav-item-glass:hover {
+            background: rgba(91, 124, 250, 0.06);
+            color: #1e293b;
+        }
+        .nav-item-glass:hover i {
+            color: #5b7cfa;
+        }
+        .nav-item-glass.active {
+            background: #5b7cfa;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(91, 124, 250, 0.25);
+        }
+        .nav-item-glass.active i {
+            color: #ffffff;
+        }
+        .nav-item-glass.active span {
+            opacity: 1;
+        }
         body.dark-theme .nav-item-glass {
             color: #94a3b8;
         }
+        body.dark-theme .nav-item-glass:hover {
+            background: rgba(129, 140, 248, 0.08);
+            color: #f1f5f9;
+        }
+        body.dark-theme .nav-item-glass:hover i {
+            color: #818cf8;
+        }
         body.dark-theme .nav-item-glass.active {
+            background: #818cf8;
             color: #ffffff;
-            background: #ff6b00;
-            box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(129, 140, 248, 0.3);
         }
         body.dark-theme .nav-item-glass.active i {
             color: #ffffff;
@@ -830,6 +892,33 @@
         }
         .net-profit-row-left {
             justify-content: flex-start;
+        }
+
+        /* ===== CARD DE JORNADA - SEM PROFUNDIDADE, BORDAS QUADRADAS ===== */
+        .journey-history-card {
+            background: #fff;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 0;
+            box-shadow: none;
+            transition: background 0.2s;
+        }
+        .journey-history-card:last-child { margin-bottom: 0; }
+        body.dark-theme .journey-history-card {
+            background: #1e293b;
+            border-color: #334155;
+            box-shadow: none;
+        }
+
+        /* ===== CARRO - TEXTO SIMPLES ===== */
+        .journey-header .car-tag {
+            font-size: 0.85rem;
+            color: #64748b;
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            display: inline;
         }
 
         /* ===== RESTO DOS ESTILOS ===== */
@@ -1229,16 +1318,7 @@
         .toggle-wrapper input[type="checkbox"] {
             display: none;
         }
-        .journey-history-card {
-            background: #fff;
-            border-radius: 18px;
-            padding: 14px 16px;
-            margin-bottom: 14px;
-            border-left: 4px solid #5b7cfa;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            transition: 0.2s;
-        }
-        .journey-history-card:last-child { margin-bottom: 0; }
+
         .journey-header {
             display: flex;
             flex-direction: column;
@@ -1250,14 +1330,6 @@
             font-weight: 700;
             color: #0f172a;
             font-size: 1rem;
-        }
-        .journey-header .car-tag {
-            font-size: 0.8rem;
-            color: #64748b;
-            background: #f1f5f9;
-            padding: 2px 12px;
-            border-radius: 30px;
-            display: inline-block;
         }
         .journey-grid {
             display: grid;
@@ -1276,9 +1348,11 @@
             margin-bottom: 8px;
         }
         .journey-pauses strong { color: #0f172a; }
+
+        /* Tabela de plataformas */
         .platform-table {
             background: #f8fafc;
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 8px 10px;
             margin-top: 8px;
             width: 100%;
@@ -1301,7 +1375,7 @@
             display: grid;
             grid-template-columns: 2fr 1fr 1.5fr;
             gap: 6px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #0f172a;
             padding: 3px 0;
             align-items: center;
@@ -1320,32 +1394,60 @@
             margin-top: 4px;
             font-weight: 700;
         }
-        .platform-table .row-total .total-label { text-align: right; color: #64748b; }
+        .platform-table .row-total .total-label { text-align: left; color: #64748b; }
         .platform-table .row-total .total-value { color: #5b7cfa; text-align: right; }
-        .expenses-day-section {
-            margin-top: 10px;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 8px;
-        }
-        .expenses-day-section .exp-total {
+
+        /* Tabela de gastos - CORRIGIDA: total alinhado à direita na coluna Valor */
+        .expenses-table {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-top: 8px;
+            width: 100%;
             font-size: 0.75rem;
-            color: #64748b;
+        }
+        .expenses-table .row-header {
+            display: grid;
+            grid-template-columns: 1.2fr 0.7fr 1fr 1fr;
+            gap: 4px;
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            font-weight: 600;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #eef2f7;
             margin-bottom: 4px;
         }
-        .expenses-day-section .exp-total strong { color: #ef4444; }
-        .expenses-tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
+        .expenses-table .row-header span:last-child { text-align: right; }
+        .expenses-table .row-header span:nth-child(2) { text-align: center; }
+        .expenses-table .row-header span:nth-child(3) { text-align: center; }
+        .expenses-table .row-item {
+            display: grid;
+            grid-template-columns: 1.2fr 0.7fr 1fr 1fr;
+            gap: 4px;
+            font-size: 0.7rem;
+            color: #0f172a;
+            padding: 3px 0;
+            align-items: center;
         }
-        .expenses-tags .tag {
-            background: #fee2e2;
-            border: 1px solid #fca5a5;
-            border-radius: 30px;
-            padding: 2px 12px;
-            font-size: 0.65rem;
-            color: #dc2626;
+        .expenses-table .row-item .exp-category { font-weight: 500; }
+        .expenses-table .row-item .exp-litros { text-align: center; font-size: 0.65rem; color: #64748b; }
+        .expenses-table .row-item .exp-payment { text-align: center; font-size: 0.65rem; color: #64748b; }
+        .expenses-table .row-item .exp-value { color: #ef4444; text-align: right; font-weight: 600; }
+        .expenses-table .row-total {
+            display: grid;
+            grid-template-columns: 1.2fr 0.7fr 1fr 1fr;
+            gap: 4px;
+            font-size: 0.75rem;
+            color: #0f172a;
+            padding: 4px 0;
+            border-top: 1px solid #eef2f7;
+            margin-top: 4px;
+            font-weight: 700;
         }
+        .expenses-table .row-total .total-label { text-align: left; color: #64748b; }
+        .expenses-table .row-total .total-value { color: #ef4444; text-align: right; }
+
         .net-profit-row {
             display: flex;
             justify-content: flex-start;
@@ -1363,9 +1465,11 @@
         }
         .net-profit-row .net-value.positive { color: #22c55e; }
         .net-profit-row .net-value.negative { color: #ef4444; }
+
+        /* ===== AÇÕES DA JORNADA: ALINHADAS À ESQUERDA ===== */
         .journey-actions {
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-start;
             gap: 6px;
             margin-top: 8px;
             flex-wrap: wrap;
@@ -1876,6 +1980,13 @@
                 gap: 4px;
                 font-size: 0.7rem;
             }
+            .expenses-table .row-header,
+            .expenses-table .row-item,
+            .expenses-table .row-total {
+                grid-template-columns: 1fr 0.6fr 0.8fr 0.8fr;
+                gap: 3px;
+                font-size: 0.6rem;
+            }
             .cronometro-botoes .btn-cron { font-size: 0.5rem; min-width: 40px; padding: 6px 2px; }
             .cronometro-botoes .btn-cron i { font-size: 0.7rem; }
             select.app-input { padding-right: 30px; font-size: 0.85rem; }
@@ -1885,14 +1996,14 @@
             .date-filter-wrapper { flex: 0.4; min-width: 40px; max-width: 50px; }
             .date-filter-wrapper .calendar-icon { font-size: 1rem; }
             .top-nav-glass {
-                padding: 4px 2px;
+                padding: 6px 4px;
             }
             .nav-item-glass {
-                padding: 4px 6px;
-                font-size: 0.45rem;
+                padding: 6px 8px;
+                font-size: 0.55rem;
             }
             .nav-item-glass i {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
             .header-theme-toggle .toggle-label {
                 display: none;
@@ -2274,10 +2385,6 @@
                     <button class="btn-filter" onclick="clearFilter()">Ver todas</button>
                 </div>
                 <div id="journeyList"><div class="empty-state-glass"><i class="fas fa-calendar-plus"></i><br>Nenhuma jornada finalizada.</div></div>
-                <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
-                    <button class="btn-app btn-app-small" onclick="exportJourneysCSV()"><i class="fas fa-file-csv"></i> CSV</button>
-                    <button class="btn-app btn-app-small" onclick="exportJourneysPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
-                </div>
             </div>
         </section>
 
@@ -2786,7 +2893,7 @@
         subcategories: {},
         folga: {},
         defaultCar: null,
-        workingDays: [1, 2, 3, 4, 5] // segunda a sexta por padrão
+        workingDays: [1, 2, 3, 4, 5]
     };
 
     let activeJourney = {
@@ -2826,11 +2933,10 @@
         return s1 === s2;
     }
 
-    // Semana: segunda (1) a domingo (0)
     function getStartOfWeek(date) {
         const d = new Date(date);
-        const day = d.getDay(); // 0=domingo, 1=segunda, ...
-        const diff = (day === 0 ? 6 : day - 1); // ajuste para segunda
+        const day = d.getDay();
+        const diff = (day === 0 ? 6 : day - 1);
         d.setDate(d.getDate() - diff);
         d.setHours(0, 0, 0, 0);
         return d;
@@ -3367,7 +3473,7 @@
     }
 
     // =============================================================
-    // 9. DASHBOARD (com semana corrigida e dias de trabalho)
+    // 9. DASHBOARD
     // =============================================================
     function renderDashboard() {
         const journeys = appData.journeys || [];
@@ -3376,13 +3482,11 @@
         const hoje = getToday();
         const workingDays = appData.workingDays || [1, 2, 3, 4, 5];
 
-        // Função para verificar se um dia é dia de trabalho
         function isWorkingDay(date) {
-            const day = date.getDay(); // 0=domingo, 1=segunda, ...
+            const day = date.getDay();
             return workingDays.includes(day);
         }
 
-        // Diário (todos os dias, independente de trabalho)
         const dailyJourneys = journeys.filter(j => {
             const d = new Date(j.date + 'T00:00:00');
             return isSameDay(d, now);
@@ -3392,7 +3496,6 @@
             return isSameDay(d, now);
         });
 
-        // Semanal (apenas dias de trabalho)
         const weeklyJourneys = journeys.filter(j => {
             const d = new Date(j.date + 'T00:00:00');
             return isSameWeek(d, now) && isWorkingDay(d);
@@ -3402,7 +3505,6 @@
             return isSameWeek(d, now) && isWorkingDay(d);
         });
 
-        // Mensal (todos os dias)
         const monthlyJourneys = journeys.filter(j => {
             const d = new Date(j.date + 'T00:00:00');
             return isSameMonth(d, now);
@@ -3453,7 +3555,7 @@
     }
 
     // =============================================================
-    // 10. FOLGA - SWITCH
+    // 10. FOLGA
     // =============================================================
     function atualizarSwitchFolga() {
         const hoje = getToday();
@@ -3515,7 +3617,7 @@
     });
 
     // =============================================================
-    // 12. EFEITO PULSANTE NO CARD DO CRONÔMETRO
+    // 12. EFEITO PULSANTE
     // =============================================================
     function atualizarEfeitoCardCronometro() {
         const card = document.getElementById('cronometroCard');
@@ -3528,7 +3630,7 @@
     }
 
     // =============================================================
-    // 13. HISTÓRICO
+    // 13. HISTÓRICO (COM TABELA DE GASTOS OTIMIZADA)
     // =============================================================
     function applyFilter() {
         const dateInput = document.getElementById('filterDate');
@@ -3585,6 +3687,7 @@
                 pausesStr = j.pauses.map(p => `${escapeHtml(p.name)} (${formatTimeShort(p.duration)})`).join(', ');
             }
 
+            // Tabela de plataformas
             let platformsHtml = '';
             j.platforms.forEach(p => {
                 platformsHtml += `
@@ -3595,23 +3698,40 @@
                         </div>
                     `;
             });
-
             platformsHtml += `
                     <div class="row-total">
-                        <span></span>
                         <span class="total-label">Total</span>
+                        <span></span>
                         <span class="total-value">${formatCurrency(totalDia)}</span>
                     </div>
                 `;
 
-            let expensesTagsHtml = '';
-            dayExpenses.forEach(e => {
-                let label = escapeHtml(e.category);
-                if (e.subcategory) label += ` - ${escapeHtml(e.subcategory)}`;
-                let litrosInfo = '';
-                if (e.litros) litrosInfo = ` (${parseFloat(e.litros).toFixed(2)} L)`;
-                expensesTagsHtml += `<span class="tag">${label} - ${formatCurrency(e.amount)}${litrosInfo}</span>`;
-            });
+            // Tabela de gastos - sem subcategoria, litros após categoria, valor por último
+            let expensesHtml = '';
+            if (dayExpenses.length > 0) {
+                dayExpenses.forEach(e => {
+                    let litrosInfo = e.litros ? `${parseFloat(e.litros).toFixed(2)}` : '';
+                    let litrosDisplay = (e.category === 'Combustível' && litrosInfo) ? litrosInfo : '';
+                    expensesHtml += `
+                            <div class="row-item">
+                                <span class="exp-category">${escapeHtml(e.category)}</span>
+                                <span class="exp-litros">${litrosDisplay}</span>
+                                <span class="exp-payment">${escapeHtml(e.paymentMethod || '')}</span>
+                                <span class="exp-value">${formatCurrency(e.amount)}</span>
+                            </div>
+                        `;
+                });
+                expensesHtml += `
+                        <div class="row-total">
+                            <span class="total-label">Total</span>
+                            <span></span>
+                            <span></span>
+                            <span class="total-value">${formatCurrency(totalDayExpenses)}</span>
+                        </div>
+                    `;
+            } else {
+                expensesHtml = `<div style="padding:6px 0; color:#64748b; font-size:0.75rem;">Nenhum gasto registrado neste dia.</div>`;
+            }
 
             const globalTime = j.globalTimeMs ? formatTimeShort(j.globalTimeMs) : 'N/A';
 
@@ -3619,7 +3739,7 @@
                     <div class="journey-history-card">
                         <div class="journey-header">
                             <span class="date">📅 ${escapeHtml(j.date)}</span>
-                            ${j.car ? `<span class="car-tag">🚗 ${escapeHtml(j.car)}</span>` : ''}
+                            ${j.car ? `<span class="car-tag">${escapeHtml(j.car)}</span>` : ''}
                         </div>
                         <div class="journey-grid">
                             <span><span class="label">⏱️</span> ${escapeHtml(j.startTime)} - ${escapeHtml(j.endTime)}</span>
@@ -3642,14 +3762,14 @@
                             ${platformsHtml}
                         </div>
 
-                        <div class="expenses-day-section">
-                            <div class="exp-total">
-                                💳 Gastos do dia: <strong>${formatCurrency(totalDayExpenses)}</strong> (${dayExpenses.length} registro(s))
-                                ${totalLitros > 0 ? ` · ⛽ ${totalLitros.toFixed(2)} L` : ''}
+                        <div class="expenses-table">
+                            <div class="row-header">
+                                <span>Categoria</span>
+                                <span>Litros</span>
+                                <span>Pagamento</span>
+                                <span>Valor</span>
                             </div>
-                            <div class="expenses-tags">
-                                ${expensesTagsHtml || '<span style="color:#64748b; font-size:0.7rem;">Nenhum gasto registrado</span>'}
-                            </div>
+                            ${expensesHtml}
                         </div>
 
                         <div class="net-profit-row">
@@ -3743,7 +3863,7 @@
     });
 
     // =============================================================
-    // 15. EXPORTAÇÃO PROFISSIONAL (CSV e PDF)
+    // 15. EXPORTAÇÕES (CSV e PDF)
     // =============================================================
     function exportJourneysCSV() {
         const journeys = appData.journeys || [];
@@ -3805,7 +3925,7 @@
         }
     }
 
-    // ===== NOVA FUNÇÃO: EXPORTAR PDF INDIVIDUAL DA JORNADA =====
+    // ===== EXPORTAR PDF INDIVIDUAL =====
     function exportSingleJourneyPDF(index) {
         const journey = appData.journeys[index];
         if (!journey) {
@@ -3813,7 +3933,6 @@
             return;
         }
 
-        // Buscar gastos do mesmo dia
         const dayExpenses = appData.expenses.filter(e => e.date === journey.date);
         const totalDayExpenses = dayExpenses.reduce((acc, e) => acc + (parseFloat(e.amount) || 0), 0);
         const totalGross = journey.platforms.reduce((acc, p) => acc + (parseFloat(p.gross) || 0), 0);
@@ -3823,15 +3942,13 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('p', 'pt', 'a4');
 
-            // ===== Título =====
             doc.setFontSize(18);
             doc.setTextColor(40, 40, 40);
-            doc.text('Relatório Detalhado da Jornada', 40, 50);
+            doc.text('Relatorio Detalhado da Jornada', 40, 50);
             doc.setFontSize(10);
             doc.setTextColor(100, 100, 100);
             doc.text(`Gerado em: ${new Date().toLocaleString('pt-BR')}`, 40, 70);
 
-            // ===== Informações gerais =====
             const startY = 90;
             const lineHeight = 20;
             let y = startY;
@@ -3839,12 +3956,12 @@
             doc.setFontSize(11);
             doc.setTextColor(0, 0, 0);
             const infoLines = [
-                `📅 Data: ${journey.date}`,
-                `⏱️ Início: ${journey.startTime}  |  Fim: ${journey.endTime}`,
-                `🚗 Carro: ${journey.car || 'Não informado'}`,
-                `🛣️ KM Inicial: ${journey.initialKm ?? 'N/I'}  |  Final: ${journey.finalKm ?? 'N/I'}  |  Rodados: ${journey.totalKm ?? 'N/I'} km`,
-                `⛽ Combustível: Início ${journey.fuelLevel ?? 'N/I'}%  |  Fim ${journey.finalFuel ?? 'N/I'}%`,
-                `⏳ Tempo de trabalho: ${formatTimeShort(journey.totalWorkMinutes * 60000)}  |  Tempo global: ${journey.globalTimeMs ? formatTimeShort(journey.globalTimeMs) : 'N/A'}`
+                `Data: ${journey.date}`,
+                `Inicio: ${journey.startTime}  |  Fim: ${journey.endTime}`,
+                `Carro: ${journey.car || 'Nao informado'}`,
+                `KM Inicial: ${journey.initialKm ?? 'N/I'}  |  Final: ${journey.finalKm ?? 'N/I'}  |  Rodados: ${journey.totalKm ?? 'N/I'} km`,
+                `Combustivel: Inicio ${journey.fuelLevel ?? 'N/I'}%  |  Fim ${journey.finalFuel ?? 'N/I'}%`,
+                `Tempo de trabalho: ${formatTimeShort(journey.totalWorkMinutes * 60000)}  |  Tempo global: ${journey.globalTimeMs ? formatTimeShort(journey.globalTimeMs) : 'N/A'}`
             ];
 
             infoLines.forEach(line => {
@@ -3852,9 +3969,8 @@
                 y += lineHeight;
             });
 
-            y += 10; // espaço
+            y += 10;
 
-            // ===== Plataformas =====
             if (journey.platforms && journey.platforms.length > 0) {
                 doc.setFontSize(12);
                 doc.setTextColor(0, 0, 150);
@@ -3884,7 +4000,6 @@
                 y = doc.lastAutoTable.finalY + 10;
             }
 
-            // ===== Pausas =====
             if (journey.pauses && journey.pauses.length > 0) {
                 doc.setFontSize(12);
                 doc.setTextColor(0, 0, 150);
@@ -3898,7 +4013,7 @@
 
                 doc.autoTable({
                     startY: y,
-                    head: [['Motivo', 'Duração']],
+                    head: [['Motivo', 'Duracao']],
                     body: pauseData,
                     theme: 'striped',
                     headStyles: { fillColor: [100, 100, 100] },
@@ -3914,7 +4029,6 @@
                 y += 20;
             }
 
-            // ===== Gastos do dia =====
             if (dayExpenses.length > 0) {
                 doc.setFontSize(12);
                 doc.setTextColor(200, 0, 0);
@@ -3960,10 +4074,9 @@
                 y += 20;
             }
 
-            // ===== Resumo financeiro =====
             doc.setFontSize(14);
             doc.setTextColor(0, 100, 0);
-            doc.text(`📊 Resumo Financeiro`, 40, y);
+            doc.text('Resumo Financeiro', 40, y);
             y += 20;
             doc.setFontSize(11);
             doc.setTextColor(0, 0, 0);
@@ -3976,12 +4089,10 @@
             doc.text(`   Lucro líquido:     R$ ${netProfit.toFixed(2)}`, 40, y);
             y += 20;
 
-            // ===== Rodapé =====
             doc.setFontSize(8);
             doc.setTextColor(150, 150, 150);
-            doc.text('Documento gerado pelo DriverControl - Gestão Inteligente para Motoristas', 40, y + 20);
+            doc.text('Documento gerado pelo DriverControl - Gestao Inteligente para Motoristas', 40, y + 20);
 
-            // Salvar PDF
             const filename = `Jornada_${journey.date}_${journey.startTime.replace(/:/g,'-')}.pdf`;
             doc.save(filename);
             showToast('PDF da jornada gerado com sucesso!', 'success', 3000);
@@ -3990,7 +4101,6 @@
             showToast('Erro ao gerar PDF. Verifique o console.', 'danger', 4000);
         }
     }
-    // ===== FIM DA NOVA FUNÇÃO =====
 
     function exportExpensesCSV() {
         const expenses = appData.expenses || [];
@@ -4098,7 +4208,7 @@
     window.addEventListener('offline', () => setStatus('⚠️ Offline', false));
 
     // =============================================================
-    // 17. GASTOS (com campo litros e filtro padrão por dia atual)
+    // 17. GASTOS
     // =============================================================
     function renderExpenseList() {
         const container = document.getElementById('expenseList');
@@ -5562,7 +5672,7 @@
             }
         });
 
-        console.log('🚀 DriverControl - Semana corrigida, dias de trabalho, tema no header e cronômetro global!');
+        console.log('🚀 DriverControl - Total de gastos alinhado à direita na coluna Valor.');
     }
 
     // =============================================================
