@@ -1582,6 +1582,40 @@
             color: #fff;
             border-color: #5b7cfa;
         }
+
+        /* Estilos para a lista de gastos com botão Editar */
+        .expense-actions {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .expense-actions button {
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 30px;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .expense-actions .edit-expense-btn:hover {
+            color: #5b7cfa;
+            background: #e0f2fe;
+        }
+        .expense-actions .delete-expense-btn:hover {
+            color: #ef4444;
+            background: #fee2e2;
+        }
+        body.dark-theme .expense-actions .edit-expense-btn:hover {
+            color: #818cf8;
+            background: #1e3a5f;
+        }
+        body.dark-theme .expense-actions .delete-expense-btn:hover {
+            color: #f87171;
+            background: #450a0a;
+        }
+
         .list-item-glass {
             display: flex;
             justify-content: space-between;
@@ -1630,6 +1664,7 @@
             border-radius: 30px;
         }
         .delete-icon:hover { color: #ef4444; background: #fee2e2; }
+
         .badge-glass {
             background: #f1f5f9;
             padding: 2px 12px;
@@ -2175,6 +2210,23 @@
             margin-bottom: 2px;
             accent-color: #5b7cfa;
         }
+
+        /* Estilos para o modal de edição de gasto */
+        .edit-expense-modal .form-group {
+            margin-bottom: 12px;
+        }
+        .edit-expense-modal .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        .edit-expense-modal .form-group input,
+        .edit-expense-modal .form-group select {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -2423,6 +2475,14 @@
                         <option value="">Selecione...</option>
                     </select>
 
+                    <!-- CAMPO DE SUBCATEGORIA DE PAGAMENTO -->
+                    <div id="paymentSubcategoryField" style="display:none;">
+                        <label class="app-label">Subcategoria de Pagamento</label>
+                        <select id="expensePaymentSubcategorySelect" class="app-input">
+                            <option value="">Selecione...</option>
+                        </select>
+                    </div>
+
                     <label class="app-label">Valor (R$)</label>
                     <input type="text" id="expenseAmount" class="app-input" placeholder="0,00" onblur="formatarValor(this)" oninput="calcularLitros()">
 
@@ -2616,6 +2676,65 @@
                 <input type="text" id="editTextInput" class="app-input" required>
             </div>
             <button type="submit" class="btn-app">Salvar</button>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DE EDIÇÃO DE GASTO -->
+<div id="editExpenseModal" class="modal-overlay edit-expense-modal">
+    <div class="modal-glass">
+        <button class="close-modal" onclick="closeModal('editExpenseModal')"><i class="fas fa-times"></i></button>
+        <div class="modal-title"><i class="fas fa-edit"></i> Editar Gasto</div>
+        <form id="editExpenseForm">
+            <input type="hidden" id="editExpenseIndex" value="">
+            <div class="form-group">
+                <label class="app-label">Data</label>
+                <input type="date" id="editExpenseDate" class="app-input" required>
+            </div>
+            <div class="form-group">
+                <label class="app-label">Hora (HH:MM:SS.d)</label>
+                <input type="text" id="editExpenseTime" class="app-input" required>
+            </div>
+            <div class="form-group">
+                <label class="app-label">Categoria</label>
+                <select id="editExpenseCategory" class="app-input" required>
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="form-group" id="editSubcategoryField" style="display:none;">
+                <label class="app-label">Subcategoria</label>
+                <select id="editExpenseSubcategory" class="app-input">
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="form-group" id="editFuelPriceField" style="display:none;">
+                <label class="app-label">Valor do litro (R$)</label>
+                <input type="text" id="editFuelPrice" class="app-input" placeholder="0,00" onblur="formatarValor(this)" oninput="calcularLitrosEdit()">
+                <div class="calc-info">
+                    💧 Litros abastecidos: <strong id="editLitrosCalc">0,00</strong> L
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="app-label">Forma de Pagamento</label>
+                <select id="editPaymentMethod" class="app-input" required>
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="form-group" id="editPaymentSubcategoryField" style="display:none;">
+                <label class="app-label">Subcategoria de Pagamento</label>
+                <select id="editExpensePaymentSubcategory" class="app-input">
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="app-label">Valor (R$)</label>
+                <input type="text" id="editExpenseAmount" class="app-input" placeholder="0,00" onblur="formatarValor(this)" oninput="calcularLitrosEdit()" required>
+            </div>
+            <div class="form-group">
+                <label class="app-label">Comentário (opcional)</label>
+                <input type="text" id="editExpenseComment" class="app-input" placeholder="Alguma observação">
+            </div>
+            <button type="submit" class="btn-app" id="saveEditExpenseBtn"><i class="fas fa-save"></i> Salvar Alterações</button>
         </form>
     </div>
 </div>
@@ -3050,7 +3169,8 @@
                 'finishJourneyBtn': '<i class="fas fa-save"></i> Salvar e Finalizar',
                 'manualJourneyBtn': '<i class="fas fa-save"></i> Salvar Jornada',
                 'editJourneyBtn': '<i class="fas fa-save"></i> Salvar Alterações',
-                'saveWorkDaysBtn': '<i class="fas fa-save"></i> Salvar'
+                'saveWorkDaysBtn': '<i class="fas fa-save"></i> Salvar',
+                'saveEditExpenseBtn': '<i class="fas fa-save"></i> Salvar Alterações'
             };
             btn.innerHTML = map[btnId] || 'Salvar';
         }
@@ -3413,7 +3533,16 @@
         updateProfileDisplay();
         populateSelects();
         atualizarBotoesCron();
-        atualizarCampoSubcategoria(document.getElementById('expenseCategorySelect').value);
+        // Atualizar campo de subcategoria após carregar as categorias
+        const currentCat = document.getElementById('expenseCategorySelect').value;
+        if (currentCat) {
+            atualizarCampoSubcategoria(currentCat);
+        }
+        // Atualizar subcategoria de pagamento se houver forma de pagamento selecionada
+        const currentPay = document.getElementById('paymentMethodSelect').value;
+        if (currentPay) {
+            atualizarCampoSubcategoriaPagamento(currentPay);
+        }
         populateCarSelects();
         if (document.getElementById('finishJourneyModal').classList.contains('active')) {
             renderFinishPlatforms();
@@ -3425,6 +3554,9 @@
         updateBadges();
         atualizarSwitchFolga();
         atualizarEfeitoCardCronometro();
+
+        // Popular selects do modal de edição
+        populateEditExpenseSelects();
     }
 
     // =============================================================
@@ -3630,7 +3762,7 @@
     }
 
     // =============================================================
-    // 13. HISTÓRICO (COM TABELA DE GASTOS OTIMIZADA)
+    // 13. HISTÓRICO
     // =============================================================
     function applyFilter() {
         const dateInput = document.getElementById('filterDate');
@@ -3687,7 +3819,6 @@
                 pausesStr = j.pauses.map(p => `${escapeHtml(p.name)} (${formatTimeShort(p.duration)})`).join(', ');
             }
 
-            // Tabela de plataformas
             let platformsHtml = '';
             j.platforms.forEach(p => {
                 platformsHtml += `
@@ -3706,7 +3837,6 @@
                     </div>
                 `;
 
-            // Tabela de gastos - sem subcategoria, litros após categoria, valor por último
             let expensesHtml = '';
             if (dayExpenses.length > 0) {
                 dayExpenses.forEach(e => {
@@ -3863,7 +3993,7 @@
     });
 
     // =============================================================
-    // 15. EXPORTAÇÕES (CSV e PDF)
+    // 15. EXPORTAÇÕES (CSV e PDF) - mantidos
     // =============================================================
     function exportJourneysCSV() {
         const journeys = appData.journeys || [];
@@ -3925,7 +4055,6 @@
         }
     }
 
-    // ===== EXPORTAR PDF INDIVIDUAL =====
     function exportSingleJourneyPDF(index) {
         const journey = appData.journeys[index];
         if (!journey) {
@@ -4107,10 +4236,10 @@
         if (expenses.length === 0) { showToast('Nenhum gasto para exportar.', 'warning', 3000); return; }
 
         let csv = 'Relatório de Gastos\n';
-        csv += 'Data,Hora,Categoria,Subcategoria,Forma de Pagamento,Valor (R$),Litros,Comentário\n';
+        csv += 'Data,Hora,Categoria,Subcategoria,Forma de Pagamento,Subcategoria Pagamento,Valor (R$),Litros,Comentário\n';
         expenses.forEach(e => {
             const litros = e.litros ? parseFloat(e.litros).toFixed(2) : '';
-            csv += `${e.date},${e.time||''},${e.category},${e.subcategory||''},${e.paymentMethod||''},${(parseFloat(e.amount)||0).toFixed(2)},${litros},${e.comment||''}\n`;
+            csv += `${e.date},${e.time||''},${e.category},${e.subcategory||''},${e.paymentMethod||''},${e.paymentSubcategory||''},${(parseFloat(e.amount)||0).toFixed(2)},${litros},${e.comment||''}\n`;
         });
         downloadFile(csv, 'gastos.csv', 'text/csv');
         showToast('Gastos exportados com sucesso!', 'success', 3000);
@@ -4208,7 +4337,7 @@
     window.addEventListener('offline', () => setStatus('⚠️ Offline', false));
 
     // =============================================================
-    // 17. GASTOS
+    // 17. GASTOS - LISTAGEM E EDIÇÃO
     // =============================================================
     function renderExpenseList() {
         const container = document.getElementById('expenseList');
@@ -4242,6 +4371,12 @@
             if (e.subcategory) label += ` - ${escapeHtml(e.subcategory)}`;
             let litrosInfo = '';
             if (e.litros) litrosInfo = ` (${parseFloat(e.litros).toFixed(2)} L)`;
+
+            let paymentInfo = escapeHtml(e.paymentMethod || '');
+            if (e.paymentSubcategory) {
+                paymentInfo += ` - ${escapeHtml(e.paymentSubcategory)}`;
+            }
+
             html += `
                     <div class="list-item-glass">
                         <div class="info">
@@ -4249,13 +4384,16 @@
                             <div class="sub">
                                 <span><i class="far fa-clock"></i> ${escapeHtml(e.time || e.date)}</span>
                                 <span class="category-badge">${label}${litrosInfo}</span>
-                                ${e.paymentMethod ? `<span>💳 ${escapeHtml(e.paymentMethod)}</span>` : ''}
+                                ${paymentInfo ? `<span>💳 ${paymentInfo}</span>` : ''}
                             </div>
                             ${e.comment ? `<div style="font-size:0.7rem; color:#64748b; margin-top:2px;">📝 ${escapeHtml(e.comment)}</div>` : ''}
                         </div>
                         <div style="display:flex; align-items:center; gap:4px;">
                             <span class="amount negative">${formatCurrency(e.amount)}</span>
-                            <button class="delete-icon" onclick="deleteExpense(${originalIndex})"><i class="fas fa-trash-alt"></i></button>
+                            <div class="expense-actions">
+                                <button class="edit-expense-btn" onclick="openEditExpenseModal(${originalIndex})" title="Editar"><i class="fas fa-pen"></i></button>
+                                <button class="delete-expense-btn" onclick="deleteExpense(${originalIndex})" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -4279,6 +4417,209 @@
         });
     }
 
+    // =============================================================
+    // 18. EDIÇÃO DE GASTO - ABRIR MODAL E SALVAR
+    // =============================================================
+    function openEditExpenseModal(index) {
+        const expense = appData.expenses[index];
+        if (!expense) {
+            showToast('Gasto não encontrado.', 'danger', 3000);
+            return;
+        }
+
+        document.getElementById('editExpenseIndex').value = index;
+        document.getElementById('editExpenseDate').value = expense.date;
+        document.getElementById('editExpenseTime').value = expense.time || '';
+        document.getElementById('editExpenseCategory').value = expense.category || '';
+        document.getElementById('editExpenseSubcategory').value = expense.subcategory || '';
+        document.getElementById('editPaymentMethod').value = expense.paymentMethod || '';
+        document.getElementById('editExpensePaymentSubcategory').value = expense.paymentSubcategory || '';
+        document.getElementById('editExpenseAmount').value = expense.amount ? expense.amount.toFixed(2).replace('.', ',') : '';
+        document.getElementById('editExpenseComment').value = expense.comment || '';
+
+        // Mostrar/ocultar campos de subcategoria e combustível
+        const cat = expense.category || '';
+        atualizarCampoSubcategoriaEdit(cat);
+
+        // Mostrar/ocultar subcategoria de pagamento
+        const pay = expense.paymentMethod || '';
+        atualizarCampoSubcategoriaPagamentoEdit(pay);
+
+        // Se for combustível, preencher litros
+        if (cat === 'Combustível' && expense.litros) {
+            document.getElementById('editFuelPrice').value = '';
+            document.getElementById('editLitrosCalc').innerText = expense.litros.toFixed(2);
+            document.getElementById('editFuelPriceField').style.display = 'block';
+            // Tentar calcular preço do litro (se tiver valor e litros)
+            if (expense.amount && expense.litros) {
+                const price = expense.amount / expense.litros;
+                document.getElementById('editFuelPrice').value = price.toFixed(2).replace('.', ',');
+            }
+        } else {
+            document.getElementById('editFuelPriceField').style.display = 'none';
+            document.getElementById('editLitrosCalc').innerText = '0,00';
+        }
+
+        // Popular selects
+        populateEditExpenseSelects();
+        document.getElementById('editExpenseModal').classList.add('active');
+    }
+
+    function populateEditExpenseSelects() {
+        const catSelect = document.getElementById('editExpenseCategory');
+        const paySelect = document.getElementById('editPaymentMethod');
+
+        // Categorias
+        const currentCat = catSelect.value;
+        catSelect.innerHTML = '<option value="">Selecione...</option>';
+        appData.categories.forEach(c => {
+            catSelect.innerHTML += `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`;
+        });
+        if (appData.categories.includes(currentCat)) catSelect.value = currentCat;
+
+        // Formas de pagamento
+        const currentPay = paySelect.value;
+        paySelect.innerHTML = '<option value="">Selecione...</option>';
+        appData.paymentMethods.forEach(p => {
+            paySelect.innerHTML += `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`;
+        });
+        if (appData.paymentMethods.includes(currentPay)) paySelect.value = currentPay;
+    }
+
+    function atualizarCampoSubcategoriaEdit(categoria) {
+        const field = document.getElementById('editSubcategoryField');
+        const select = document.getElementById('editExpenseSubcategory');
+        if (!categoria || !appData.subcategories[categoria] || appData.subcategories[categoria].length === 0) {
+            field.style.display = 'none';
+            select.value = '';
+            return;
+        }
+        field.style.display = 'block';
+        const currentSub = select.value;
+        select.innerHTML = '<option value="">Selecione...</option>';
+        appData.subcategories[categoria].forEach(s => {
+            select.innerHTML += `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`;
+        });
+        if (appData.subcategories[categoria].includes(currentSub)) select.value = currentSub;
+    }
+
+    function atualizarCampoSubcategoriaPagamentoEdit(paymentMethod) {
+        const field = document.getElementById('editPaymentSubcategoryField');
+        const select = document.getElementById('editExpensePaymentSubcategory');
+        if (!paymentMethod || !appData.subcategories[paymentMethod] || appData.subcategories[paymentMethod].length === 0) {
+            field.style.display = 'none';
+            select.value = '';
+            return;
+        }
+        field.style.display = 'block';
+        const currentSub = select.value;
+        select.innerHTML = '<option value="">Selecione...</option>';
+        appData.subcategories[paymentMethod].forEach(s => {
+            select.innerHTML += `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`;
+        });
+        if (appData.subcategories[paymentMethod].includes(currentSub)) select.value = currentSub;
+    }
+
+    // Evento change para o campo de categoria no modal de edição
+    document.getElementById('editExpenseCategory').addEventListener('change', function() {
+        const categoria = this.value;
+        atualizarCampoSubcategoriaEdit(categoria);
+        // Mostrar campo de combustível se for "Combustível"
+        const fuelField = document.getElementById('editFuelPriceField');
+        if (categoria === 'Combustível') {
+            fuelField.style.display = 'block';
+            calcularLitrosEdit();
+        } else {
+            fuelField.style.display = 'none';
+            document.getElementById('editLitrosCalc').innerText = '0,00';
+        }
+    });
+
+    document.getElementById('editPaymentMethod').addEventListener('change', function() {
+        const pay = this.value;
+        atualizarCampoSubcategoriaPagamentoEdit(pay);
+    });
+
+    function calcularLitrosEdit() {
+        const amount = document.getElementById('editExpenseAmount').value.replace(',', '.');
+        const price = document.getElementById('editFuelPrice').value.replace(',', '.');
+        const valAmount = parseFloat(amount);
+        const valPrice = parseFloat(price);
+        if (!isNaN(valAmount) && !isNaN(valPrice) && valPrice > 0) {
+            const litros = valAmount / valPrice;
+            document.getElementById('editLitrosCalc').innerText = litros.toFixed(2);
+        } else {
+            document.getElementById('editLitrosCalc').innerText = '0,00';
+        }
+    }
+
+    // Submit do formulário de edição
+    document.getElementById('editExpenseForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const index = parseInt(document.getElementById('editExpenseIndex').value);
+        const date = document.getElementById('editExpenseDate').value;
+        const time = document.getElementById('editExpenseTime').value.trim();
+        const category = document.getElementById('editExpenseCategory').value.trim();
+        const subcategory = document.getElementById('editExpenseSubcategory').value.trim();
+        const paymentMethod = document.getElementById('editPaymentMethod').value.trim();
+        const paymentSubcategory = document.getElementById('editExpensePaymentSubcategory').value.trim();
+        let amount = document.getElementById('editExpenseAmount').value.replace(',', '.');
+        const comment = document.getElementById('editExpenseComment').value.trim();
+
+        let fuelPrice = document.getElementById('editFuelPrice').value.replace(',', '.');
+        let litros = null;
+        if (category === 'Combustível' && fuelPrice) {
+            const valAmount = parseFloat(amount);
+            const valPrice = parseFloat(fuelPrice);
+            if (!isNaN(valAmount) && !isNaN(valPrice) && valPrice > 0) {
+                litros = valAmount / valPrice;
+            }
+        }
+
+        if (!date || !category || !amount) {
+            showToast('Preencha Data, Categoria e Valor.', 'warning', 3000);
+            return;
+        }
+
+        const amountNum = parseFloat(amount);
+        if (isNaN(amountNum) || amountNum <= 0) {
+            showToast('Digite um valor válido.', 'warning', 3000);
+            return;
+        }
+
+        // Atualizar o gasto
+        const expense = appData.expenses[index];
+        if (!expense) {
+            showToast('Gasto não encontrado.', 'danger', 3000);
+            return;
+        }
+
+        expense.date = date;
+        expense.time = time || getCurrentTimeWithTenths();
+        expense.category = category;
+        expense.subcategory = subcategory || '';
+        expense.paymentMethod = paymentMethod || 'Não informado';
+        expense.paymentSubcategory = paymentSubcategory || '';
+        expense.amount = amountNum;
+        expense.comment = comment || '';
+        if (litros !== null) {
+            expense.litros = litros;
+        } else {
+            delete expense.litros;
+        }
+
+        setLoading('saveEditExpenseBtn', true);
+        await saveUserData();
+        setLoading('saveEditExpenseBtn', false);
+
+        closeModal('editExpenseModal');
+        renderAll();
+        showToast('Gasto atualizado com sucesso!', 'success', 3000);
+    });
+
+    // =============================================================
+    // 19. CALCULAR LITROS (para o formulário principal)
+    // =============================================================
     function calcularLitros() {
         const amount = document.getElementById('expenseAmount').value.replace(',', '.');
         const price = document.getElementById('fuelPrice').value.replace(',', '.');
@@ -4306,8 +4647,30 @@
         atualizarCampoSubcategoria(categoria);
     });
 
+    document.getElementById('paymentMethodSelect').addEventListener('change', function() {
+        const pay = this.value;
+        atualizarCampoSubcategoriaPagamento(pay);
+    });
+
+    function atualizarCampoSubcategoriaPagamento(paymentMethod) {
+        const field = document.getElementById('paymentSubcategoryField');
+        const select = document.getElementById('expensePaymentSubcategorySelect');
+        if (!paymentMethod || !appData.subcategories[paymentMethod] || appData.subcategories[paymentMethod].length === 0) {
+            field.style.display = 'none';
+            select.value = '';
+            return;
+        }
+        field.style.display = 'block';
+        const currentSub = select.value;
+        select.innerHTML = '<option value="">Selecione...</option>';
+        appData.subcategories[paymentMethod].forEach(s => {
+            select.innerHTML += `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`;
+        });
+        if (appData.subcategories[paymentMethod].includes(currentSub)) select.value = currentSub;
+    }
+
     // =============================================================
-    // 18. PERFIL E CARROS
+    // 20. PERFIL E CARROS
     // =============================================================
     function renderProfileForm() {
         const p = appData.profile || {};
@@ -4363,7 +4726,7 @@
     }
 
     // =============================================================
-    // 19. CONFIGURAÇÕES
+    // 21. CONFIGURAÇÕES
     // =============================================================
     function toggleAccordion(header) {
         const body = header.nextElementSibling;
@@ -4439,7 +4802,7 @@
     }
 
     // =============================================================
-    // 20. SUBCATEGORIAS
+    // 22. SUBCATEGORIAS
     // =============================================================
     let subcategoryModalContext = { type: null, index: null };
 
@@ -4573,7 +4936,7 @@
     });
 
     // =============================================================
-    // 21. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
+    // 23. DELEGAÇÃO DE EVENTOS PARA CONFIGURAÇÕES
     // =============================================================
     document.addEventListener('click', function(e) {
         const target = e.target.closest('.edit-btn, .delete-btn');
@@ -4680,7 +5043,7 @@
     });
 
     // =============================================================
-    // 22. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
+    // 24. ADICIONAR CATEGORIA / PAGAMENTO / MOTIVO / PLATAFORMA
     // =============================================================
     document.getElementById('addCategoryBtn').addEventListener('click', async function() {
         const input = document.getElementById('newCategoryInput');
@@ -4731,7 +5094,7 @@
     });
 
     // =============================================================
-    // 23. POPULAR SELECTS
+    // 25. POPULAR SELECTS
     // =============================================================
     function populateSelects() {
         const catSelect = document.getElementById('expenseCategorySelect');
@@ -4755,7 +5118,14 @@
         } else {
             document.getElementById('fuelPriceField').style.display = 'none';
         }
-        atualizarCampoSubcategoria(catSelect.value);
+        // Atualizar subcategoria se houver categoria selecionada
+        if (currentCat) {
+            atualizarCampoSubcategoria(currentCat);
+        }
+        // Atualizar subcategoria de pagamento se houver forma de pagamento selecionada
+        if (currentPay) {
+            atualizarCampoSubcategoriaPagamento(currentPay);
+        }
     }
 
     function populateCarSelects() {
@@ -4795,7 +5165,7 @@
     }
 
     // =============================================================
-    // 24. PLATAFORMAS
+    // 26. PLATAFORMAS
     // =============================================================
     function renderPlatformsGroup(containerId, dataArray, removeFnName) {
         const container = document.getElementById(containerId);
@@ -4881,7 +5251,7 @@
     }
 
     // =============================================================
-    // 25. CRONÔMETRO E JORNADA
+    // 27. CRONÔMETRO E JORNADA
     // =============================================================
     function iniciarJornadaCron() {
         openStartJourneyModal();
@@ -5327,7 +5697,7 @@
     }
 
     // =============================================================
-    // 26. MODAL INICIAR JORNADA (FUEL GAUGE)
+    // 28. MODAL INICIAR JORNADA (FUEL GAUGE)
     // =============================================================
     function openStartJourneyModal() {
         document.getElementById('quickJourneyDate').value = getCurrentDate();
@@ -5462,7 +5832,7 @@
     });
 
     // =============================================================
-    // 27. AÇÃO RÁPIDA: REGISTRAR GASTO
+    // 29. AÇÃO RÁPIDA: REGISTRAR GASTO
     // =============================================================
     function openQuickExpense() {
         document.querySelectorAll('.nav-item-glass').forEach(i => i.classList.remove('active'));
@@ -5481,6 +5851,8 @@
         document.getElementById('expenseSubcategorySelect').value = '';
         document.getElementById('subcategoryField').style.display = 'none';
         document.getElementById('paymentMethodSelect').value = '';
+        document.getElementById('expensePaymentSubcategorySelect').value = '';
+        document.getElementById('paymentSubcategoryField').style.display = 'none';
         document.getElementById('expenseAmount').value = '';
         document.getElementById('expenseComment').value = '';
         document.getElementById('fuelPrice').value = '';
@@ -5489,7 +5861,7 @@
     }
 
     // =============================================================
-    // 28. EVENTOS DOS FORMULÁRIOS
+    // 30. EVENTOS DOS FORMULÁRIOS
     // =============================================================
     document.getElementById('expenseForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -5498,6 +5870,7 @@
         const category = document.getElementById('expenseCategorySelect').value.trim();
         const subcategory = document.getElementById('expenseSubcategorySelect').value.trim();
         const paymentMethod = document.getElementById('paymentMethodSelect').value.trim();
+        const paymentSubcategory = document.getElementById('expensePaymentSubcategorySelect').value.trim();
         let amount = document.getElementById('expenseAmount').value.replace(',', '.');
         const comment = document.getElementById('expenseComment').value.trim();
 
@@ -5534,6 +5907,12 @@
                 appData.subcategories[category].push(subcategory);
             }
         }
+        if (paymentSubcategory) {
+            if (!appData.subcategories[paymentMethod]) appData.subcategories[paymentMethod] = [];
+            if (!appData.subcategories[paymentMethod].includes(paymentSubcategory)) {
+                appData.subcategories[paymentMethod].push(paymentSubcategory);
+            }
+        }
 
         setLoading('saveExpenseBtn', true);
         const expense = {
@@ -5543,6 +5922,7 @@
             category,
             subcategory: subcategory || '',
             paymentMethod: paymentMethod || 'Não informado',
+            paymentSubcategory: paymentSubcategory || '',
             amount: amountNum,
             comment: comment || ''
         };
@@ -5597,7 +5977,7 @@
     });
 
     // =============================================================
-    // 29. FECHAR MODAIS E NAVEGAÇÃO
+    // 31. FECHAR MODAIS E NAVEGAÇÃO
     // =============================================================
     function closeModal(id) {
         document.getElementById(id).classList.remove('active');
@@ -5611,6 +5991,9 @@
             manualPlatformsData = [];
         }
         if (id === 'workDaysModal') {
+            // nada
+        }
+        if (id === 'editExpenseModal') {
             // nada
         }
     }
@@ -5634,7 +6017,7 @@
     });
 
     // =============================================================
-    // 30. INICIALIZAÇÃO
+    // 32. INICIALIZAÇÃO
     // =============================================================
     function initApp() {
         resetExpenseForm();
@@ -5672,11 +6055,11 @@
             }
         });
 
-        console.log('🚀 DriverControl - Total de gastos alinhado à direita na coluna Valor.');
+        console.log('🚀 DriverControl - Adicionado suporte a subcategorias para formas de pagamento.');
     }
 
     // =============================================================
-    // 31. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
+    // 33. FUNÇÃO PARA ABRIR MODAL DE JORNADA PASSADA
     // =============================================================
     function openManualJourneyModal() {
         document.getElementById('manualDate').value = getToday();
@@ -5696,7 +6079,7 @@
     }
 
     // =============================================================
-    // 32. MODAL FINALIZAR JORNADA
+    // 34. MODAL FINALIZAR JORNADA
     // =============================================================
     function openFinishJourneyModal() {
         document.getElementById('finishDateTime').value = getCurrentDate() + ' ' + getCurrentTimeWithTenths();
